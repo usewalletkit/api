@@ -1,0 +1,25 @@
+---
+title: "Authentication"
+description: "Learn how to make authenticated calls to WalletKit"
+---
+
+WalletKit uses Basic Authentication to authenticate your requests. Broadly, this works by passing the `Authorization: Basic <credentials>` header where `<credentials>` is a base64 encoded string: `Project ID:API Secret`.
+
+You can find the Project ID and API Secret on the API Keys page in your dashboard: [https://app.usewalletkit.com/api-keys](https://app.usewalletkit.com/api-keys).
+
+```js NodeJS
+const projectID = "";
+const apiSecret = "";
+
+const wallets = await fetch("https://testnet.usewalletkit.com/wallets", {
+  method: "GET",
+  headers: {
+   'Content-Type': "application/json",
+   'Authorization': "Basic " + Buffer.from(projectID + ":" + apiSecret).toString("base64"),
+  }
+}).then(r => r.json());
+
+console.log(wallets);
+```
+
+You must ensure that the API Secret never leaves your servers and is never leaked. If you suspect any leaks, rotate it immediately on the API keys page in your dashboard.

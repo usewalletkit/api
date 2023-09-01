@@ -1,0 +1,56 @@
+---
+title: "Relay"
+description: "Learn how to use WalletKit as a transaction relayer"
+---
+
+You can use WalletKit to submit raw transactions to the blockchain using simple HTTP APIs. WalletKit will manage your **wallet setup**, **transaction signing**, **gas estimation**, **nonce management**, and **resubmissions**. Once the transaction is submitted, you will get notifications for all transaction updates.
+
+WalletKit provides higher-level APIs to submit common transactions like minting and transfers for tokens and NFTs. But this guide is focused on submitting raw transactions only.
+
+#### Use Cases
+
+You can use WalletKit to submit your transactions from your backend, lambdas, workers, scripts, or webhook handlers.
+
+For example, if you want to make an on-chain transaction when an event occurs in your app, you can make a call to WalletKit to do so. Or let's say you want to airdrop tokens when a user signs up, you can do that as well.
+
+#### Setup
+
+Make sure you do the following first:
+
+1. Setup your WalletKit account
+2. Buy some gas. You can do this from the dashboard. Have 0.01 MATIC available, although we'll use a lot less.
+3. Get the Project ID and the API Secret from the API Keys page in the dashboard
+
+#### Submit Transaction
+
+As an example, let's say we want to transfer 0.001 MATIC to `0xe883Cd7ADfe55CD84798a8129468e106b32CDC7A`. The raw transaction for this is:
+
+```json JSON
+{
+  "to": "0xe883Cd7ADfe55CD84798a8129468e106b32CDC7A",
+  "value": "0x38D7EA4C68000"
+} 
+```
+
+To submit a raw transaction, we will use the Sign and Send endpoint:
+
+```bash Shell
+curl --request POST \
+     --url https://testnet.usewalletkit.com/transactions/sign-and-send
+     --user <project id>:<api secret>
+     --data '
+{
+  "network": "Polygon",
+  "signer_wallet_address": "0xbfD206D1Fe1Cc447B9307777E7e5ec54DE2aE05b",
+  "unsigned_transaction": {
+    "to": "0xe883Cd7ADfe55CD84798a8129468e106b32CDC7A",
+    "value": "0x38D7EA4C68000"
+  },
+  "secret": "testnet-secret"
+}
+'
+```
+
+#### Check Status
+
+That's it! Your transaction has been submitted. You'll receive a transaction hash that you can use to check the transaction status. Or, you can subscribe to webhook alerts to get transaction updates.

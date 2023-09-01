@@ -1,0 +1,168 @@
+{
+    "name": "WalletKit",
+    "logo": {
+      "light": "/images/logo/logo-light-mode.svg",
+      "dark": "/images/logo/logo-light-mode.svg"
+    },
+    "favicon": "/images/logo/logo-light-mode.svg",
+    "colors": {
+      "primary": "#84449c",
+      "light": "#c487da",
+      "dark": "#84449c"
+    },
+    "feedback": {
+      "thumbsRating": true
+    },
+    "api": {
+      "baseUrl": "https://testnet.usewalletkit.com"
+    },
+    "topbarCtaButton": {
+      "name": "Login",
+      "url": "https://next-admin-dash.vercel.app/playground"
+    },
+    "topbarLinks": [
+      {
+        "name": "Features",
+        "url": "https://www.walletkit.io/site/features"
+      }
+    ],
+    "tabs": [
+      {
+          "name": "API Reference",
+          "url": "api-reference"
+      }
+  
+   ],
+    "navigation": [
+        {
+            "group": "WalletKit",
+            "pages": [
+              "reference/getting-started-with-your-api",
+              "reference/architecture"
+            ]
+          },
+          {
+            "group": "Get started",
+            "pages": [
+              "reference/endpoints",
+              "reference/authentication"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "reference/rewards-loyalty-program",
+              "reference/relay",
+              "reference/webhooks",
+              "reference/automations",
+              "reference/how-to-mint-nfts",
+              "reference/pwa-with-simple-onboarding-on-base"
+            ]
+          },
+          {
+            "group": "Wallets",
+            "pages": [
+              "reference/create-wallet",
+              "reference/list-wallets"
+            ]
+          },
+          {
+            "group": "transactions",
+            "pages": [
+              "reference/get-transaction-status-by-hash",
+              "reference/sign-and-send",
+              "reference/get-transaction-status-by-id"
+            ]
+          },
+          {
+            "group": "Tokens",
+            "pages": [
+              "reference/get-token",
+              "reference/list-token-balances",
+              "reference/create-token",
+              "reference/mint-token",
+              "reference/transfer-token",
+              "reference/batch-transfer-token"
+            ]
+          },
+          {
+            "group": "NFTs",
+            "pages": [
+              "reference/create-nft-collection",
+              "reference/nft-image-upload",
+              "reference/mint-nft",
+              "reference/transfer-nft",
+              "reference/get-nft-collection",
+              "reference/list-nft-collections",
+              "reference/list-nfts"
+            ]
+          },
+          {
+            "group": "Activity",
+            "pages": [
+              "reference/list-wallet-activity"
+            ]
+          },
+          {
+            "group": "Gas",
+            "pages": [
+              "reference/buy-gas"
+            ]
+          },
+          {
+            "group": "Wallets",
+            "pages": [
+              "api-reference/create-wallet",
+              "api-reference/list-wallets"
+            ]
+          },
+          {
+            "group": "Transactions",
+            "pages": [
+              "api-reference/transaction-status-by-hash",
+              "api-reference/sign-and-send",
+              "api-reference/transaction-status-by-id"
+            ]
+          },
+          {
+            "group": "Tokens",
+            "pages": [
+              "api-reference/get-token",
+              "api-reference/list-token-balances",
+              "api-reference/create-token",
+              "api-reference/mint-token",
+              "api-reference/transfer-token",
+              "api-reference/batch-transfer-token"
+            ]
+          },
+          {
+            "group": "NFTs",
+            "pages": [
+              "api-reference/create-nft-collection",
+              "api-reference/upload-nft-image",
+              "api-reference/mint-nft",
+              "api-reference/transfer-nft",
+              "api-reference/get-nft-collection",
+              "api-reference/list-nft-collections",
+              "api-reference/list-nfts"
+            ]
+          },
+          {
+            "group": "Activity",
+            "pages": [
+              "api-reference/list-wallet-activity"
+            ]
+          },
+          {
+            "group": "Gas",
+            "pages": [
+              "api-reference/buy-gas"
+            ]
+          }                      
+    ],
+    "footerSocials":
+      {
+          "twitter": "https://twitter.com/walletkit",
+          "linkedin": "https://www.linkedin.com/company/walletkit"
+      }
+  }

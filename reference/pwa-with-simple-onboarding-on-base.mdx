@@ -1,0 +1,161 @@
+---
+title: "PWA with Simple Onboarding on Base"
+---
+
+In this guide, we'll develop a Progressive Web App (PWA) using NextJS. Our primary objective is to implement a straightforward onboarding process where users can easily sign up with just their email and password.
+
+Upon successful sign-in, a wallet is automatically generated for them compatible with the Base network. This wallet remains linked to their account, offering them the flexibility to switch devices or reset passwords without the complications of seed phrases.
+
+Let's begin.
+
+<Note>
+
+  **Progressive Web Apps (PWAs)**
+
+  PWAs are web applications that use modern web technologies to provide features commonly found in native apps. They offer offline capabilities, push notifications, and the option to be added directly to a device's home screen similar to an app downloaded from App Store or Google Play Store.
+</Note>
+
+### Setup
+
+1. Setup your [WalletKit](https://usewalletkit.com/) account
+2. Get your Project ID and API Secret from the API Keys page
+3. Create a [Supabase](https://supabase.com/) account, we'll use them for Auth
+
+### Create NextJS App
+
+##### Bootstrap
+
+Create a new NextJS app with the Supabase starter code
+
+```bash shell
+npx create-next-app -e with-supabase wk-onboarding
+cd wk-onboarding
+```
+
+##### Configs
+
+Rename the `.env.local.example` file to `.env.local` and set the values like so:
+
+```
+NEXT_PUBLIC_SUPABASE_URL =
+NEXT_PUBLIC_SUPABASE_ANON_KEY =
+
+WALLETKIT_PROJECT_ID = ""
+WALLETKIT_API_KEY = ""
+WALLETKIT_SECRET = "testnet-secret"
+```
+
+Get the Supabase URL and Anon Key from the API Settings page in the Supabase dashboard. WalletKit's Project ID and API Key can be found on the API Keys page in the WalletKit dashboard.
+
+Now, run your app with:
+
+```
+npm run dev
+```
+
+##### Wallet Page
+
+Open the `app/page.tsx` file for editing. Replace the entire component with a simple component:
+
+```java Javascript
+export default async function Index() {
+    const supabase = createServerComponentClient({cookies})
+    const {data: {session}} = await supabase.auth.getSession();
+  
+  return (
+    <div className="w-full flex-1 gap-8 flex flex-col items-center">
+    <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
+    <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm text-foreground">
+    <div/>
+        {session && (
+        <LogoutButton/>
+      )}
+    </div>
+    </nav>
+
+    {session ? (
+      <div className={"flex-1 space-y-2 px-4 sm:px-0"}>
+      <div className={"text-xl font-medium"}>Hello, {session.user.email}</div>
+       </div>
+     ) : (
+       <div className={"flex-1 flex items-center justify-center"}>
+         <Link href="/login" className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
+            Login
+         </Link>
+    	 </div>
+      )}
+      </div>
+    )
+}
+```
+
+Run your app and you should have a simple login/logout flow working with email authentication.
+
+Let's create a wallet compatible with the Base network when the user signs in. Modify the `app/page.tsx` file:
+
+```java Javascript
+const supabase = createServerComponentClient({cookies})
+const {data: {session}} = await supabase.auth.getSession();
+let wallet = null;
+
+if (session) {
+  wallet = await fetch('https://testnet.usewalletkit.com/wallets', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + Buffer.from(process.env.WALLETKIT_PROJECT_ID + ":" + process.env.WALLETKIT_API_KEY).toString("base64"),
+    },
+    body: JSON.stringify({
+      network: 'Base',
+      name: session.user.email,
+      owner_id: session.user.id,
+      secret: process.env.WALLETKIT_SECRET,
+    })
+  }).then(res => res.json());
+}
+```
+
+In the code above, we create a wallet for the authenticated user when the page loads. Note that we set the `owner_id` field to the authenticated user id. This ensures that only a single wallet is created per user.
+
+Finally, let's update the welcome message to display the wallet address:
+
+```java Javascript
+<div className={"flex-1 space-y-2 px-4 sm:px-0"}>
+  <div className={"text-xl font-medium"}>Hello, {session.user.email}</div>
+  <div>Your wallet address on Base is <span className={"font-mono"}>{wallet.address}</span></div>
+</div>
+```
+
+You should see a simple page with the wallet address:
+
+![](/images/reference/3605f01-image.png) 
+
+That's it! If the user logs out and logs back in, the same wallet will persist.
+
+### PWA
+
+Now, let's convert our NextJS app into a PWA app that the user can install to their home screen.
+
+You'll need a few icons and a `manifest.json` to convert your app into a PWA. You can use a manifest generator like [https://www.simicart.com/manifest-generator.html/](https://www.simicart.com/manifest-generator.html/) to create these assets for you.
+
+Once you download the assets, rename the manifest file to `manifest.json`.
+
+Create a `public/` directory at the root of your project and move all files there
+
+![](/images/reference/bec1a22-image.png) 
+
+Finally, edit `app/layout.tsx` file update the `metadata` variable:
+
+```java JavaScript
+export const metadata = {
+  title: 'Create Next App',
+  description: 'Generated by create next app',
+  manifest: '/manifest.json',
+}
+```
+
+Refresh your page and you should see the Install icon next to the share icon:
+
+![](/images/reference/255aede-image.png) 
+
+All done! Users can now install your app to their home screen and have a wallet associated to their account

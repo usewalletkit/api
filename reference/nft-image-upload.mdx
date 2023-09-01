@@ -1,0 +1,16 @@
+---
+title: "Upload NFT image"
+---
+
+This endpoint facilitates uploading the image to IPFS and returns an IPFS URI, which can be used in the NFT mint endpoint. 
+
+The metadata for NFTs is stored off-chain, while the pointer of the metadata (such as the URI of the image) is stored on-chain. You can host the image on a centralized service like Amazon S3 or store it on IPFS, a decentralized storage system that ensures immutability. 
+
+curl example
+
+`curl -X 'POST' \
+  'https://testnet.usewalletkit.com/nfts/upload' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: multipart/form-data' \
+  -F file=@to_the_moon.jpg
+`

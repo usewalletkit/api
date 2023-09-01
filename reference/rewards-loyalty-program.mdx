@@ -1,0 +1,110 @@
+---
+title: "Rewards & Loyalty Program"
+description: "Learn how we can use WalletKit to build a web3 rewards & loyalty program"
+---
+
+Web3 provides all the necessary tools to create a rewards and loyalty program that is decentralized, with tokens and NFTs. WalletKit makes it easy to work with tokens and NFTs, so you can develop user-friendly apps quickly.
+
+This guide will show you how to use WalletKit to build a rewards and loyalty program for airlines that meets the following requirements:
+
+* Travelers earn points each time they fly with their preferred airlines.
+* Travelers achieve Gold status after flying 50,000 miles in one year.
+* Travelers can buy points.
+* Travelers can transfer, purchase, or sell their points.
+
+#### Prerequisites
+
+To get started with WalletKit, follow these steps:
+
+1. Create a WalletKit account.
+2. Obtain your Project ID and API Secret from the API Keys page.
+3. Purchase some gas on the Polygon testnet. `0.01 MATIC` should be sufficient.
+
+#### High-level steps
+
+First, we'll create tokens and NFTs 
+
+1. Create a custom token, `MILES`, with 1B of initial supply
+2. Create a custom NFT collection for Gold tier travelers and mint 100 Gold NFTs
+
+Then, when a customer signs up, we will create a wallet for them.
+
+Finally, when a customer makes a flight booking, we award them with the `MILES` tokens.
+
+#### Custom tokens and NFTs
+
+We have two major components for our rewards and loyalty program:
+
+1. Points: We will award these points, represented by tokens, to users each time they book a flight.
+2. Gold Tier: When users reach a certain milestone, they will be awarded Gold Tier status. We will represent this status using an NFT.
+
+To create the `MILES` token, use the API Explorer in the dashboard.
+
+![](/images/reference/b36473a-image.png) 
+
+Once the token is created, you will see it in your Tokens balance:
+
+![ ](/images/reference/8a3dc76-image.png) 
+
+Currently, your Project Wallet holds the entire supply of MILES tokens, giving you full control over their distribution to your users.
+
+In the following steps, we will explore how to distribute these tokens to our travelers.
+
+---
+
+#### Create customer wallet
+
+To maintain each customer's assets separately and ensure complete transparency, we will create a separate wallet for each customer.
+
+To create a managed wallet on WalletKit for a customer who signs up on your platform, use the 'create wallet' endpoint.
+
+```bash Shell
+curl --request POST \
+     --url https://testnet.usewalletkit.com/wallets \
+     --user <project id>:<api secret> \
+     --data '
+{
+  "network": "Polygon",
+  "name": "John McEnroe",
+  "owner_id": "3a509b36-30ca-4b8c-9acf-5f37ae22b646",
+  "secret": "testnet-secret"
+}
+'
+```
+
+The `owner_id` field should be set to the ID used in your system to identify the user. WalletKit will create only one wallet per owner.
+
+Once you have set this up, a new wallet will be created for each customer. You can view all wallets on the Wallets page in the dashboard.
+
+#### Transfer tokens
+
+At this time, your Project Wallet holds all the NFTs and the tokens, and all your customers have an empty wallet.
+
+When they book a flight, on your system, you can calculate the number of miles for the flight, and initiate an on-chain transfer of points to their wallet.
+
+![](/images/reference/6a9b435-image.png) 
+
+To make a transfer, you can use the transfer tokens endpoint:
+
+```bash Shell
+curl --request POST \
+     --url https://testnet.usewalletkit.com/tokens/transfer \
+     --user <project id>:<api secret> \
+     --data '
+{
+  "network": "Polygon",
+  "token": "MILES",
+  "amount": "1500",
+  "recipient_owner_id": "3a509b36-30ca-4b8c-9acf-5f37ae22b646",
+  "secret": "testnet-secret"
+}
+'
+```
+
+The above call will transfer `1500 MILES` tokens to the wallet owned by the user identified by `3a509b36-30ca-4b8c-9acf-5f37ae22b646`.
+
+#### Next Steps
+
+We have left the Gold NFT as an exercise for the reader. You can use the NFT mint and transfers endpoint to extend this system and award users a Gold tier NFT when they reach a certain milestone. It's just another HTTP call and WalletKit will handle the rest.
+
+With just a few steps, we have created a web3 powered rewards and loyalty program. Users get the benefit of fully transparency and an open ecosystem where they can sell or trade their points and NFTs. You get to build on a powerful and flexible platform with complete control over the user experience.

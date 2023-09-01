@@ -1,0 +1,17 @@
+---
+title: "Architecture"
+---
+
+WalletKit is a cloud-hosted platform that manages everything blockchain-related for you, as you build web3 products. It exposes HTTP APIs for your backend to integrate with. If you are working with backend-as-a-service providers like Firebase or Supabase, that will work too!
+
+![](/images/reference/911a9a6-image.png)
+
+#### Components
+
+**Your App (iOS, Android, Web)**: This is the frontend app that your users interact with. It sends HTTP calls to your backend servers, where user data is stored.
+
+**Your Backend**: This is your server where the app logic resides. Teams usually build their own servers using tools like NodeJS, Go, or PHP. However, backend-as-a-service solutions like Firebase or Supabase are also popular choices.
+
+**WalletKit**: WalletKit takes care of all blockchain-related tasks. It helps create wallets, mint tokens & NFTs, and manage transactions, all possible through HTTP APIs without the need for deep crypto knowledge.
+
+**Signer**: The Signer is an open-source tool developed by WalletKit. It manages your private keys and signs transactions before sending them off to the blockchain. You operate Signer on your server, ensuring complete control and ownership over your digital assets.

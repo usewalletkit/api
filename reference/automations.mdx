@@ -1,0 +1,104 @@
+---
+title: "Automations"
+description: "Learn how to build automations with WalletKit"
+---
+
+WalletKit offers an extensive set of APIs, webhooks, and a fully featured dashboard that includes a multi-chain wallet. These tools are perfect for building your crypto automations.
+
+#### Use Cases
+
+Here are some ideas for automations that you could set up:
+
+1. Receive notifications on Slack for incoming transfers to your wallet.
+2. Periodically check your wallet balance and automatically top-up gas.
+3. Forward incoming transfers to another address.
+
+#### Goal
+
+This guide will show you how to use Zapier + WalletKit to set up an automation that forwards all incoming `MATIC` transfers to another address. For instance, if there is an incoming transfer of `1 MATIC`, we will transfer `1 MATIC` to our destination address.
+
+Although we will be using Zapier in this guide, you are free to use any other automation tool or integrate with your own backend services.
+
+#### Setup
+
+1. Create your WalletKit account.
+2. Create your Zapier account.
+3. Buy a small amount of gas from the dashboard. You only need `0.01 MATIC`. We'll use much less.
+4. You'll need a Polygon testnet wallet with some funds to send the MATIC that will be forwarded.
+
+#### Steps Overview
+
+At a high-level, you will be performing the following steps:
+
+1. Create a Webhook Trigger in Zapier
+2. Setup webhook with transfer events in WalletKit
+3. Test the Zapier trigger
+4. Add Zapier actions to make a transfer to the destination address
+
+#### Zapier Trigger
+
+Begin by making a new Zap. Next, choose the "Webhooks by Zapier" trigger with the "Catch Raw Hook" event.
+
+![](/images/reference/63c0189-image.png) 
+
+Click “Continue” and Zapier will generate a URL for you. Note this URL for the next step.
+
+#### WalletKit Webhook
+
+Setup webhook in WalletKit for transfer events:
+
+1. Go to the WalletKit dashboard.
+2. Navigate to the Webhooks page.
+3. Click “New Webhook”.
+4. Use the URL from the previous step as the Target URL.
+5. Check the box for Transfer events.
+6. Click “Create Webhook”.
+![](/images/reference/57ce63b-image.png) 
+
+#### Test Transfer
+
+To test the Zapier trigger, send a test transaction with some `MATIC` to your WalletKit wallet. You can find the wallet's address on the right side of the Overview page, labeled "Deposit Address".
+
+After sending the `MATIC`, you can test your Zapier trigger. It should find a record like so:
+
+![](/images/reference/634f162-image.png) 
+
+Click “Continue with selected record”.
+
+#### Forward Transfer
+
+**Request Body**
+
+Next, we'll make an action in Zapier. This action will take the `raw_body` data from the previous step and make the request body for the transfer call to WalletKit API.
+
+Choose “Code by Zapier” as the Action and pick “Run Javascript” as the event:
+
+![](/images/reference/348c0d8-image.png) 
+
+Click “Continue”. Configure the “Input Data” and the “Code” like so:
+
+![](/images/reference/294fc46-image.png) 
+
+Remember to update the recipient value to your intended destination address. Click “Continue” and test the action.
+
+**Transfer API Call**
+
+To make the forward transfer, we'll make an API call to WalletKit from our Zap.
+
+In Zapier, add a new action by clicking the "plus" button at the bottom. Select "Webhooks by Zapier" and choose "POST" as the event.
+
+![](/images/reference/bf4f5f6-image.png) 
+
+Click on "Continue". In the next step, copy and paste this URL: `https://testnet.usewalletkit.com/tokens/transfer`. Select JSON as the Payload Type. Zapier will take the request body from the previous step automatically.
+
+![](/images/reference/1da5ac5-image.png) 
+
+To finish, we need to authenticate the request. Go to the WalletKit dashboard, click on the API Keys page, and get the Project ID and the API Secret.
+
+In Zapier, look for the "Basic Auth" field and type the Project ID, followed by "|", and the API Secret. Here is an example: `e40e8b79-79c8-4baf-b153-9fcf4ca26780|wkt_zabc123456`.
+
+Click "Continue" and test the action.
+
+#### Test
+
+That’s it! Publish your zapier. Now, send transfers to the wallet and they’ll automatically get forwarded to the destination address.
