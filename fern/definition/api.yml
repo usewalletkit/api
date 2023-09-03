@@ -2,14 +2,13 @@ name: api
 display-name: WalletKit
 error-discrimination:
   strategy: status-code
-auth: BasicAuthScheme
+auth: AuthorizationAuthScheme
 auth-schemes:
-  BasicAuthScheme:
-    scheme: basic
-    username:
-      name: projectID
-    password:
-      name: apiKey
+  AuthorizationAuthScheme:
+    header: Authorization
+    type: string
+headers:
+  X-WalletKit-JWT-Source: optional<string>
 default-environment: testnet
 environments:
   testnet: https://testnet.usewalletkit.com
