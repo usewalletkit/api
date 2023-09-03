@@ -15,7 +15,7 @@ Here are some ideas for NFT use cases:
 
 ### Goal
 
-This guide will show you how to use WalletKit to create Gold status NFT for the [ Airline Rewards & Logyalty Program](/reference/rewards-loyalty-program) mentioned in earlier guide.
+This guide will show you how to use WalletKit to create Gold status NFT for the [ Airline Rewards & Loyalty Program](/reference/rewards-loyalty-program) mentioned in earlier guide.
 
 ### Setup
 
@@ -27,7 +27,7 @@ Make sure you do the following first:
 
 ### Create GOLD NFT Collection
 
-Use the [Create NFT Collection API](/reference/create-nft-collection) to create NFT collection.
+Use the [Create NFT Collection API](/api-reference/nfts/create-nft-collection) to create NFT collection.
 
 ```bash cURL
 curl --request POST \
@@ -58,7 +58,7 @@ Response will contain the created NFT collection `contract_address`, which is ne
 
 This step is optional if you already have the image hosted some where, and have the image uri ready to be used.
 
-In the case where you would like to upload the image of NFT to be hosted on IPFS, use the [Upload NFT image API](/reference/nft-image-upload). 
+In the case where you would like to upload the image of NFT to be hosted on IPFS, use the [Upload NFT image API](/api-reference/nfts/upload-nft-image).
 
 ```bash cURL
 curl -X 'POST' \
@@ -77,7 +77,7 @@ An IPFS url will be returned by the API.
 
 ### Mint NFTs
 
-Let's say the wallet of the first traveler `Alice` who achieve Gold status is `0x976Cf57B7EE1D84E73BE9115457889d49a8A1335`, call [Mint NFT API](/reference/mint-nft) with the traveler's wallet as the `recipient`, and the NFT collection created in previous step as `contract_address`. Put the image url in the`metadata.image` field.
+Let's say the wallet of the first traveler `Alice` who achieve Gold status is `0x976Cf57B7EE1D84E73BE9115457889d49a8A1335`, call [Mint NFT API](/api-reference/nfts/mint-nft) with the traveler's wallet as the `recipient`, and the NFT collection created in previous step as `contract_address`. Put the image url in the`metadata.image` field.
 
 ```bash cURL
 curl --request POST \

@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+imports:
+  commons: commons.yml
+
+service:
+  auth: true
+  base-path: /activity
+  endpoints:
+    list:
+      path: /activity
+      method: GET
+      docs: Retrieves activity history on a specific wallet address.
+      display-name: List Wallet Activity
+      request:
+        name: ListWalletActivityRequest
+        query-parameters:
+          network:
+            type: string
+          wallet_address:
+            type: string
+          page:
+            type: optional<integer>
+          page_size:
+            type: optional<integer>
+      response: list<ListWalletActivityResponseItem>
+      errors:
+        - commons.BadRequestError
+
+types:
+  ListWalletActivityResponseItem:
+    properties:
+      uuid:
+        type: string
+      network:
+        type: string
+      type:
+        type: string
+      timestamp:
+        type: string
+      wallet_address:
+        type: string
+      transaction_hash:
+        type: string
+      metadata:
+        type: ListWalletActivityResponseItemMetadata
+      Token:
+        type: ListWalletActivityResponseItemToken
+
+  ListWalletActivityResponseItemMetadata:
+    properties:
+      amount:
+        type: string
+
+  ListWalletActivityResponseItemToken:
+    properties:
+      uuid:
+        type: string
+      network:
+        type: string
+      contract_address:
+        type: string
+      name:
+        type: string
+      symbol:
+        type: string
+      decimals:
+        type: integer
+      display_decimals:
+        type: integer
+      logo_url:
+        type: optional<string>

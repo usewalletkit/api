@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "mintlify": "cd docs && mintlify dev",
+    "openapi": "fern generate --group docs"
+  },
+  "devDependencies": {
+    "fern": "^0.0.19",
+    "mintlify": "^4.0.12"
+  }
+}

@@ -1,0 +1,218 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+imports:
+  commons: commons.yml
+
+service:
+  auth: true
+  base-path: /tokens
+  endpoints:
+    get:
+      path: /tokens
+      method: GET
+      auth: true
+      docs: Gets the metadata for a token.
+      display-name: Get Token
+      request:
+        name: GetTokenRequest
+        query-parameters:
+          network:
+            type: string
+          token:
+            docs: >-
+              token contract address or symbol in case of the gas token
+            type: string
+      response: GetTokenResponse
+      errors:
+        - commons.BadRequestError
+
+    create:
+      path: ""
+      method: POST
+      docs: Creates an on-chain token with provided metadata.
+      display-name: Create Token
+      request:
+        name: CreateTokenRequest
+        body:
+          properties:
+            network:
+              type: string
+            name:
+              type: string
+            symbol:
+              type: string
+            decimals:
+              type: string
+              docs: >-
+                Specify how many decimals places a token has. E.g. To be able to
+                transfer 1.5 XYZ token, decimals must be at least 1 since that
+                number has a single decimal places.
+            display_decimals:
+              docs: Decimals to display on WalletKit dashboard.
+              type: optional<string>
+            logo_url:
+              docs: url of the token logo.
+              type: optional<string>
+            initial_supply:
+              docs: The amount of tokens to be minted to the token creator.
+              type: string
+            secret:
+              type: string
+      response: commons.TransactionSubmissionResponse
+      errors:
+        - commons.BadRequestError
+
+    transfer:
+      path: /transfer
+      method: POST
+      docs: Transfers the specified amount of tokens from `from` to `recipient`. The from address can only be the ones created in the project.
+      display-name: Transfer Token
+      request:
+        name: TransferTokenRequest
+        body:
+          properties:
+            network:
+              type: string
+            from:
+              docs: from address of the transfer
+              type: string
+            token:
+              docs: >-
+                token contract address or symbol in case of the gas token to be
+                transferred.
+              type: string
+            recipient:
+              docs: recipient of the transfer
+              type: string
+            amount:
+              docs: amount to be transferred.
+              type: string
+            secret:
+              type: string
+      response: commons.TransactionSubmissionResponse
+      errors:
+        - commons.BadRequestError
+
+    mint:
+      path: /mint
+      method: POST
+      docs: Mints specified amount of token to the recipient.
+      display-name: Mint Token
+      request:
+        name: MintTokenRequest
+        body:
+          properties:
+            network:
+              type: string
+            contract_address:
+              type: string
+            recipient:
+              type: string
+            amount:
+              type: string
+            secret:
+              type: string
+      response: commons.TransactionSubmissionResponse
+      errors:
+        - commons.BadRequestError
+
+    list-balances:
+      path: /balances
+      method: GET
+      auth: true
+      docs: Retrieves a list of token balances associated with a specific wallet address on a given network.
+      display-name: List Token Balances
+      request:
+        name: ListTokenBalancesRequest
+        query-parameters:
+          network:
+            type: string
+          wallet_address:
+            type: string
+      response: list<ListTokenBalancesResponseItem>
+      errors:
+        - commons.BadRequestError
+
+    batch-transfer:
+      path: /batch-transfer
+      method: POST
+      auth: true
+      docs: |
+        Batch transfers from the `from` wallet to the list of 
+        `recipients` with the provided amount. The `from` address can only be the ones 
+        created in the project. Transfers within a batch are processed atomically 
+        in a single transaction, resulting in significantly lower average costs 
+        compared to individual transfers
+      display-name: Batch Transfer Token
+      request:
+        name: BatchTransferTokenRequest
+        body:
+          properties:
+            network:
+              type: string
+            from:
+              docs: from address of the transfer
+              type: string
+            token:
+              docs: >-
+                token contract address or symbol in case of the gas token to be
+                transferred.
+              type: string
+            transfers:
+              docs: transfers in this batch, max batch size is 50 transfers.
+              type: list<BatchTransferTokenRequestTransfersItem>
+            secret:
+              type: string
+      response: commons.TransactionSubmissionResponse
+      errors:
+        - commons.BadRequestError
+
+types:
+  GetTokenResponse:
+    properties:
+      uuid:
+        type: string
+      network:
+        type: string
+      contract_address:
+        type: string
+      name:
+        type: string
+      symbol:
+        type: string
+      decimals:
+        type: integer
+      display_decimals:
+        type: integer
+      logo_url:
+        type: optional<string>
+
+  ListTokenBalancesResponseItem:
+    properties:
+      uuid:
+        type: string
+      network:
+        type: string
+      contract_address:
+        type: string
+      name:
+        type: string
+      symbol:
+        type: string
+      decimals:
+        type: integer
+      display_decimals:
+        type: integer
+      logo_url:
+        type: string
+      Balance:
+        type: string
+
+  BatchTransferTokenRequestTransfersItem:
+    properties:
+      recipient:
+        docs: recipient of the transfer
+        type: string
+      amount:
+        docs: amount to be transferred
+        type: string

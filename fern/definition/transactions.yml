@@ -1,0 +1,113 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+imports:
+  commons: commons.yml
+
+service:
+  auth: true
+  base-path: /transactions
+  endpoints:
+    get-status:
+      path: /status-by-hash
+      method: GET
+      docs: Retrieves the status of a transaction by its hash.
+      display-name: Transaction Status By Hash
+      request:
+        name: GetTransactionStatusByHashRequest
+        query-parameters:
+          network: string
+          transaction_hash: string
+      response: GetTransactionStatusByHashResponse
+      errors:
+        - commons.BadRequestError
+
+    sign-and-send:
+      path: /sign-and-send
+      method: POST
+      auth: true
+      docs: This endpoint allows arbitrary smart contract function calls. It can be used to interact with smart contracts that are not supported by the Token/NFT APIs.
+      display-name: Sign and Send
+      request:
+        name: SignAndSendRequest
+        body:
+          properties:
+            network:
+              type: string
+            signer_wallet_address:
+              type: string
+            unsigned_transaction:
+              type: SignAndSendRequestUnsignedTransaction
+              docs: input of a transaction to be signed.
+            secret:
+              type: string
+      response: commons.TransactionSubmissionResponse
+      errors:
+        - commons.BadRequestError
+
+    status-by-id:
+      path: /status-by-id
+      method: GET
+      auth: true
+      docs: Retrieves the status of a transaction by its id returned from the APIs that change the state of blockchain` (e.g. /tokens/transfer)`
+      display-name: Transaction Status by ID
+      request:
+        name: GetTransactionStatusByIdRequest
+        query-parameters:
+          id:
+            docs: >-
+              transaction id returned in POST requests that result in a
+              transaction. e.g. Transfer Token
+            type: optional<string>
+      response: GetTransactionStatusByIdResponse
+      errors:
+        - commons.BadRequestError
+
+types:
+  GetTransactionStatusByHashResponse:
+    properties:
+      transaction_hash:
+        type: string
+      network:
+        type: string
+      status:
+        type: string
+      contract_address:
+        docs: >-
+          If the transaction is a contract creation, this field will be populated with the contract address.
+        type: optional<string>
+
+  GetTransactionStatusByIdResponse:
+    properties:
+      transaction_id:
+        type: string
+      transaction_hash:
+        docs: >-
+          If the transaction has been sent to the blockchain (status = pending/success/failed), this field will be populated with the transaction hash.
+        type: optional<string>
+      network:
+        type: string
+      status:
+        type: string
+      contract_address:
+        docs: >-
+          If the transaction is a contract creation, this field will be populated with the contract address.
+        type: optional<string>
+
+  SignAndSendRequestUnsignedTransaction:
+    docs: input of a transaction to be signed.
+    properties:
+      to:
+        docs: >-
+          smart contract address or external owned account address to interact
+          with
+        type: string
+      value:
+        docs: >-
+          optional. amount of native token to be transferred to the to address
+          in this transaction.
+        type: optional<string>
+      input:
+        docs: >-
+          If it's a smart contract interaction, the calldata of the smart
+          contract function. (ABI-encoded function with arguments)
+        type: optional<string>

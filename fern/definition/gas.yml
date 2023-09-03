@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+imports:
+  commons: commons.yml
+
+service:
+  auth: true
+  base-path: /gas
+  endpoints:
+    buy:
+      path: /buy
+      method: POST
+      docs: Tops up gas to the destination wallet address (default to project wallet if not provided explicitly).
+      display-name: Buy Gas
+      request:
+        name: BuyGasRequest
+        body:
+          properties:
+            network:
+              type: string
+            amount:
+              type: string
+            destination_address:
+              type: optional<string>
+      response: BuyGasResponse
+      errors:
+        - commons.BadRequestError
+
+types:
+  BuyGasResponse:
+    properties:
+      transaction_id:
+        type: string
+      network:
+        type: string
+      status:
+        type: string

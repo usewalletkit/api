@@ -1,0 +1,253 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+imports:
+  commons: commons.yml
+
+service:
+  auth: true
+  display-name: NFT
+  base-path: /nfts/collections
+  endpoints:
+    create:
+      path: ""
+      method: POST
+      auth: true
+      docs: |
+        Creates an NFT Collection with provided metadata.
+        An NFT collection refers to a group of non-fungible tokens (NFTs) that are created and released together, often following a specific theme or concept. NFTs are unique digital assets that are stored on a blockchain, represent ownership or proof of authenticity of a particular item, artwork, or digital content.
+        The created nft collection's address can be found by `/transactions/status-by-id` 
+        endpoint once the transaction is succeeded.
+      display-name: Create NFT Collection
+      request:
+        name: CreateNftCollectionRequest
+        body:
+          properties:
+            network:
+              type: string
+            name:
+              type: string
+              docs: collection name
+            symbol:
+              type: string
+              docs: Collection symbol used for identification purposes
+            image_url:
+              type: string
+              docs: URL to the collection logo image
+            base_uri:
+              docs: >-
+                Base URI for computing tokenURI. If set, the resulting URI for
+                each token will be the concatenation of the baseURI and the
+                tokenId. Empty by default, can be overridden in child contracts.
+              type: optional<string>
+            secret:
+              type: string
+      response: commons.TransactionSubmissionResponse
+      errors:
+        - commons.BadRequestError
+
+    mint-nft:
+      path: /nfts/mint
+      method: POST
+      auth: true
+      docs: Mints a NFT from a collection
+      display-name: Mint NFT
+      request:
+        name: MintNftRequest
+        body:
+          properties:
+            network:
+              type: string
+            contract_address:
+              type: string
+              docs: address of the NFT collection smart contract to mint from.
+            recipient:
+              type: string
+            metadata:
+              docs: Metadata JSON object.
+              type: optional<MintNftRequestMetadata>
+            uri:
+              docs: >-
+                uri the the nft metadata.json, schema define in
+                https://eips.ethereum.org/EIPS/eip-721#specification. Use the
+                metadata field instead if the metadata.json doesn't exist and
+                needs to be created and hosted.
+              type: optional<string>
+            secret:
+              type: string
+      response: commons.TransactionSubmissionResponse
+      errors:
+        - commons.BadRequestError
+
+    transfer-nft:
+      path: /nfts/transfer
+      method: POST
+      auth: true
+      docs: Transfers NFT from `from` to `recipient`. The from address must be wallet created in the project.
+      display-name: Transfer NFT
+      request:
+        name: TransferNftRequest
+        body:
+          properties:
+            network:
+              type: string
+            from:
+              type: string
+              docs: from address of the transfer
+            contract_address:
+              type: string
+              docs: collection contract address
+            recipient:
+              type: string
+              docs: recipient of the NFT transfer
+            token_id:
+              type: optional<string>
+            secret:
+              type: optional<string>
+      response: commons.TransactionSubmissionResponse
+      errors:
+        - commons.BadRequestError
+
+    list-nfts:
+      path: /nfts
+      method: GET
+      auth: true
+      docs: List NFTs by wallet or by collection address
+      display-name: List NFTs
+      request:
+        name: ListNftsRequest
+        query-parameters:
+          network:
+            type: string
+          wallet_address:
+            docs: >-
+              query by wallet address. If provided, contract_address should not be set.
+            type: optional<string>
+          contract_address:
+            docs: >-
+              query by collection address. If provided, wallet_address should not be set.
+            type: optional<string>
+          page:
+            docs: page number, starting from 1
+            type: optional<integer>
+          page_size:
+            docs: size of each page
+            type: optional<integer>
+      response: list<ListNftsResponseItem>
+      errors:
+        - commons.BadRequestError
+
+    get-nft-collection:
+      path: /nfts/collection-by-address
+      method: GET
+      auth: true
+      docs: Get NFT collection by collection address
+      display-name: Get NFT Collection
+      request:
+        name: GetNftCollectionRequest
+        query-parameters:
+          network:
+            type: optional<string>
+          collection_address:
+            docs: address of the NFT contract
+            type: optional<string>
+      response: GetNftCollectionResponse
+      errors:
+        - commons.BadRequestError
+
+    list-nft-collections:
+      path: /nfts/collections
+      method: GET
+      auth: true
+      docs: List NFT collections owned by wallet
+      display-name: List NFT Collections
+      request:
+        name: ListNftCollectionsRequest
+        query-parameters:
+          network:
+            type: string
+          wallet_address:
+            type: string
+          page:
+            docs: page number starting from 1
+            type: optional<integer>
+          page_size:
+            docs: size of each page
+            type: optional<integer>
+      response: list<ListNftCollectionsResponseItem>
+      errors:
+        - commons.BadRequestError
+
+    nft-image-upload:
+      path: /nfts/upload
+      method: POST
+      auth: true
+      docs: Upload NFT image to IPFS
+      display-name: Upload NFT image
+      response: NftImageUploadResponse
+      errors:
+        - commons.BadRequestError
+
+types:
+  MintNftRequestMetadata:
+    docs: Metadata JSON object.
+    properties:
+      name:
+        type: string
+        docs: Identifies the asset to which this NFT represents
+      description:
+        type: string
+        docs: Describes the asset to which this NFT represents
+      image:
+        type: string
+        docs: >-
+          A URI pointing to a resource with mime type image/* representing the
+          asset to which this NFT represents. Consider making any images at a
+          width between 320 and 1080 pixels and aspect ratio between 1.91:1 and
+          4:5 inclusive.
+
+  ListNftsResponseItem:
+    properties:
+      metadata:
+        type: optional<ListNftsResponseItemMetadata>
+      owner_wallet_address:
+        type: string
+      contract_address:
+        type: string
+      token_id:
+        type: string
+
+  ListNftsResponseItemMetadata:
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      image:
+        type: string
+
+  GetNftCollectionResponse:
+    properties:
+      network:
+        type: string
+      contract_address:
+        type: string
+      name:
+        type: string
+      symbol:
+        type: string
+
+  ListNftCollectionsResponseItem:
+    properties:
+      network:
+        type: string
+      contract_address:
+        type: string
+      name:
+        type: string
+      image_url:
+        type: string
+
+  NftImageUploadResponse:
+    properties:
+      ipfs_url:
+        type: string

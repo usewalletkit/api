@@ -1,0 +1,8 @@
+navigation: 
+  - wallets.yml
+  - transactions.yml
+  - tokens.yml
+  - nfts.yml
+  - activity.yml
+  - gas.yml
+  - commons.yml

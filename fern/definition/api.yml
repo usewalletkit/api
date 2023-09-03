@@ -1,0 +1,16 @@
+name: api
+display-name: WalletKit
+error-discrimination:
+  strategy: status-code
+auth: BasicAuthScheme
+auth-schemes:
+  BasicAuthScheme:
+    scheme: basic
+    username:
+      name: projectID
+    password:
+      name: apiKey
+default-environment: testnet
+environments:
+  testnet: https://testnet.usewalletkit.com
+  mainnet: https://mainnet.usewalletkit.com

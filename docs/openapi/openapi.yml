@@ -5,9 +5,7 @@ info:
 paths:
   /activity/activity:
     get:
-      description: >-
-        This endpoint is commonly used to retrieve activity history on a
-        specific wallet address.
+      description: Retrieves activity history on a specific wallet address.
       operationId: activity_list
       tags:
         - Activity
@@ -51,8 +49,8 @@ paths:
   /gas/buy:
     post:
       description: >-
-        This endpoint tops up gas to the destination wallet address (default to
-        project wallet if not provided explicitly).
+        Tops up gas to the destination wallet address (default to project wallet
+        if not provided explicitly).
       operationId: gas_buy
       tags:
         - Gas
@@ -88,7 +86,7 @@ paths:
   /nfts/collections:
     post:
       description: >
-        This endpoint creates an NFT Collection with provided metadata.
+        Creates an NFT Collection with provided metadata.
 
         An NFT collection refers to a group of non-fungible tokens (NFTs) that
         are created and released together, often following a specific theme or
@@ -151,7 +149,7 @@ paths:
                 - secret
   /nfts/collections/nfts/mint:
     post:
-      description: mints a NFT from a collection
+      description: Mints a NFT from a collection
       operationId: nfts_mint-nft
       tags:
         - Nfts
@@ -203,8 +201,8 @@ paths:
   /nfts/collections/nfts/transfer:
     post:
       description: >-
-        This endpoint transfers NFT from `from` to `recipient`. The from address
-        must be wallet created in the project.
+        Transfers NFT from `from` to `recipient`. The from address must be
+        wallet created in the project.
       operationId: nfts_transfer-nft
       tags:
         - Nfts
@@ -401,7 +399,7 @@ paths:
       security: *ref_0
   /tokens/tokens:
     get:
-      description: This endpoint is commonly used to get the metadata for a token.
+      description: Gets the metadata for a token.
       operationId: tokens_get
       tags:
         - Tokens
@@ -430,6 +428,7 @@ paths:
       security: *ref_0
   /tokens:
     post:
+      description: Creates an on-chain token with provided metadata.
       operationId: tokens_create
       tags:
         - Tokens
@@ -487,9 +486,8 @@ paths:
   /tokens/transfer:
     post:
       description: >-
-        This endpoint transfers the specified amount of tokens from `from` to
-        `recipient`. The from address can only be the ones created in the
-        project.
+        Transfers the specified amount of tokens from `from` to `recipient`. The
+        from address can only be the ones created in the project.
       operationId: tokens_transfer
       tags:
         - Tokens
@@ -539,7 +537,7 @@ paths:
                 - secret
   /tokens/mint:
     post:
-      description: This endpoint mints specified amount of token to the recipient.
+      description: Mints specified amount of token to the recipient.
       operationId: tokens_mint
       tags:
         - Tokens
@@ -581,8 +579,8 @@ paths:
   /tokens/balances:
     get:
       description: >-
-        The List Token Balances endpoint retrieves a list of token balances
-        associated with a specific wallet address on a given network.
+        Retrieves a list of token balances associated with a specific wallet
+        address on a given network.
       operationId: tokens_list-balances
       tags:
         - Tokens
@@ -613,8 +611,7 @@ paths:
   /tokens/batch-transfer:
     post:
       description: >
-        This endpoint does batch transfers from the `from` wallet to the list
-        of 
+        Batch transfers from the `from` wallet to the list of 
 
         `recipients` with the provided amount. The `from` address can only be
         the ones 
@@ -673,6 +670,7 @@ paths:
                 - secret
   /transactions/status-by-hash:
     get:
+      description: Retrieves the status of a transaction by its hash.
       operationId: transactions_get-status
       tags:
         - Transactions
@@ -700,7 +698,10 @@ paths:
       security: *ref_0
   /transactions/sign-and-send:
     post:
-      description: This endpoint allows arbitrary smart contract function calls.
+      description: >-
+        This endpoint allows arbitrary smart contract function calls. It can be
+        used to interact with smart contracts that are not supported by the
+        Token/NFT APIs.
       operationId: transactions_sign-and-send
       tags:
         - Transactions
@@ -740,8 +741,8 @@ paths:
   /transactions/status-by-id:
     get:
       description: >-
-        Get transaction by transaction id returned by the POST APIs.` (e.g.
-        /tokens/transfer)`
+        Retrieves the status of a transaction by its id returned from the APIs
+        that change the state of blockchain` (e.g. /tokens/transfer)`
       operationId: transactions_status-by-id
       tags:
         - Transactions
@@ -768,6 +769,7 @@ paths:
       security: *ref_0
   /wallets:
     post:
+      description: Creates a wallet with provided metadata.
       operationId: wallets_create
       tags:
         - Wallets
@@ -806,7 +808,7 @@ paths:
                   owner_id: 58c9095e-24db-43eb-b49d-b78f72573a29
                   secret: testnet-secret
     get:
-      description: List wallets created. Support filter by network.
+      description: Lists wallets created in the project. Supports filter by network.
       operationId: wallets_list
       tags:
         - Wallets

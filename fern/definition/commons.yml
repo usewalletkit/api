@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+types:
+  TransactionSubmissionResponse:
+    properties:
+      transaction_id:
+        type: string
+      network:
+        type: string
+      status:
+        type: string
+
+errors:
+  BadRequestError:
+    status-code: 400
