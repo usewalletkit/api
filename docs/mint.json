@@ -26,6 +26,10 @@
   "topbarLinks": [],
   "tabs": [
     {
+      "name": "Guides",
+      "url": "guides"
+    },
+    {
       "name": "API Reference",
       "url": "api-reference"
     }
@@ -43,6 +47,12 @@
       "pages": [
         "get-started/endpoints",
         "get-started/authentication"
+      ]
+    },
+    {
+      "group": "Wallets",
+      "pages": [
+        "wallets/create-wallet"
       ]
     },
     {
