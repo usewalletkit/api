@@ -52,7 +52,8 @@
     {
       "group": "Wallets",
       "pages": [
-        "wallets/create-wallet"
+        "wallets/create-wallet",
+        "wallets/activity-history"
       ]
     },
     {

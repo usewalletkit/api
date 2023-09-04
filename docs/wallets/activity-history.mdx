@@ -1,0 +1,30 @@
+---
+title: "Activity History"
+description: "List wallet activity history"
+---
+
+Use the activity history endpoint to list all wallet activity history. This includes deposits, withdrawals, token
+transfers, NFT transfers, and more.
+
+<CodeGroup>
+```javascript Node
+import { WalletKitClient } from 'walletkit';
+
+const wk = WalletKitClient.usingAPIKey({
+  projectID: '<Project ID>',
+  apiKey: '<API Key>'
+});
+
+const activity = await wk.activity.list({
+  network: 'Base',
+  walletAddress: '0x..'
+});
+```
+```bash curl
+curl --request GET \
+  --url 'https://testnet.usewalletkit.com/activity/activity?network=Base&wallet_address=0x..' \
+  --user '<Project ID>:<API Key>'
+```
+</CodeGroup>
+
+You can use this endpoint to build the transaction history for a wallet.
