@@ -23,7 +23,7 @@
     "name": "Dashboard",
     "url": "https://app.usewalletkit.com"
   },
-  "topbarLinks": [  ],
+  "topbarLinks": [],
   "tabs": [
     {
       "name": "API Reference",
@@ -33,10 +33,7 @@
   "navigation": [
     {
       "group": "Introduction",
-      "pages": [
-        "introduction/getting-started-with-your-api",
-        "introduction/architecture"
-      ]
+      "pages": ["introduction/overview"]
     },
     {
       "group": "Get started",
