@@ -1,0 +1,45 @@
+---
+title: "Make Transfer"
+description: "Easily transfer tokens from one wallet to another"
+---
+
+<CodeGroup>
+```javascript Node
+import { WalletKitClient } from 'walletkit';
+
+const wk = WalletKitClient.usingAPIKey({
+  projectID: '<Project ID>',
+  apiKey: '<API Key>'
+});
+
+const transaction = await wk.tokens.transfer({
+  'network': 'Base',
+  'from': '0x..',
+  'token': 'ETH',
+  'recipient': '0x..',
+  'amount': '0.01',
+  'secret': 'testnet-secret'
+});
+```
+
+```bash curl
+  curl --request POST \
+  --url https://testnet.usewalletkit.com/tokens/transfer \
+  --user '<Project ID>:<API Key>' \
+  --data '{
+    "network": "Base",
+    "from": "0x..",
+    "token": "ETH",
+    "recipient": "0x..",
+    "amount": "0.01",
+    "secret": "testnet-secret"
+  }'
+```
+</CodeGroup>
+
+This returns a transaction object with a transaction id. You can monitor the status of the transaction by calling the
+[Get Transaction Status](/api-reference/transactions/transaction-status-by-id) endpoint. WalletKit handles retries to
+ensure that the transaction is successful.
+
+To transfer other tokens, you can use the contract address for the token instead of the token symbol. For example, to
+transfer USDC, you can use its contract address found [here](https://www.circle.com/en/multichain-usdc).

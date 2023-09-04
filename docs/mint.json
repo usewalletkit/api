@@ -57,6 +57,12 @@
       ]
     },
     {
+      "group": "Tokens",
+      "pages": [
+        "tokens/make-transfer"
+      ]
+    },
+    {
       "group": "Guides",
       "pages": [
         "guides/rewards-loyalty-program",
