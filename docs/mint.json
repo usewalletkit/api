@@ -33,7 +33,10 @@
   "navigation": [
     {
       "group": "Introduction",
-      "pages": ["introduction/overview"]
+      "pages": [
+        "introduction/overview",
+        "introduction/supported-networks"
+      ]
     },
     {
       "group": "Get started",
