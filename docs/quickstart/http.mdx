@@ -1,0 +1,35 @@
+---
+title: "HTTP APIs"
+---
+
+WalletKit provides a set of HTTP APIs so you can integrate with your own backend service in any language or framework.
+
+
+#### API Hosts
+WalletKit exposes two endpoints, one for each environment:
+
+- Mainnet: https://mainnet.usewalletkit.com
+- Testnet: https://testnet.usewalletkit.com
+
+#### Authentication
+WalletKit uses Basic Authentication to authenticate your requests. Broadly, this works by passing the
+`Authorization: Basic <credentials>` header where `<credentials>` is a base64 encoded string: `Project ID:API Secret`.
+
+<Tip>
+  Grab your ProjectID and API Key from the API Keys page in the WalletKit Dashboard:
+  https://app.usewalletkit.com/api-keys
+</Tip>
+
+#### Example Request
+Here is an example request to create a wallet on the Base testnet network:
+
+```bash
+curl --request POST \
+--url https://testnet.usewalletkit.com/wallets \
+--user '<Project ID>:<API Key>' \
+--data '{
+  "network": "Base",
+  "name": "My Wallet",
+  "secret": "testnet-secret"
+}'
+```

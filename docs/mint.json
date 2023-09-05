@@ -46,7 +46,8 @@
     {
       "group": "Quickstart",
       "pages": [
-        "quickstart/nodejs"
+        "quickstart/nodejs",
+        "quickstart/http"
       ]
     },
     {
