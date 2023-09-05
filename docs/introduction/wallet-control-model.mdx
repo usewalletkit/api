@@ -1,0 +1,30 @@
+---
+title: "Wallet Control Models"
+---
+Wallet control model governs who controls the ability to access to the underlying private keys of the wallets.
+WalletKit provides two types of control model: developer-controlled wallet and user-controlled wallet.
+
+### Developer-Controlled Wallets
+With this model, the developer controls the ability to access the private key of the wallet to interact with the blockchain. 
+Developer has access to the private keys to signs the transaction on behalf of the user. This model is suitable for 
+the applications that developer is comfortable taking custody of the assets on users' wallets. For example, a game application
+issuing in-game points and assets to users' wallets. This model usually result in better user experience as it requires less
+steps during user onboarding, and less user invovlement to interact with the blockchain.
+
+#### How it works
+WalletKit leverages MPC (Multi-Party Computation) to private key management, dividing the private key into three shares distributed 
+among multiple parties. The developer holds two shares, one hosted by WalletKit protected by their encryption secret, while the 
+recovery share is typically stored offline. To sign a transaction, the two online shares will be used to sign the transaction.
+
+![](/images/reference/developer-controlled-wallet-diagram.png) 
+
+
+### User-Controlled Wallets
+With this model, the user controls the ability to access the private key of the wallet to interact with the blockchain.
+It empowers your app's users with full control over their wallets. Neither Wallekit, nor the developer can access or 
+transfer a user's assets without their permission.
+User-controlled wallet requires user to setup their encryption secret, and complete a recovery flow during onboarding.
+
+<Note>
+🚧 Full support of user-controlled wallet is working in progress, if you want to use user-controlled wallet, please [contact us](mailto:founders@usewalletkit.com)  
+</Note>

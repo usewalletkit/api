@@ -39,7 +39,8 @@
       "group": "Introduction",
       "pages": [
         "introduction/overview",
-        "introduction/supported-networks"
+        "introduction/supported-networks",
+        "introduction/wallet-control-model"
       ]
     },
     {
