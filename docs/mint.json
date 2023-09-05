@@ -44,10 +44,9 @@
       ]
     },
     {
-      "group": "Get started",
+      "group": "Quickstart",
       "pages": [
-        "get-started/endpoints",
-        "get-started/authentication"
+        "quickstart/nodejs"
       ]
     },
     {

@@ -1,0 +1,25 @@
+---
+title: "NodeJS"
+---
+
+If you are building a NodeJS application using any frameworks such as NextJS, you can use the WalletKit NodeJS SDK to
+quickly get started.
+
+```bash Shell
+npm install walletkit
+```
+
+### Setup WalletKit Client
+
+Grab your ProjectID and API Key from the API Keys page in the WalletKit Dashboard: https://app.usewalletkit.com/api-keys
+
+```javascript Node
+import { WalletKitClient } from 'walletkit';
+
+const wk = WalletKitClient.usingAPIKey({
+  projectID: '<Project ID>',
+  apiKey: '<API Key>'
+});
+```
+
+Checkout the API Reference to see all the methods available: https://docs.usewalletkit.com/api-reference
