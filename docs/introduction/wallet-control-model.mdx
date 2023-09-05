@@ -6,17 +6,25 @@ WalletKit provides two types of control model: developer-controlled wallet and u
 
 ### Developer-Controlled Wallets
 With this model, the developer controls the ability to access the private key of the wallet to interact with the blockchain. 
-Developer has access to the private keys to signs the transaction on behalf of the user. This model is suitable for 
-the applications that developer is comfortable taking custody of the assets on users' wallets. For example, a game application
-issuing in-game points and assets to users' wallets. This model usually result in better user experience as it requires less
-steps during user onboarding, and less user invovlement to interact with the blockchain.
+That means the developer manages the wallets on users behalf. This model is suitable for the applications that developer is comfortable 
+taking custody of the assets on users' wallets. For example, a game application issuing in-game points and assets to users' wallets. 
+This model usually result in better user experience as it requires less steps during user onboarding, and less user involvement to 
+interact with the blockchain.
 
 #### How it works
-WalletKit leverages MPC (Multi-Party Computation) to private key management, dividing the private key into three shares distributed 
-among multiple parties. The developer holds two shares, one hosted by WalletKit protected by their encryption secret, while the 
-recovery share is typically stored offline. To sign a transaction, the two online shares will be used to sign the transaction.
 
-![](/images/reference/developer-controlled-wallet-diagram.png) 
+![](/images/reference/developer-controlled-wallet.png) 
+
+WalletKit leverages MPC (Multi-Party Computation) for private key management, dividing the private key into three shares distributed 
+among multiple parties. The developer holds two shares, one for online signing hosted in MPC node and one for recovery which is is typically stored offline.
+WalletKit retains the third share in an MPC node. When combined with the developer's share, these shares enable signature generation for transaction signing.
+WalletKit can run developer's MPC Node out of the box, and the developer share is encrypted by a developer-provided secret so WalletKit has no access to it 
+without developer's explicit permission.
+
+<Tip>
+ If you want to run your own MPC Node, please [contact us](mailto:founders@usewalletkit.com)  
+</Tip>
+
 
 
 ### User-Controlled Wallets
