@@ -1,0 +1,63 @@
+---
+title: "Custom Token"
+description: "Learn how to deploy a custom token"
+---
+
+WalletKit lets you easily deploy custom tokens on any chains. Once deployed, the tokens are deposited in your project
+wallet. From there, you can manage its supply by minting additional tokens or burning existing ones.
+
+Combined with the [Transfer API](make-transfer), you can easily create a token-based features for your project such as
+rewarding users for completing tasks or creating a marketplace.
+
+![Custom Token](/images/reference/custom-token.png)
+
+### Using Dashboard
+WalletKit provides no-code tools in the Dashboard to deploy custom tokens. To deploy a custom token, follow these steps:
+1. Head over to the [Dashboard](https://app.usewalletkit.com/)
+2. Click "Create Token"
+3. Configure the token, by picking a name, symbol, logo, and its initial supply.
+4. Finally, confirm the network you want to deploy on and click "Create Token"
+
+![Tokens in Project Wallet](/images/reference/dashboard-tokens.png)
+
+### Using API
+
+You can also programmatically deploy custom tokens using the
+[Create Token API](http://localhost:3000/api-reference/tokens/create-token).
+
+<CodeGroup>
+```javascript Node
+import {WalletKitClient} from 'walletkit';
+
+const wk = WalletKitClient.usingAPIKey({
+  projectID: "<Project ID>",
+  apiKey: "<API Key>"
+});
+
+const transaction = await wk.tokens.create({
+  network: "Base",
+  name: "Reward Points",
+  symbol: "RPC",
+  decimals: 6,
+  displayDecimals: 2,
+  initialSupply: "1000000",
+  logoUrl: "https://example.org/token-logo.png",
+  secret: "testnset-secret"
+});
+```
+
+```bash curl
+  curl --request POST \
+  --url https://testnet.usewalletkit.com/tokens \
+  --user '<Project ID>:<API Key>' \
+  --data '{
+    "network": "Base",
+    "name": "Reward Points",
+    "symbol": "RPC",
+    "decimals": 6,
+    "initial_supply": "1000000",
+    "logo_url": "https://example.org/token-logo.png",
+    "secret": "testnet-secret"
+  }'
+```
+</CodeGroup>
