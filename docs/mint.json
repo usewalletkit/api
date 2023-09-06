@@ -46,8 +46,10 @@
     {
       "group": "Quickstart",
       "pages": [
+        "quickstart/api-keys",
         "quickstart/nodejs",
-        "quickstart/http"
+        "quickstart/http",
+        "quickstart/secret"
       ]
     },
     {
