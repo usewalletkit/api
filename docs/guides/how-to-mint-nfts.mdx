@@ -35,7 +35,7 @@ curl --request POST \
      --user <project id>:<api secret> \
      --data '
 {
-   "network": "Polygon",
+   "network": "Base",
    "name": "Sky Airline Gold Member",
    "symbol": "SAGM",
    "secret": "testnet-secret"
@@ -43,14 +43,29 @@ curl --request POST \
 '
 ```
 
-Response will contain the created NFT collection `contract_address`, which is needed in mint API call
+The response returns a transaction object with a transaction id. 
+```json JSON
+{
+  "transaction_id": "11da23c2-fed1-4a37-963a-f7222041d6e3",
+  "network": "Base",
+  "status": "submitted",
+}
+```
+
+You can monitor the status of the transaction by calling the
+[Get Transaction Status](/api-reference/transactions/transaction-status-by-id) endpoint. WalletKit handles retries to
+ensure that the transaction is successful.
+
+Once the transaction is successful, the response will contain the contract address of the NFT collection, which will be
+used in the minting step.
 
 ```json JSON
 {
-  "contract_address": "0x2b0bbdfef86b1979f931317252fd4d73e506c1b1",
-  "network": "Polygon",
-  "status": "pending",
-  "transaction_hash": "0x07c782dcba4cc90d22047f93dbe5f6ccdf66ab6628dae2eeb528114baa9d1399"
+  "transaction_id": "11da23c2-fed1-4a37-963a-f7222041d6e3",
+  "transaction_hash": "0x2f54260a6803d3b03b83580a168a79c384cc138c37cca93f76dd7c042c183457",
+  "network": "Base",
+  "status": "success",
+  "contract_address": "0xD4Edb607A07BFe4D5678fA01a2773449465F1aD1"
 }
 ```
 
@@ -85,8 +100,8 @@ curl --request POST \
      --user <project id>:<api secret> \
      --data '
 {
-   "contract_address": "0x2b0bbdfef86b1979f931317252fd4d73e506c1b1",
-   "network": "Polygon",
+   "contract_address": "0xD4Edb607A07BFe4D5678fA01a2773449465F1aD1",
+   "network": "Base",
    "recipient": "0x976Cf57B7EE1D84E73BE9115457889d49a8A1335",
    "metadata": {
      "name": "Gold member #1",

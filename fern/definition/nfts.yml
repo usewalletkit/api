@@ -35,9 +35,9 @@ service:
               docs: URL to the collection logo image
             base_uri:
               docs: >-
-                Base URI for computing tokenURI. If set, the resulting URI for
-                each token will be the concatenation of the baseURI and the
-                tokenId. Empty by default, can be overridden in child contracts.
+                Base URI for computing tokenURI which resolves to token metadata JSON. If set, the resulting URI for
+                each token will be the concatenation of the baseURI and the tokenId (or tokenURI if tokenURI is set
+                when minting the NFT).
               type: optional<string>
             secret:
               type: string

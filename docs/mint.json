@@ -64,6 +64,12 @@
       ]
     },
     {
+      "group": "NFTs",
+      "pages": [
+        "nfts/mint"
+      ]
+    },
+    {
       "group": "Guides",
       "pages": [
         "guides/rewards-loyalty-program",

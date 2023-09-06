@@ -1,0 +1,52 @@
+---
+title: "Mint NFT"
+description: "Easily mint NFT"
+---
+
+Use the mint NFT endpoint to mint a new NFT with custom metadata.
+
+<CodeGroup>
+```javascript Node
+import { WalletKitClient } from 'walletkit';
+
+const wk = WalletKitClient.usingAPIKey({
+  projectID: '<Project ID>',
+  apiKey: '<API Key>'
+});
+
+const transaction = await wk.nfts.mint({
+  'network': 'Base',
+  'contract_address': '0x..',
+  "recipient": '0x..',
+  'metadata': {
+    'name': 'Gold member #1',
+    'description': 'Skyline Airline Gold Member enjoys unlimited seat upgrades, 40% more awarded miles ...',
+    'image': 'image_url'
+  },
+  'secret': 'testnet-secret'
+});
+```
+
+```bash curl
+  curl --request POST \
+  --url https://testnet.usewalletkit.com/nfts/mint \
+  --user '<Project ID>:<API Key>' \
+  --data '{
+    "network": "Base",
+    "contract_address": "0x..",
+    "recipient": "0x..",
+    "metadata": {
+      "name": "Gold member #1",
+      "description": "Skyline Airline Gold Member enjoys unlimited seat upgrades, 40% more awarded miles ...",
+      "image": "image_url"
+    },
+    "secret": "testnet-secret"
+  }'
+```
+</CodeGroup>
+
+This returns a transaction object with a transaction id. You can monitor the status of the transaction by calling the
+[Get Transaction Status](/api-reference/transactions/transaction-status-by-id) endpoint. WalletKit handles retries to
+ensure that the transaction is successful.
+
+A detailed guide on minting NFT from scratch is available [here](/guides/how-to-mint-nfts).

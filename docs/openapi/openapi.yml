@@ -45,7 +45,7 @@ paths:
           description: ''
       summary: List Wallet Activity
       security: &ref_0
-        - BasicAuth: []
+        - AuthorizationAuth: []
   /gas/buy:
     post:
       description: >-
@@ -135,10 +135,10 @@ paths:
                   type: string
                   nullable: true
                   description: >-
-                    Base URI for computing tokenURI. If set, the resulting URI
-                    for each token will be the concatenation of the baseURI and
-                    the tokenId. Empty by default, can be overridden in child
-                    contracts.
+                    Base URI for computing tokenURI which resolves to token
+                    metadata JSON. If set, the resulting URI for each token will
+                    be the concatenation of the baseURI and the tokenId (or
+                    tokenURI if tokenURI is set when minting the NFT).
                 secret:
                   type: string
               required:
@@ -728,6 +728,7 @@ paths:
                   type: string
                 signer_wallet_address:
                   type: string
+                  description: address can only be the ones created in the project.
                 unsigned_transaction:
                   $ref: '#/components/schemas/SignAndSendRequestUnsignedTransaction'
                   description: input of a transaction to be signed.
@@ -1253,9 +1254,10 @@ components:
         - network
         - address
   securitySchemes:
-    BasicAuth:
-      type: http
-      scheme: basic
+    AuthorizationAuth:
+      type: apiKey
+      in: header
+      name: Authorization
 servers:
   - url: https://testnet.usewalletkit.com
     description: testnet
