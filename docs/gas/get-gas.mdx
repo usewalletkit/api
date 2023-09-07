@@ -1,0 +1,33 @@
+---
+title: "Get Gas"
+description: "Learn about the gas and how to get it with WalletKit"
+---
+
+Gas is a fundamental concept in blockchain. As implied by the name, gas serves as the measurement of cost to perform an 
+action on the blockchain. The cost includes computational cost of execution as well as the cost of data storage.
+<Tip>
+Only the write operation on the blockchain requires gas as it mutates the blockchain state. Read operations are free.
+</Tip>
+
+Managing gas is a complex task that requires a deep understanding of the underlying blockchain. With WalletKit, the 
+complexity is abstracted away from the developer, allowing you to focus on building your application.
+
+In our developer dashboard, you can see the gas balance of your project wallet. And you can easily get gas by clicking
+the `Buy` button.
+![Gas balance in dashboard](/images/reference/gas-balance-dashboard.png)
+
+It can also be done programmatically with the [Buy Gas API](/api-reference/gas/buy-gas) .
+
+<Note>
+On testnet, "buy gas" is free (subject to rate limit). On mainnet, the charge will bill to your monthly bill.
+</Note>
+
+### Gasless Experience
+Gas fees must be paid in order for a transaction to be completed. This cannot be avoided. What does gasless experience mean then? 
+Gasless refers to a model in which users do not bear the cost of transaction fees. However, someone pays for the gas for a 
+transaction to be completed. Sometimes development teams or project owners pay for the gas fee, allowing end-users to only pay 
+for the services availed.
+
+Wallekit strives to provide a gasless experience for the end users. Currently the custom token and NFT created on our 
+platform support gasless transaction. With our API, your user can easily transfer your token or NFT without gas in their wallet.
+The gas fee will be billed to your project.

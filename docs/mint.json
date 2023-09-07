@@ -60,6 +60,12 @@
       ]
     },
     {
+      "group": "Gas",
+      "pages": [
+        "gas/get-gas"
+      ]
+    },
+    {
       "group": "Tokens",
       "pages": [
         "tokens/custom-token",
