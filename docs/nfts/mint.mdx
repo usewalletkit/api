@@ -1,9 +1,142 @@
 ---
 title: "Mint NFT"
-description: "Easily mint NFT"
+description: "Learn how to mint NFTs with WalletKit."
 ---
 
-Use the mint NFT endpoint to mint a new NFT with custom metadata.
+Creating and distributing NFTs can be complicated and time-consuming, as it involves dealing with smart contracts, private key signing, paying for gas, and managing blockchain operations. With WalletKit, it will be a few simple HTTP API calls.
+
+There are two simple highlevel concepts to understand when working with NFTs:
+*  NFT - a non-fungible token that represents a unique asset.
+*  NFT Collection - grouping of nfts, nfts in the same collection usually share the same theme.
+
+Combined with the [Transfer endpoint](/nfts/transfer-nft), you can easily create a NFT-based feature for your app, such
+as membership identity, digital collectibles, and more.
+
+
+
+## Using Dashboard
+
+
+WalletKit provides no-code tools in the Dashboard to create NFT collection and mint NFT. 
+
+### Create Collection
+To create a NFT collection, follow these steps:
+
+1. Head over to the [Dashboard](https://app.usewalletkit.com)
+2. Click “Create Collection
+3. Configure the collection, by picking a name, symbol, and cover.
+4. Finally, confirm the network you want to deploy on and click “Create”
+
+![](/images/reference/create-nft-collection-dashboard.png)
+
+### Mint NFT
+To mint NFT, follow these steps:
+1. In the dashboard, click on the collection you want to mint NFTs for.
+2. Click “Mint NFT”
+3. Configure the NFT, by picking a name, description, and image.
+4. Finally, click "Mint NFT"
+
+![](/images/reference/mint-nft-dashboard.png)
+
+
+## Using API
+
+You can also programmatically create NFT collection and mint NFT using the [Create NFT Collection endpoint](/api-reference/nfts/create-nft-collection)
+and [Mint NFT endpoint](/api-reference/nfts/mint-nft).
+
+### Create NFT Collection
+
+Use the [Create NFT Collection endpoint](/api-reference/nfts/create-nft-collection) to create NFT collection.
+
+<CodeGroup>
+```javascript Node
+import { WalletKitClient } from 'walletkit';
+
+const wk = WalletKitClient.usingAPIKey({
+  projectID: '<Project ID>',
+  apiKey: '<API Key>'
+});
+
+const transaction = await wk.nfts.create({
+  "network": "Base",
+  "name": "Sky Airline Gold Member",
+  "symbol": "SAGM",
+  "imageUrl": "https://example.com/gold_membership",
+  "secret": "testnet-secret"
+});
+```
+
+```bash cURL
+curl --request POST \
+     --url 'https://testnet.usewalletkit.com/nfts/collections' \
+     --user <project id>:<api secret> \
+     --data '
+{
+   "network": "Base",
+   "name": "Sky Airline Gold Member",
+   "symbol": "SAGM",
+   "image_url": "https://example.com/gold_membership",
+   "secret": "testnet-secret"
+}
+'
+```
+</CodeGroup>
+
+The response returns a transaction object with a transaction id. 
+```json JSON
+{
+  "transaction_id": "11da23c2-fed1-4a37-963a-f7222041d6e3",
+  "network": "Base",
+  "status": "submitted",
+}
+```
+
+You can monitor the status of the transaction by calling the
+[Get Transaction Status](/api-reference/transactions/transaction-status-by-id) endpoint. WalletKit handles retries to
+ensure that the transaction is successful.
+
+Once the transaction is successful, the response will contain the contract address of the NFT collection, which will be
+used in the minting step.
+
+```json JSON
+{
+  "transaction_id": "11da23c2-fed1-4a37-963a-f7222041d6e3",
+  "transaction_hash": "0x2f54260a6803d3b03b83580a168a79c384cc138c37cca93f76dd7c042c183457",
+  "network": "Base",
+  "status": "success",
+  "contract_address": "0xD4Edb607A07BFe4D5678fA01a2773449465F1aD1"
+}
+```
+
+### Upload NFT Image (Optional)
+
+This step is optional if you already have the image hosted some where, and have the image uri ready to be used.
+
+In the case where you would like to upload the image of NFT to be hosted on IPFS, use the [Upload NFT image endpoint](/api-reference/nfts/upload-nft-image).
+
+<Tip>
+Storing NFT images on IPFS is recommended, as it is decentralized and immutable.
+</Tip>
+
+```bash cURL
+curl -X 'POST' \
+  'https://testnet.usewalletkit.com/nfts/upload' \
+  --user <project id>:<api secret> \
+  -H 'accept: application/json' \
+  -H 'Content-Type: multipart/form-data' \
+  -F file=@path/to/gold_membership.jpeg
+```
+
+An IPFS url will be returned by the API.
+
+```json JSON
+{"ipfs_url":"ipfs://bafybeies72zw3kxh3dmgsmwyh5th7wk4kovnodhahn32s3oruorihs7qua/gold_membership.jpeg"}
+```
+
+### Mint NFTs
+
+Use [Mint NFT endpoint](/api-reference/nfts/mint-nft) to mint NFT with custom metadata. 
+Use recipient wallet address as the `recipient`, and the NFT collection created in previous step as `contract_address`. Put the image url in the`metadata.image` field.
 
 <CodeGroup>
 ```javascript Node
@@ -16,7 +149,7 @@ const wk = WalletKitClient.usingAPIKey({
 
 const transaction = await wk.nfts.mint({
   'network': 'Base',
-  'contract_address': '0x..',
+  'contract_address': '0xD4Edb607A07BFe4D5678fA01a2773449465F1aD1',
   "recipient": '0x..',
   'metadata': {
     'name': 'Gold member #1',
@@ -33,7 +166,7 @@ const transaction = await wk.nfts.mint({
   --user '<Project ID>:<API Key>' \
   --data '{
     "network": "Base",
-    "contract_address": "0x..",
+    "contract_address": "0xD4Edb607A07BFe4D5678fA01a2773449465F1aD1",
     "recipient": "0x..",
     "metadata": {
       "name": "Gold member #1",
@@ -45,8 +178,6 @@ const transaction = await wk.nfts.mint({
 ```
 </CodeGroup>
 
-This returns a transaction object with a transaction id. You can monitor the status of the transaction by calling the
+Similar to create NFT collection, this endpoint returns a transaction object with a transaction id. You can monitor the status of the transaction by calling the
 [Get Transaction Status](/api-reference/transactions/transaction-status-by-id) endpoint. WalletKit handles retries to
 ensure that the transaction is successful.
-
-A detailed guide on minting NFT from scratch is available [here](/guides/how-to-mint-nfts).

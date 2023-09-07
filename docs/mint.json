@@ -69,14 +69,14 @@
     {
       "group": "NFTs",
       "pages": [
-        "nfts/mint"
+        "nfts/mint",
+        "nfts/make-transfer"
       ]
     },
     {
       "group": "Guides",
       "pages": [
         "guides/rewards-loyalty-program",
-        "guides/how-to-mint-nfts",
         "guides/pwa-with-simple-onboarding-on-base",
         "guides/webhooks",
         "guides/automations",
