@@ -14,7 +14,7 @@ Creating a wallet is as simple as making an API call:
 <CodeGroup>
 ```javascript Node
 import { WalletKitClient } from 'walletkit';
-import { WalletControlMode } from 'walletkit/api';
+import { WalletControlMode, Network } from 'walletkit/api';
 
 const wk = WalletKitClient.usingAPIKey({
   projectID: '<Project ID>',
@@ -22,7 +22,7 @@ const wk = WalletKitClient.usingAPIKey({
 });
 
 const wallet = await wk.wallets.create({
-  network: 'Base',
+  network: Network.Base,
   name: 'My Wallet',
   controlMode: WalletControlMode.Developer,
   developer_secret: 'testnet-secret'

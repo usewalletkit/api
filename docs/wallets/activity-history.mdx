@@ -9,6 +9,7 @@ transfers, NFT transfers, and more.
 <CodeGroup>
 ```javascript Node
 import { WalletKitClient } from 'walletkit';
+import { Network } from 'walletkit/api';
 
 const wk = WalletKitClient.usingAPIKey({
   projectID: '<Project ID>',
@@ -16,7 +17,7 @@ const wk = WalletKitClient.usingAPIKey({
 });
 
 const activity = await wk.activity.list({
-  network: 'Base',
+  network: Network.Base,
   walletAddress: '0x..'
 });
 ```

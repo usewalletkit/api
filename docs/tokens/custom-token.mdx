@@ -28,6 +28,7 @@ You can also programmatically deploy custom tokens using the
 <CodeGroup>
 ```javascript Node
 import {WalletKitClient} from 'walletkit';
+import {Network} from 'walletkit/api';
 
 const wk = WalletKitClient.usingAPIKey({
   projectID: "<Project ID>",
@@ -35,7 +36,7 @@ const wk = WalletKitClient.usingAPIKey({
 });
 
 const transaction = await wk.tokens.create({
-  network: "Base",
+  network: Network.Base,
   name: "Reward Points",
   symbol: "RPC",
   decimals: 6,
