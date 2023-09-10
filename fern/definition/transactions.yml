@@ -15,7 +15,7 @@ service:
       request:
         name: GetTransactionStatusByHashRequest
         query-parameters:
-          network: string
+          network: commons.Network
           transaction_hash: string
       response: GetTransactionStatusByHashResponse
       errors:
@@ -31,16 +31,15 @@ service:
         name: SignAndSendRequest
         body:
           properties:
-            network:
-              type: string
+            network: commons.Network
             signer_wallet_address:
               type: string
               docs: address can only be the ones created in the project.
             unsigned_transaction:
               type: SignAndSendRequestUnsignedTransaction
               docs: input of a transaction to be signed.
-            secret:
-              type: string
+            developer_secret: optional<commons.DeveloperSecret>
+            user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
       errors:
         - commons.BadRequestError
@@ -68,8 +67,7 @@ types:
     properties:
       transaction_hash:
         type: string
-      network:
-        type: string
+      network: commons.Network
       status:
         type: string
       contract_address:
@@ -85,8 +83,7 @@ types:
         docs: >-
           If the transaction has been sent to the blockchain (status = pending/success/failed), this field will be populated with the transaction hash.
         type: optional<string>
-      network:
-        type: string
+      network: commons.Network
       status:
         type: string
       contract_address:

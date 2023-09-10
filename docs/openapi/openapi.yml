@@ -14,7 +14,7 @@ paths:
           in: query
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Network'
         - name: wallet_address
           in: query
           required: true
@@ -74,7 +74,7 @@ paths:
               type: object
               properties:
                 network:
-                  type: string
+                  $ref: '#/components/schemas/Network'
                 amount:
                   type: string
                 destination_address:
@@ -121,7 +121,7 @@ paths:
               type: object
               properties:
                 network:
-                  type: string
+                  $ref: '#/components/schemas/Network'
                 name:
                   type: string
                   description: collection name
@@ -139,14 +139,17 @@ paths:
                     metadata JSON. If set, the resulting URI for each token will
                     be the concatenation of the baseURI and the tokenId (or
                     tokenURI if tokenURI is set when minting the NFT).
-                secret:
-                  type: string
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
               required:
                 - network
                 - name
                 - symbol
                 - image_url
-                - secret
   /nfts/collections/nfts/mint:
     post:
       description: Mints a NFT from a collection
@@ -173,7 +176,7 @@ paths:
               type: object
               properties:
                 network:
-                  type: string
+                  $ref: '#/components/schemas/Network'
                 contract_address:
                   type: string
                   description: address of the NFT collection smart contract to mint from.
@@ -191,13 +194,16 @@ paths:
                     https://eips.ethereum.org/EIPS/eip-721#specification. Use
                     the metadata field instead if the metadata.json doesn't
                     exist and needs to be created and hosted.
-                secret:
-                  type: string
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
               required:
                 - network
                 - contract_address
                 - recipient
-                - secret
   /nfts/collections/nfts/transfer:
     post:
       description: >-
@@ -226,7 +232,7 @@ paths:
               type: object
               properties:
                 network:
-                  type: string
+                  $ref: '#/components/schemas/Network'
                 from:
                   type: string
                   description: from address of the transfer
@@ -239,8 +245,11 @@ paths:
                 token_id:
                   type: string
                   nullable: true
-                secret:
-                  type: string
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
                   nullable: true
               required:
                 - network
@@ -258,7 +267,7 @@ paths:
           in: query
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Network'
         - name: wallet_address
           in: query
           description: >-
@@ -315,7 +324,7 @@ paths:
           in: query
           required: false
           schema:
-            type: string
+            $ref: '#/components/schemas/Network'
             nullable: true
         - name: collection_address
           in: query
@@ -346,7 +355,7 @@ paths:
           in: query
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Network'
         - name: wallet_address
           in: query
           required: true
@@ -408,7 +417,7 @@ paths:
           in: query
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Network'
         - name: token
           in: query
           description: token contract address or symbol in case of the gas token
@@ -452,7 +461,7 @@ paths:
               type: object
               properties:
                 network:
-                  type: string
+                  $ref: '#/components/schemas/Network'
                 name:
                   type: string
                 symbol:
@@ -474,15 +483,18 @@ paths:
                 initial_supply:
                   type: string
                   description: The amount of tokens to be minted to the token creator.
-                secret:
-                  type: string
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
               required:
                 - network
                 - name
                 - symbol
                 - decimals
                 - initial_supply
-                - secret
   /tokens/transfer:
     post:
       description: >-
@@ -511,7 +523,7 @@ paths:
               type: object
               properties:
                 network:
-                  type: string
+                  $ref: '#/components/schemas/Network'
                 from:
                   type: string
                   description: from address of the transfer
@@ -526,15 +538,18 @@ paths:
                 amount:
                   type: string
                   description: amount to be transferred.
-                secret:
-                  type: string
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
               required:
                 - network
                 - from
                 - token
                 - recipient
                 - amount
-                - secret
   /tokens/mint:
     post:
       description: Mints specified amount of token to the recipient.
@@ -561,21 +576,24 @@ paths:
               type: object
               properties:
                 network:
-                  type: string
+                  $ref: '#/components/schemas/Network'
                 contract_address:
                   type: string
                 recipient:
                   type: string
                 amount:
                   type: string
-                secret:
-                  type: string
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
               required:
                 - network
                 - contract_address
                 - recipient
                 - amount
-                - secret
   /tokens/balances:
     get:
       description: >-
@@ -589,7 +607,7 @@ paths:
           in: query
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Network'
         - name: wallet_address
           in: query
           required: true
@@ -645,7 +663,7 @@ paths:
               type: object
               properties:
                 network:
-                  type: string
+                  $ref: '#/components/schemas/Network'
                 from:
                   type: string
                   description: from address of the transfer
@@ -660,14 +678,17 @@ paths:
                     $ref: >-
                       #/components/schemas/BatchTransferTokenRequestTransfersItem
                   description: transfers in this batch, max batch size is 50 transfers.
-                secret:
-                  type: string
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
               required:
                 - network
                 - from
                 - token
                 - transfers
-                - secret
   /transactions/status-by-hash:
     get:
       description: Retrieves the status of a transaction by its hash.
@@ -679,7 +700,7 @@ paths:
           in: query
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Network'
         - name: transaction_hash
           in: query
           required: true
@@ -725,20 +746,23 @@ paths:
               type: object
               properties:
                 network:
-                  type: string
+                  $ref: '#/components/schemas/Network'
                 signer_wallet_address:
                   type: string
                   description: address can only be the ones created in the project.
                 unsigned_transaction:
                   $ref: '#/components/schemas/SignAndSendRequestUnsignedTransaction'
                   description: input of a transaction to be signed.
-                secret:
-                  type: string
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
               required:
                 - network
                 - signer_wallet_address
                 - unsigned_transaction
-                - secret
   /transactions/status-by-id:
     get:
       description: >-
@@ -807,7 +831,8 @@ paths:
                   network: Polygon
                   name: My Wallet
                   owner_id: 58c9095e-24db-43eb-b49d-b78f72573a29
-                  secret: testnet-secret
+                  control_mode: developer
+                  developer_secret: testnet-secret
     get:
       description: Lists wallets created in the project. Supports filter by network.
       operationId: wallets_list
@@ -818,7 +843,7 @@ paths:
           in: query
           required: false
           schema:
-            type: string
+            $ref: '#/components/schemas/Network'
             nullable: true
         - name: page
           in: query
@@ -852,7 +877,7 @@ components:
         uuid:
           type: string
         network:
-          type: string
+          $ref: '#/components/schemas/Network'
         type:
           type: string
         timestamp:
@@ -889,7 +914,7 @@ components:
         uuid:
           type: string
         network:
-          type: string
+          $ref: '#/components/schemas/Network'
         contract_address:
           type: string
         name:
@@ -911,6 +936,29 @@ components:
         - symbol
         - decimals
         - display_decimals
+    Network:
+      title: Network
+      type: string
+      enum:
+        - Ethereum
+        - Polygon
+        - Base
+        - Polkadot
+        - Vara
+    DeveloperSecret:
+      title: DeveloperSecret
+      type: string
+      nullable: true
+      description: >-
+        On testnet, the developer_secret is always "testnet-secret". On mainnet,
+        the developer_secret is set by the developer during account activation.
+    UserPin:
+      title: UserPin
+      type: string
+      nullable: true
+      description: >-
+        A 6-digit numeric pin that is only known to the user, set during  wallet
+        creation. This pin is required to sign transactions from  this wallet.
     TransactionSubmissionResponse:
       title: TransactionSubmissionResponse
       type: object
@@ -918,7 +966,7 @@ components:
         transaction_id:
           type: string
         network:
-          type: string
+          $ref: '#/components/schemas/Network'
         status:
           type: string
       required:
@@ -932,7 +980,7 @@ components:
         transaction_id:
           type: string
         network:
-          type: string
+          $ref: '#/components/schemas/Network'
         status:
           type: string
       required:
@@ -997,7 +1045,7 @@ components:
       type: object
       properties:
         network:
-          type: string
+          $ref: '#/components/schemas/Network'
         contract_address:
           type: string
         name:
@@ -1014,7 +1062,7 @@ components:
       type: object
       properties:
         network:
-          type: string
+          $ref: '#/components/schemas/Network'
         contract_address:
           type: string
         name:
@@ -1041,7 +1089,7 @@ components:
         uuid:
           type: string
         network:
-          type: string
+          $ref: '#/components/schemas/Network'
         contract_address:
           type: string
         name:
@@ -1070,7 +1118,7 @@ components:
         uuid:
           type: string
         network:
-          type: string
+          $ref: '#/components/schemas/Network'
         contract_address:
           type: string
         name:
@@ -1115,7 +1163,7 @@ components:
         transaction_hash:
           type: string
         network:
-          type: string
+          $ref: '#/components/schemas/Network'
         status:
           type: string
         contract_address:
@@ -1142,7 +1190,7 @@ components:
             pending/success/failed), this field will be populated with the
             transaction hash.
         network:
-          type: string
+          $ref: '#/components/schemas/Network'
         status:
           type: string
         contract_address:
@@ -1179,30 +1227,45 @@ components:
             contract function. (ABI-encoded function with arguments)
       required:
         - to
+    WalletControlMode:
+      title: WalletControlMode
+      type: string
+      enum:
+        - developer
+        - user
     CreateWalletRequest:
       title: CreateWalletRequest
       type: object
       properties:
         network:
-          type: string
-          example: Polygon
+          $ref: '#/components/schemas/Network'
         name:
           type: string
-          nullable: true
-          description: wallet name
+          example: My Wallet
         owner_id:
           type: string
           nullable: true
           description: >-
-            optional id to associated the wallet with. e.g. user uuid in your
-            application. When provided, the same owner_id  will have the
-            Ethereum address across EVM compatible networks.
-        secret:
-          type: string
-          example: testnet-secret
+            An ID that you can use to associate the wallet with a user in your
+            application. e.g. user uuid. When creating wallets for the same
+            owner_id across different networks, the same seed phrase will be
+            used.
+        control_mode:
+          $ref: '#/components/schemas/WalletControlMode'
+          description: >-
+            Defines whether the developer or the user controls the wallet. When
+            control_mode is developer, the developer_secret must be provided.
+            When control_mode is user, the user_pin must be provided.
+        developer_secret:
+          $ref: '#/components/schemas/DeveloperSecret'
+          nullable: true
+        user_pin:
+          $ref: '#/components/schemas/UserPin'
+          nullable: true
       required:
         - network
-        - secret
+        - name
+        - control_mode
     CreateWalletResponse:
       title: CreateWalletResponse
       type: object
@@ -1214,8 +1277,7 @@ components:
           type: string
           example: '2023-07-21T22:03:16Z'
         network:
-          type: string
-          example: Polygon
+          $ref: '#/components/schemas/Network'
         name:
           type: string
           nullable: true
@@ -1239,7 +1301,7 @@ components:
         created_at:
           type: string
         network:
-          type: string
+          $ref: '#/components/schemas/Network'
         name:
           type: string
           nullable: true

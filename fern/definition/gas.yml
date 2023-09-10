@@ -16,8 +16,7 @@ service:
         name: BuyGasRequest
         body:
           properties:
-            network:
-              type: string
+            network: commons.Network
             amount:
               type: string
             destination_address:
@@ -31,7 +30,6 @@ types:
     properties:
       transaction_id:
         type: string
-      network:
-        type: string
+      network: commons.Network
       status:
         type: string

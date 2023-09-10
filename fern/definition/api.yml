@@ -2,13 +2,18 @@ name: api
 display-name: WalletKit
 error-discrimination:
   strategy: status-code
-auth: Authorization
+auth:
+  scheme: Authorization
+  docs: >-
+    Basic Auth header. The value should be the base64 encoded string of
+    `ProjectID:APIKey`. The Project ID and API Key can be found in the
+    WalletKit dashboard.
 auth-schemes:
   Authorization:
     header: Authorization
     type: string
 headers:
-  X-WalletKit-JWT-Source: 
+  X-WalletKit-JWT-Source:
     type: optional<string>
     name: source
 default-environment: testnet

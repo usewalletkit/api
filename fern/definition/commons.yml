@@ -1,12 +1,33 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
 
 types:
+  Network:
+    enum:
+      - Ethereum
+      - Polygon
+      - Base
+      - Polkadot
+      - Vara
+
+  DeveloperSecret:
+    type: optional<string>
+    docs: >-
+      On testnet, the developer_secret is always "testnet-secret". On
+      mainnet, the developer_secret is set by the developer during
+      account activation.
+
+  UserPin:
+    type: optional<string>
+    docs: >-
+      A 6-digit numeric pin that is only known to the user, set during 
+      wallet creation. This pin is required to sign transactions from 
+      this wallet.
+
   TransactionSubmissionResponse:
     properties:
       transaction_id:
         type: string
-      network:
-        type: string
+      network: Network
       status:
         type: string
 

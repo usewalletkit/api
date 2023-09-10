@@ -31,7 +31,7 @@ service:
         name: ListWalletsRequest
         query-parameters:
           network:
-            type: optional<string>
+            type: optional<commons.Network>
           page:
             type: optional<integer>
           page_size:
@@ -39,33 +39,44 @@ service:
       response: list<ListWalletsResponseItem>
 
 types:
+  WalletControlMode:
+    enum:
+      - developer
+      - user
   CreateWalletRequest:
     properties:
-      network: string
-      name:
-        docs: wallet name
-        type: optional<string>
+      network: commons.Network
+      name: string
       owner_id:
-        docs: >-
-          optional id to associated the wallet with. e.g. user uuid in
-          your application. When provided, the same owner_id  will have
-          the Ethereum address across EVM compatible networks.
         type: optional<string>
-      secret:
-        type: string
+        docs: >-
+          An ID that you can use to associate the wallet with a user in
+          your application. e.g. user uuid. When creating wallets for
+          the same owner_id across different networks, the same seed
+          phrase will be used.
+      control_mode:
+        type: WalletControlMode
+        docs: >-
+          Defines whether the developer or the user controls the wallet.
+          When control_mode is developer, the developer_secret must be
+          provided. When control_mode is user, the user_pin must be
+          provided.
+      developer_secret: optional<commons.DeveloperSecret>
+      user_pin: optional<commons.UserPin>
     examples:
       - name: Example1
         value:
           network: Polygon
           name: My Wallet
           owner_id: 58c9095e-24db-43eb-b49d-b78f72573a29
-          secret: testnet-secret
+          control_mode: developer
+          developer_secret: testnet-secret
 
   CreateWalletResponse:
     properties:
       id: string
       created_at: string
-      network: string
+      network: commons.Network
       name: optional<string>
       owner_id: optional<string>
       address: string
@@ -83,7 +94,7 @@ types:
     properties:
       id: string
       created_at: string
-      network: string
+      network: commons.Network
       name: optional<string>
       owner_id: optional<string>
       address: string

@@ -23,7 +23,7 @@ const wk = WalletKitClient.usingAPIKey({
 const wallet = await wk.wallets.create({
   network: 'Base',
   name: 'My Wallet',
-  secret: 'testnet-secret'
+  developer_secret: 'testnet-secret'
 });
 ```
 
@@ -34,7 +34,7 @@ curl --request POST \
 --data '{
   "network": "Base",
   "name": "My Wallet",
-  "secret": "testnet-secret"
+  "developer_secret": "testnet-secret"
 }'
 ```
 </CodeGroup>

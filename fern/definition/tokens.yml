@@ -16,8 +16,7 @@ service:
       request:
         name: GetTokenRequest
         query-parameters:
-          network:
-            type: string
+          network: commons.Network
           token:
             docs: >-
               token contract address or symbol in case of the gas token
@@ -36,7 +35,7 @@ service:
         body:
           properties:
             network:
-              type: string
+              type: commons.Network
             name:
               type: string
             symbol:
@@ -56,8 +55,8 @@ service:
             initial_supply:
               docs: The amount of tokens to be minted to the token creator.
               type: string
-            secret:
-              type: string
+            developer_secret: optional<commons.DeveloperSecret>
+            user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
       errors:
         - commons.BadRequestError
@@ -71,8 +70,7 @@ service:
         name: TransferTokenRequest
         body:
           properties:
-            network:
-              type: string
+            network: commons.Network
             from:
               docs: from address of the transfer
               type: string
@@ -87,8 +85,8 @@ service:
             amount:
               docs: amount to be transferred.
               type: string
-            secret:
-              type: string
+            developer_secret: optional<commons.DeveloperSecret>
+            user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
       errors:
         - commons.BadRequestError
@@ -102,16 +100,15 @@ service:
         name: MintTokenRequest
         body:
           properties:
-            network:
-              type: string
+            network: commons.Network
             contract_address:
               type: string
             recipient:
               type: string
             amount:
               type: string
-            secret:
-              type: string
+            developer_secret: optional<commons.DeveloperSecret>
+            user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
       errors:
         - commons.BadRequestError
@@ -125,8 +122,7 @@ service:
       request:
         name: ListTokenBalancesRequest
         query-parameters:
-          network:
-            type: string
+          network: commons.Network
           wallet_address:
             type: string
       response: list<ListTokenBalancesResponseItem>
@@ -148,8 +144,7 @@ service:
         name: BatchTransferTokenRequest
         body:
           properties:
-            network:
-              type: string
+            network: commons.Network
             from:
               docs: from address of the transfer
               type: string
@@ -161,8 +156,8 @@ service:
             transfers:
               docs: transfers in this batch, max batch size is 50 transfers.
               type: list<BatchTransferTokenRequestTransfersItem>
-            secret:
-              type: string
+            developer_secret: optional<commons.DeveloperSecret>
+            user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
       errors:
         - commons.BadRequestError
@@ -172,8 +167,7 @@ types:
     properties:
       uuid:
         type: string
-      network:
-        type: string
+      network: commons.Network
       contract_address:
         type: string
       name:
@@ -191,8 +185,7 @@ types:
     properties:
       uuid:
         type: string
-      network:
-        type: string
+      network: commons.Network
       contract_address:
         type: string
       name:

@@ -62,7 +62,7 @@ const transaction = await wk.nfts.create({
   "name": "Sky Airline Gold Member",
   "symbol": "SAGM",
   "imageUrl": "https://example.com/gold_membership",
-  "secret": "testnet-secret"
+  "developer_secret": "testnet-secret"
 });
 ```
 
@@ -76,7 +76,7 @@ curl --request POST \
    "name": "Sky Airline Gold Member",
    "symbol": "SAGM",
    "image_url": "https://example.com/gold_membership",
-   "secret": "testnet-secret"
+   "developer_secret": "testnet-secret"
 }
 '
 ```
@@ -156,7 +156,7 @@ const transaction = await wk.nfts.mint({
     'description': 'Skyline Airline Gold Member enjoys unlimited seat upgrades, 40% more awarded miles ...',
     'image': 'image_url'
   },
-  'secret': 'testnet-secret'
+  'developer_secret': 'testnet-secret'
 });
 ```
 
@@ -173,7 +173,7 @@ const transaction = await wk.nfts.mint({
       "description": "Skyline Airline Gold Member enjoys unlimited seat upgrades, 40% more awarded miles ...",
       "image": "image_url"
     },
-    "secret": "testnet-secret"
+    "developer_secret": "testnet-secret"
   }'
 ```
 </CodeGroup>

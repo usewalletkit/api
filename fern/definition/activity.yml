@@ -15,8 +15,7 @@ service:
       request:
         name: ListWalletActivityRequest
         query-parameters:
-          network:
-            type: string
+          network: commons.Network
           wallet_address:
             type: string
           page:
@@ -32,8 +31,7 @@ types:
     properties:
       uuid:
         type: string
-      network:
-        type: string
+      network: commons.Network
       type:
         type: string
       timestamp:
@@ -56,8 +54,7 @@ types:
     properties:
       uuid:
         type: string
-      network:
-        type: string
+      network: commons.Network
       contract_address:
         type: string
       name:

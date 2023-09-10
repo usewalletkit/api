@@ -22,8 +22,7 @@ service:
         name: CreateNftCollectionRequest
         body:
           properties:
-            network:
-              type: string
+            network: commons.Network
             name:
               type: string
               docs: collection name
@@ -39,8 +38,8 @@ service:
                 each token will be the concatenation of the baseURI and the tokenId (or tokenURI if tokenURI is set
                 when minting the NFT).
               type: optional<string>
-            secret:
-              type: string
+            developer_secret: optional<commons.DeveloperSecret>
+            user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
       errors:
         - commons.BadRequestError
@@ -55,8 +54,7 @@ service:
         name: MintNftRequest
         body:
           properties:
-            network:
-              type: string
+            network: commons.Network
             contract_address:
               type: string
               docs: address of the NFT collection smart contract to mint from.
@@ -72,8 +70,8 @@ service:
                 metadata field instead if the metadata.json doesn't exist and
                 needs to be created and hosted.
               type: optional<string>
-            secret:
-              type: string
+            developer_secret: optional<commons.DeveloperSecret>
+            user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
       errors:
         - commons.BadRequestError
@@ -88,8 +86,7 @@ service:
         name: TransferNftRequest
         body:
           properties:
-            network:
-              type: string
+            network: commons.Network
             from:
               type: string
               docs: from address of the transfer
@@ -101,8 +98,8 @@ service:
               docs: recipient of the NFT transfer
             token_id:
               type: optional<string>
-            secret:
-              type: optional<string>
+            developer_secret: optional<commons.DeveloperSecret>
+            user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
       errors:
         - commons.BadRequestError
@@ -116,8 +113,7 @@ service:
       request:
         name: ListNftsRequest
         query-parameters:
-          network:
-            type: string
+          network: commons.Network
           wallet_address:
             docs: >-
               query by wallet address. If provided, contract_address should not be set.
@@ -146,7 +142,7 @@ service:
         name: GetNftCollectionRequest
         query-parameters:
           network:
-            type: optional<string>
+            type: optional<commons.Network>
           collection_address:
             docs: address of the NFT contract
             type: optional<string>
@@ -163,8 +159,7 @@ service:
       request:
         name: ListNftCollectionsRequest
         query-parameters:
-          network:
-            type: string
+          network: commons.Network
           wallet_address:
             type: string
           page:
@@ -227,8 +222,7 @@ types:
 
   GetNftCollectionResponse:
     properties:
-      network:
-        type: string
+      network: commons.Network
       contract_address:
         type: string
       name:
@@ -238,8 +232,7 @@ types:
 
   ListNftCollectionsResponseItem:
     properties:
-      network:
-        type: string
+      network: commons.Network
       contract_address:
         type: string
       name:
