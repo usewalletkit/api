@@ -38,11 +38,44 @@ service:
             type: optional<string>
       response: list<ListWalletsResponseItem>
 
+    export:
+      path: "/export"
+      method: POST
+      docs: Export wallet mnemonic phrase
+      display-name: Export Wallet
+      request: ExportWalletRequest
+      response: ExportWalletResponse
+      errors:
+        - commons.BadRequestError
+      examples:
+        - name: Example1
+          request: $ExportWalletRequest.Example1
+          response:
+            body: $ExportWalletResponse.Example1
+
 types:
   WalletControlMode:
     enum:
       - developer
       - user
+  ExportWalletRequest:
+    properties:
+      network: commons.Network
+      address: string
+      user_pin: commons.UserPin
+    examples:
+      - name: Example1
+        value:
+          network: Polygon
+          address: "0x976Cf57B7EE1D84E73BE9115457889d49a8A1335"
+          user_pin: "123456"
+  ExportWalletResponse:
+    properties:
+      mnemonic_phrase: string
+    examples:
+      - name: Example1
+        value:
+          mnemonic_phrase: "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat"
   CreateWalletRequest:
     properties:
       network: commons.Network

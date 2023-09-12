@@ -868,6 +868,42 @@ paths:
                   $ref: '#/components/schemas/ListWalletsResponseItem'
       summary: List Wallets
       security: *ref_0
+  /wallets/export:
+    post:
+      description: Export wallet mnemonic phrase
+      operationId: wallets_export
+      tags:
+        - Wallets
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportWalletResponse'
+              examples:
+                Example1:
+                  value:
+                    mnemonic_phrase: >-
+                      candy maple cake sugar pudding cream honey rich smooth
+                      crumble sweet treat
+        '400':
+          description: ''
+      summary: Export Wallet
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportWalletRequest'
+            examples:
+              Example1:
+                value:
+                  network: Polygon
+                  address: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
+                  user_pin: '123456'
 components:
   schemas:
     ListWalletActivityResponseItem:
@@ -1233,6 +1269,32 @@ components:
       enum:
         - developer
         - user
+    ExportWalletRequest:
+      title: ExportWalletRequest
+      type: object
+      properties:
+        network:
+          $ref: '#/components/schemas/Network'
+        address:
+          type: string
+          example: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
+        user_pin:
+          $ref: '#/components/schemas/UserPin'
+      required:
+        - network
+        - address
+        - user_pin
+    ExportWalletResponse:
+      title: ExportWalletResponse
+      type: object
+      properties:
+        mnemonic_phrase:
+          type: string
+          example: >-
+            candy maple cake sugar pudding cream honey rich smooth crumble sweet
+            treat
+      required:
+        - mnemonic_phrase
     CreateWalletRequest:
       title: CreateWalletRequest
       type: object

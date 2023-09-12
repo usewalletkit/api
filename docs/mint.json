@@ -93,7 +93,8 @@
       "group": "Wallets",
       "pages": [
         "api-reference/wallets/create-wallet",
-        "api-reference/wallets/list-wallets"
+        "api-reference/wallets/list-wallets",
+        "api-reference/wallets/export-wallet"
       ]
     },
     {
