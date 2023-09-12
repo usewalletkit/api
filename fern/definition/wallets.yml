@@ -38,6 +38,21 @@ service:
             type: optional<string>
       response: list<ListWalletsResponseItem>
 
+    change-user-pin:
+      path: "/change-user-pin"
+      method: POST
+      docs: Change pin for user controlled wallets
+      display-name: Change User Pin
+      request: ChangeUserPinRequest
+      response: ChangeUserPinResponse
+      errors:
+        - commons.BadRequestError
+      examples:
+        - name: Example1
+          request: $ChangeUserPinRequest.Example1
+          response:
+            body: $ChangeUserPinResponse.Example1
+
     export:
       path: "/export"
       method: POST
@@ -58,6 +73,26 @@ types:
     enum:
       - developer
       - user
+  ChangeUserPinRequest:
+    properties:
+      network: commons.Network
+      address: string
+      old_user_pin: commons.UserPin
+      new_user_pin: commons.UserPin
+    examples:
+      - name: Example1
+        value:
+          network: Polygon
+          address: "0x976Cf57B7EE1D84E73BE9115457889d49a8A1335"
+          old_user_pin: "123456"
+          new_user_pin: "654321"
+  ChangeUserPinResponse:
+    properties:
+      success: boolean
+    examples:
+      - name: Example1
+        value:
+          success: true
   ExportWalletRequest:
     properties:
       network: commons.Network

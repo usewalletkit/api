@@ -94,6 +94,7 @@
       "pages": [
         "api-reference/wallets/create-wallet",
         "api-reference/wallets/list-wallets",
+        "api-reference/wallets/change-user-pin",
         "api-reference/wallets/export-wallet"
       ]
     },
