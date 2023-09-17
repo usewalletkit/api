@@ -1,20 +1,17 @@
+imports:
+  commons: commons.yml
+
 name: api
 display-name: WalletKit
 error-discrimination:
   strategy: status-code
-auth:
-  scheme: Authorization
-  docs: >-
-    Basic Auth header. The value should be the base64 encoded string of
-    `ProjectID:APIKey`. The Project ID and API Key can be found in the
-    WalletKit dashboard.
-auth-schemes:
-  Authorization:
-    header: Authorization
-    type: string
+auth: bearer
 headers:
-  X-WalletKit-JWT-Source:
-    type: optional<string>
+  X-WalletKit-Project-ID:
+    type: string
+    name: projectID
+  X-WalletKit-Token-Source:
+    type: optional<commons.TokenSource>
     name: source
 default-environment: testnet
 environments:

@@ -45,7 +45,7 @@ paths:
           description: ''
       summary: List Wallet Activity
       security: &ref_0
-        - AuthorizationAuth: []
+        - BearerAuth: []
   /gas/buy:
     post:
       description: >-
@@ -1066,6 +1066,13 @@ components:
         - symbol
         - decimals
         - display_decimals
+    TokenSource:
+      title: TokenSource
+      type: string
+      enum:
+        - walletkit
+        - firebase
+        - supabase
     Network:
       title: Network
       type: string
@@ -1515,10 +1522,9 @@ components:
         - network
         - address
   securitySchemes:
-    AuthorizationAuth:
-      type: apiKey
-      in: header
-      name: Authorization
+    BearerAuth:
+      type: http
+      scheme: bearer
 servers:
   - url: https://testnet.usewalletkit.com
     description: testnet
