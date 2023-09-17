@@ -5,4 +5,5 @@ navigation:
   - nfts.yml
   - activity.yml
   - gas.yml
+  - users.yml
   - commons.yml

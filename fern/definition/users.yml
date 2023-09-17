@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+imports:
+  commons: commons.yml
+
+service:
+  auth: false
+  base-path: /users
+  endpoints:
+    login-with-email:
+      path: /login-with-email
+      method: POST
+      docs: Log a user in with their email.
+      display-name: Login with Email
+      request:
+        name: LoginWithEmailRequest
+        body:
+          properties:
+            email:
+              type: string
+      response: LoginWithEmailResponse
+      errors:
+        - commons.BadRequestError
+    verify-login:
+      path: /verify-login
+      method: POST
+      docs: Verify a user's login code.
+      display-name: Verify Login
+      request:
+        name: VerifyLoginRequest
+        body:
+          properties:
+            user_id:
+              type: string
+            verification_code:
+              type: string
+      response: VerifyLoginResponse
+      errors:
+        - commons.BadRequestError
+
+
+types:
+  LoginWithEmailResponse:
+    properties:
+      user_id:
+        type: string
+  VerifyLoginResponse:
+    properties:
+      token:
+        type: string

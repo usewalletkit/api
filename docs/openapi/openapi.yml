@@ -792,6 +792,65 @@ paths:
           description: ''
       summary: Transaction Status by ID
       security: *ref_0
+  /users/login-with-email:
+    post:
+      description: Log a user in with their email.
+      operationId: users_login-with-email
+      tags:
+        - Users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginWithEmailResponse'
+        '400':
+          description: ''
+      summary: Login with Email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+                - email
+  /users/verify-login:
+    post:
+      description: Verify a user's login code.
+      operationId: users_verify-login
+      tags:
+        - Users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyLoginResponse'
+        '400':
+          description: ''
+      summary: Verify Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                verification_code:
+                  type: string
+              required:
+                - user_id
+                - verification_code
   /wallets:
     post:
       description: Creates a wallet with provided metadata.
@@ -1298,6 +1357,22 @@ components:
             contract function. (ABI-encoded function with arguments)
       required:
         - to
+    LoginWithEmailResponse:
+      title: LoginWithEmailResponse
+      type: object
+      properties:
+        user_id:
+          type: string
+      required:
+        - user_id
+    VerifyLoginResponse:
+      title: VerifyLoginResponse
+      type: object
+      properties:
+        token:
+          type: string
+      required:
+        - token
     WalletControlMode:
       title: WalletControlMode
       type: string

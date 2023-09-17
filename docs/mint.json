@@ -99,6 +99,13 @@
       ]
     },
     {
+      "group": "Users",
+      "pages": [
+        "api-reference/users/login-with-email",
+        "api-reference/users/verify-login"
+      ]
+    },
+    {
       "group": "Gas",
       "pages": [
         "api-reference/gas/buy-gas"
