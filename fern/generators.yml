@@ -1,4 +1,4 @@
-default-group: publish
+default-group: local
 groups:
   docs:
     generators:
@@ -13,9 +13,19 @@ groups:
         version: 0.7.2
         output:
           location: npm
-          package-name: 'walletkit'
+          package-name: walletkit
           token: ${NPM_TOKEN}
         github:
           repository: usewalletkit/walletkit-node
+        config:
+          namespaceExport: WalletKit
+  local:
+    generators:
+      - name: fernapi/fern-typescript-node-sdk
+        version: 0.7.2
+        output:
+          location: npm
+          url: npm.buildwithfern.com
+          package-name: '@walletkit-fern/api'
         config:
           namespaceExport: WalletKit
