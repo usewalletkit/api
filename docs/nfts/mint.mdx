@@ -17,7 +17,7 @@ as membership identity, digital collectibles, and more.
 ## Using Dashboard
 
 
-WalletKit provides no-code tools in the Dashboard to create NFT collection and mint NFT. 
+WalletKit provides no-code tools in the Dashboard to create NFT collection and mint NFT.
 
 ### Create Collection
 To create a NFT collection, follow these steps:
@@ -50,26 +50,27 @@ Use the [Create NFT Collection endpoint](/api-reference/nfts/create-nft-collecti
 
 <CodeGroup>
 ```javascript Node
-import { WalletKitClient } from 'walletkit';
+import { WalletKit, WalletKitClient } from 'walletkit';
 
-const wk = WalletKitClient.usingAPIKey({
-  projectID: '<Project ID>',
-  apiKey: '<API Key>'
+const wk = new WalletKitClient({
+  projectId: '<Project ID>',
+  token: '<API Key>'
 });
 
 const transaction = await wk.nfts.create({
-  "network": "Base",
-  "name": "Sky Airline Gold Member",
-  "symbol": "SAGM",
-  "imageUrl": "https://example.com/gold_membership",
-  "developer_secret": "testnet-secret"
+  network: WalletKit.Network.Base,
+  name: "Sky Airline Gold Member",
+  symbol: "SAGM",
+  imageUrl: "https://example.com/gold_membership",
+  developerSecret: "testnet-secret"
 });
 ```
 
 ```bash cURL
 curl --request POST \
      --url 'https://testnet.usewalletkit.com/nfts/collections' \
-     --user <project id>:<api secret> \
+     --header 'X-WalletKit-Project-ID: <Project ID>' \
+     --header 'Authorization: Bearer <API Key>' \
      --data '
 {
    "network": "Base",
@@ -82,7 +83,7 @@ curl --request POST \
 ```
 </CodeGroup>
 
-The response returns a transaction object with a transaction id. 
+The response returns a transaction object with a transaction id.
 ```json JSON
 {
   "transaction_id": "11da23c2-fed1-4a37-963a-f7222041d6e3",
@@ -121,7 +122,8 @@ Storing NFT images on IPFS is recommended, as it is decentralized and immutable.
 ```bash cURL
 curl -X 'POST' \
   'https://testnet.usewalletkit.com/nfts/upload' \
-  --user <project id>:<api secret> \
+  --header 'X-WalletKit-Project-ID: <Project ID>' \
+  --header 'Authorization: Bearer <API Key>' \
   -H 'accept: application/json' \
   -H 'Content-Type: multipart/form-data' \
   -F file=@path/to/gold_membership.jpeg
@@ -135,28 +137,28 @@ An IPFS url will be returned by the API.
 
 ### Mint NFTs
 
-Use [Mint NFT endpoint](/api-reference/nfts/mint-nft) to mint NFT with custom metadata. 
+Use [Mint NFT endpoint](/api-reference/nfts/mint-nft) to mint NFT with custom metadata.
 Use recipient wallet address as the `recipient`, and the NFT collection created in previous step as `contract_address`. Put the image url in the`metadata.image` field.
 
 <CodeGroup>
 ```javascript Node
-import { WalletKitClient } from 'walletkit';
+import { WalletKit, WalletKitClient } from 'walletkit';
 
-const wk = WalletKitClient.usingAPIKey({
-  projectID: '<Project ID>',
-  apiKey: '<API Key>'
+const wk = new WalletKitClient({
+  projectId: '<Project ID>',
+  token: '<API Key>'
 });
 
 const transaction = await wk.nfts.mint({
-  'network': 'Base',
-  'contract_address': '0xD4Edb607A07BFe4D5678fA01a2773449465F1aD1',
-  "recipient": '0x..',
-  'metadata': {
-    'name': 'Gold member #1',
-    'description': 'Skyline Airline Gold Member enjoys unlimited seat upgrades, 40% more awarded miles ...',
-    'image': 'image_url'
+  network: WalletKit.Network.Base,
+  contractAddress': '0xD4Edb607A07BFe4D5678fA01a2773449465F1aD1',
+  recipient: '0x..',
+  metadata: {
+    name: 'Gold member #1',
+    description: 'Skyline Airline Gold Member enjoys unlimited seat upgrades, 40% more awarded miles ...',
+    image: '<image_url>'
   },
-  'developer_secret': 'testnet-secret'
+  developerSecret: 'testnet-secret'
 });
 ```
 
@@ -171,7 +173,7 @@ const transaction = await wk.nfts.mint({
     "metadata": {
       "name": "Gold member #1",
       "description": "Skyline Airline Gold Member enjoys unlimited seat upgrades, 40% more awarded miles ...",
-      "image": "image_url"
+      "image": "<image_url>"
     },
     "developer_secret": "testnet-secret"
   }'

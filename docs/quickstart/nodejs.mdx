@@ -16,9 +16,9 @@ Grab your ProjectID and API Key from the API Keys page in the WalletKit Dashboar
 ```javascript Node
 import { WalletKitClient } from 'walletkit';
 
-const wk = WalletKitClient.usingAPIKey({
-  projectID: '<Project ID>',
-  apiKey: '<API Key>'
+const wk = new WalletKitClient({
+  projectId: '<Project ID>',
+  token: '<API Key>'
 });
 ```
 

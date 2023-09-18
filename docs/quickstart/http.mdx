@@ -26,7 +26,8 @@ Here is an example request to create a wallet on the Base testnet network:
 ```bash
 curl --request POST \
 --url https://testnet.usewalletkit.com/wallets \
---user '<Project ID>:<API Key>' \
+--header 'X-WalletKit-Project-ID: <Project ID>' \
+--header 'Authorization: Bearer <API Key>' \
 --data '{
   "network": "Base",
   "name": "My Wallet",

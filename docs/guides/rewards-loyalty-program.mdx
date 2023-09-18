@@ -22,7 +22,7 @@ To get started with WalletKit, follow these steps:
 
 #### High-level steps
 
-First, we'll create tokens and NFTs 
+First, we'll create tokens and NFTs
 
 1. Create a custom token, `MILES`, with 1B of initial supply
 2. Create a custom NFT collection for Gold tier travelers and mint 100 Gold NFTs
@@ -40,11 +40,11 @@ We have two major components for our rewards and loyalty program:
 
 To create the `MILES` token, use the API Explorer in the dashboard.
 
-![](/images/reference/b36473a-image.png) 
+![](/images/reference/b36473a-image.png)
 
 Once the token is created, you will see it in your Tokens balance:
 
-![ ](/images/reference/8a3dc76-image.png) 
+![ ](/images/reference/8a3dc76-image.png)
 
 Currently, your Project Wallet holds the entire supply of MILES tokens, giving you full control over their distribution to your users.
 
@@ -61,7 +61,8 @@ To create a managed wallet on WalletKit for a customer who signs up on your plat
 ```bash Shell
 curl --request POST \
      --url https://testnet.usewalletkit.com/wallets \
-     --user <project id>:<api secret> \
+     --header 'X-WalletKit-Project-ID: <Project ID>' \
+     --header 'Authorization: Bearer <API Key>' \
      --data '
 {
   "network": "Polygon",
@@ -82,7 +83,7 @@ At this time, your Project Wallet holds all the NFTs and the tokens, and all you
 
 When they book a flight, on your system, you can calculate the number of miles for the flight, and initiate an on-chain transfer of points to their wallet.
 
-![](/images/reference/6a9b435-image.png) 
+![](/images/reference/6a9b435-image.png)
 
 To make a transfer, you can use the transfer tokens endpoint:
 

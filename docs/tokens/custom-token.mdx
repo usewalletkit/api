@@ -50,7 +50,8 @@ const transaction = await wk.tokens.create({
 ```bash curl
   curl --request POST \
   --url https://testnet.usewalletkit.com/tokens \
-  --user '<Project ID>:<API Key>' \
+  --header 'X-WalletKit-Project-ID: <Project ID>' \
+  --header 'Authorization: Bearer <API Key>'
   --data '{
     "network": "Base",
     "name": "Reward Points",

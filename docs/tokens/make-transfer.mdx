@@ -5,27 +5,28 @@ description: "Easily transfer tokens from one wallet to another"
 
 <CodeGroup>
 ```javascript Node
-import { WalletKitClient } from 'walletkit';
+import { WalletKit, WalletKitClient } from 'walletkit';
 
-const wk = WalletKitClient.usingAPIKey({
-  projectID: '<Project ID>',
-  apiKey: '<API Key>'
+const wk = new WalletKitClient({
+  projectId: '<Project ID>',
+  token: '<API Key>'
 });
 
 const transaction = await wk.tokens.transfer({
-  'network': 'Base',
-  'from': '0x..',
-  'token': 'ETH',
-  'recipient': '0x..',
-  'amount': '0.01',
-  'developer_secret': 'testnet-secret'
+  network: WalletKit.Network.Base,
+  from: '0x..',
+  token: 'ETH',
+  recipient: '0x..',
+  amount: '0.01',
+  developerSecret: 'testnet-secret'
 });
 ```
 
 ```bash curl
   curl --request POST \
   --url https://testnet.usewalletkit.com/tokens/transfer \
-  --user '<Project ID>:<API Key>' \
+  --header 'X-WalletKit-Project-ID: <Project ID>' \
+  --header 'Authorization: Bearer <API Key>' \
   --data '{
     "network": "Base",
     "from": "0x..",

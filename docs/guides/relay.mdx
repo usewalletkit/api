@@ -29,7 +29,7 @@ As an example, let's say we want to transfer 0.001 MATIC to `0xe883Cd7ADfe55CD84
 {
   "to": "0xe883Cd7ADfe55CD84798a8129468e106b32CDC7A",
   "value": "0x38D7EA4C68000"
-} 
+}
 ```
 
 To submit a raw transaction, we will use the Sign and Send endpoint:
@@ -37,7 +37,8 @@ To submit a raw transaction, we will use the Sign and Send endpoint:
 ```bash Shell
 curl --request POST \
      --url https://testnet.usewalletkit.com/transactions/sign-and-send
-     --user <project id>:<api secret>
+     --header 'X-WalletKit-Project-ID: <Project ID>' \
+     --header 'Authorization: Bearer <API Key>' \
      --data '
 {
   "network": "Polygon",

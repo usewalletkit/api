@@ -13,18 +13,17 @@ Creating a wallet is as simple as making an API call:
 
 <CodeGroup>
 ```javascript Node
-import { WalletKitClient } from 'walletkit';
-import { WalletControlMode, Network } from 'walletkit/api';
+import { WalletKit, WalletKitClient } from 'walletkit';
 
-const wk = WalletKitClient.usingAPIKey({
-  projectID: '<Project ID>',
-  apiKey: '<API Key>'
+const wk = new WalletKitClient({
+  projectId: '<Project ID>',
+  token: '<API Key>'
 });
 
 const wallet = await wk.wallets.create({
-  network: Network.Base,
+  network: WalletKit.Network.Base,
   name: 'My Wallet',
-  controlMode: WalletControlMode.Developer,
+  controlMode: WalletKit.WalletControlMode.Developer,
   developer_secret: 'testnet-secret'
 });
 ```
@@ -32,7 +31,8 @@ const wallet = await wk.wallets.create({
 ```bash curl
 curl --request POST \
 --url https://testnet.usewalletkit.com/wallets \
---user '<Project ID>:<API Key>' \
+--header 'X-WalletKit-Project-ID: <Project ID>' \
+--header 'Authorization: Bearer <API Key>' \
 --data '{
   "network": "Base",
   "name": "My Wallet",

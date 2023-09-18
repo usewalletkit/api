@@ -11,9 +11,9 @@ transfers, NFT transfers, and more.
 import { WalletKitClient } from 'walletkit';
 import { Network } from 'walletkit/api';
 
-const wk = WalletKitClient.usingAPIKey({
-  projectID: '<Project ID>',
-  apiKey: '<API Key>'
+const wk = new WalletKitClient({
+  projectId: '<Project ID>',
+  token: '<API Key>'
 });
 
 const activity = await wk.activity.list({
@@ -24,7 +24,8 @@ const activity = await wk.activity.list({
 ```bash curl
 curl --request GET \
   --url 'https://testnet.usewalletkit.com/activity/activity?network=Base&wallet_address=0x..' \
-  --user '<Project ID>:<API Key>'
+  --header 'X-WalletKit-Project-ID: <Project ID>' \
+  --header 'Authorization: Bearer <API Key>' \
 ```
 </CodeGroup>
 
