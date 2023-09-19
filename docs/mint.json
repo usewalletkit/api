@@ -93,6 +93,9 @@
       "group": "Wallets",
       "pages": [
         "api-reference/wallets/create-wallet",
+        "api-reference/wallets/get-wallet-by-id",
+        "api-reference/wallets/get-wallet-by-address",
+        "api-reference/wallets/get-wallet-by-owner-id",
         "api-reference/wallets/list-wallets",
         "api-reference/wallets/change-user-pin",
         "api-reference/wallets/export-wallet"

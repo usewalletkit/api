@@ -7,6 +7,52 @@ service:
   auth: true
   base-path: /wallets
   endpoints:
+    get-by-id:
+      path: "/get-by-id"
+      method: "GET"
+      docs: "Get a wallet by id"
+      display-name: Get Wallet by ID
+      request:
+        name: GetWalletByIdRequest
+        query-parameters:
+          id: string
+      response: Wallet
+      errors:
+        - commons.BadRequestError
+      examples:
+        - query-parameters:
+            id: 5884bd1d-ecb3-41ea-bcc7-e9e3d229618f
+          response:
+            body: $Wallet.Example1
+
+    get-by-address:
+      path: "/get-by-address"
+      method: "GET"
+      docs: "Get a wallet by network and address"
+      display-name: Get Wallet by Address
+      request:
+        name: GetWalletByAddressRequest
+        query-parameters:
+          network: commons.Network
+          address: string
+      response: Wallet
+      errors:
+        - commons.BadRequestError
+
+    get-by-owner-id:
+      path: "/get-by-owner-id"
+      method: "GET"
+      docs: "Get a wallet by network and owner id"
+      display-name: Get Wallet by Owner ID
+      request:
+        name: GetWalletByOwnerIDRequest
+        query-parameters:
+          network: commons.Network
+          ownerID: string
+      response: Wallet
+      errors:
+        - commons.BadRequestError
+
     create:
       path: ""
       method: POST
@@ -139,6 +185,24 @@ types:
           owner_id: 58c9095e-24db-43eb-b49d-b78f72573a29
           control_mode: developer
           developer_secret: testnet-secret
+
+  Wallet:
+    properties:
+      id: string
+      created_at: string
+      network: commons.Network
+      name: optional<string>
+      owner_id: optional<string>
+      address: string
+    examples:
+      - name: Example1
+        value:
+          id: 5884bd1d-ecb3-41ea-bcc7-e9e3d229618f
+          created_at: "2023-07-21T22:03:16Z"
+          network: Polygon
+          name: Joe's wallet
+          owner_id: 58c9095e-24db-43eb-b49d-b78f72573a29
+          address: "0x976Cf57B7EE1D84E73BE9115457889d49a8A1335"
 
   CreateWalletResponse:
     properties:

@@ -851,6 +851,97 @@ paths:
               required:
                 - user_id
                 - verification_code
+  /wallets/get-by-id:
+    get:
+      description: Get a wallet by id
+      operationId: wallets_get-by-id
+      tags:
+        - Wallets
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+          examples:
+            Example1:
+              value: 5884bd1d-ecb3-41ea-bcc7-e9e3d229618f
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wallet'
+              examples:
+                Example1:
+                  value:
+                    id: 5884bd1d-ecb3-41ea-bcc7-e9e3d229618f
+                    created_at: '2023-07-21T22:03:16Z'
+                    network: Polygon
+                    name: Joe's wallet
+                    owner_id: 58c9095e-24db-43eb-b49d-b78f72573a29
+                    address: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
+        '400':
+          description: ''
+      summary: Get Wallet by ID
+      security: *ref_0
+  /wallets/get-by-address:
+    get:
+      description: Get a wallet by network and address
+      operationId: wallets_get-by-address
+      tags:
+        - Wallets
+      parameters:
+        - name: network
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Network'
+        - name: address
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wallet'
+        '400':
+          description: ''
+      summary: Get Wallet by Address
+      security: *ref_0
+  /wallets/get-by-owner-id:
+    get:
+      description: Get a wallet by network and owner id
+      operationId: wallets_get-by-owner-id
+      tags:
+        - Wallets
+      parameters:
+        - name: network
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Network'
+        - name: ownerID
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wallet'
+        '400':
+          description: ''
+      summary: Get Wallet by Owner ID
+      security: *ref_0
   /wallets:
     post:
       description: Creates a wallet with provided metadata.
@@ -1472,6 +1563,32 @@ components:
         - network
         - name
         - control_mode
+    Wallet:
+      title: Wallet
+      type: object
+      properties:
+        id:
+          type: string
+          example: 5884bd1d-ecb3-41ea-bcc7-e9e3d229618f
+        created_at:
+          type: string
+          example: '2023-07-21T22:03:16Z'
+        network:
+          $ref: '#/components/schemas/Network'
+        name:
+          type: string
+          nullable: true
+        owner_id:
+          type: string
+          nullable: true
+        address:
+          type: string
+          example: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
+      required:
+        - id
+        - created_at
+        - network
+        - address
     CreateWalletResponse:
       title: CreateWalletResponse
       type: object
