@@ -26,6 +26,14 @@ groups:
         output:
           location: npm
           url: npm.buildwithfern.com
-          package-name: '@walletkit-fern/api'
+          package-name: '@walletkit-fern/walletkit-node'
+        config:
+          namespaceExport: WalletKit
+      - name: fernapi/fern-typescript-browser-sdk
+        version: 0.7.2
+        output:
+          location: npm
+          url: npm.buildwithfern.com
+          package-name: '@walletkit-fern/walletkit-js'
         config:
           namespaceExport: WalletKit

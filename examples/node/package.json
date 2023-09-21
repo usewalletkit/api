@@ -4,7 +4,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "@walletkit-fern/api": "0.0.73"
+    "@walletkit-fern/walletkit-node": "0.0.75"
   },
   "devDependencies": {
     "@types/node": "^18.11.7",
