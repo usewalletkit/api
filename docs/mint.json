@@ -105,7 +105,9 @@
       "group": "Users",
       "pages": [
         "api-reference/users/login-with-email",
-        "api-reference/users/verify-login"
+        "api-reference/users/login-anonymously",
+        "api-reference/users/verify-login",
+        "api-reference/users/refresh-token"
       ]
     },
     {

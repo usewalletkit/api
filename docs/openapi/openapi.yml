@@ -792,6 +792,23 @@ paths:
           description: ''
       summary: Transaction Status by ID
       security: *ref_0
+  /users/login-anonymously:
+    post:
+      description: Create an anonymous user session
+      operationId: users_login-anonymously
+      tags:
+        - Users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '400':
+          description: ''
+      summary: Login Anonymously
   /users/login-with-email:
     post:
       description: Log a user in with their email.
@@ -833,7 +850,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VerifyLoginResponse'
+                $ref: '#/components/schemas/Session'
         '400':
           description: ''
       summary: Verify Login
@@ -851,6 +868,37 @@ paths:
               required:
                 - user_id
                 - verification_code
+  /users/refresh-token:
+    post:
+      description: Refresh an access token
+      operationId: users_refresh-token
+      tags:
+        - Users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '400':
+          description: ''
+      summary: Refresh Token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                refresh_token:
+                  type: string
+              required:
+                - user_id
+                - refresh_token
   /wallets/get-by-id:
     get:
       description: Get a wallet by id
@@ -1455,6 +1503,33 @@ components:
             contract function. (ABI-encoded function with arguments)
       required:
         - to
+    Session:
+      title: Session
+      type: object
+      properties:
+        access_token:
+          type: string
+        access_token_expires_at:
+          type: string
+          format: date-time
+        refresh_token:
+          type: string
+        refresh_token_expires_at:
+          type: string
+          format: date-time
+      required:
+        - access_token
+        - access_token_expires_at
+        - refresh_token
+        - refresh_token_expires_at
+    LoginAnonymouslyResponse:
+      title: LoginAnonymouslyResponse
+      type: object
+      properties:
+        user_id:
+          type: string
+      required:
+        - user_id
     LoginWithEmailResponse:
       title: LoginWithEmailResponse
       type: object
@@ -1463,14 +1538,6 @@ components:
           type: string
       required:
         - user_id
-    VerifyLoginResponse:
-      title: VerifyLoginResponse
-      type: object
-      properties:
-        token:
-          type: string
-      required:
-        - token
     WalletControlMode:
       title: WalletControlMode
       type: string
