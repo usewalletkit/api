@@ -65,6 +65,8 @@ service:
 types:
   Session:
     properties:
+      user_id:
+        type: string
       access_token:
         type: string
       access_token_expires_at:

@@ -1507,6 +1507,8 @@ components:
       title: Session
       type: object
       properties:
+        user_id:
+          type: string
         access_token:
           type: string
         access_token_expires_at:
@@ -1518,6 +1520,7 @@ components:
           type: string
           format: date-time
       required:
+        - user_id
         - access_token
         - access_token_expires_at
         - refresh_token
