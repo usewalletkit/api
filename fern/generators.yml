@@ -13,7 +13,7 @@ groups:
         version: 0.7.2
         output:
           location: npm
-          package-name: walletkit
+          package-name: walletkit-js
           token: ${NPM_TOKEN}
         github:
           repository: usewalletkit/walletkit-js
