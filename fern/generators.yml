@@ -9,6 +9,16 @@ groups:
           path: ./../docs/openapi
   publish:
     generators:
+      - name: fernapi/fern-typescript-browser-sdk
+        version: 0.7.2
+        output:
+          location: npm
+          package-name: walletkit
+          token: ${NPM_TOKEN}
+        github:
+          repository: usewalletkit/walletkit-js
+        config:
+          namespaceExport: WalletKit
       - name: fernapi/fern-typescript-node-sdk
         version: 0.7.2
         output:
