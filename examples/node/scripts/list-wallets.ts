@@ -1,4 +1,4 @@
-import { WalletKit, WalletKitClient } from "@walletkit-fern/walletkit-node";
+import { WalletKit, WalletKitClient } from "walletkit";
 
 const wk = new WalletKitClient({
   environment: process.env.WALLETKIT_ENVIRONMENT,
