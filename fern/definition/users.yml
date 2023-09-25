@@ -54,7 +54,7 @@ service:
         name: RefreshTokenRequest
         body:
           properties:
-            user_id:
+            session_id:
               type: string
             refresh_token:
               type: string
@@ -65,6 +65,12 @@ service:
 types:
   Session:
     properties:
+      id:
+        type: string
+      created_at:
+        type: datetime
+      project_id:
+        type: string
       user_id:
         type: string
       access_token:

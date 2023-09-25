@@ -892,12 +892,12 @@ paths:
             schema:
               type: object
               properties:
-                user_id:
+                session_id:
                   type: string
                 refresh_token:
                   type: string
               required:
-                - user_id
+                - session_id
                 - refresh_token
   /wallets/get-by-id:
     get:
@@ -1507,6 +1507,13 @@ components:
       title: Session
       type: object
       properties:
+        id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        project_id:
+          type: string
         user_id:
           type: string
         access_token:
@@ -1520,6 +1527,9 @@ components:
           type: string
           format: date-time
       required:
+        - id
+        - created_at
+        - project_id
         - user_id
         - access_token
         - access_token_expires_at
