@@ -7,6 +7,24 @@ service:
   auth: true
   base-path: /wallets
   endpoints:
+    get-by-network:
+      path: "/get-by-network"
+      method: "GET"
+      docs: "Get a wallet for a user by network"
+      display-name: Get User Wallet by Network
+      request:
+        name: GetWalletByNetworkRequest
+        query-parameters:
+          network: commons.Network
+      response: Wallet
+      errors:
+        - commons.BadRequestError
+      examples:
+        - query-parameters:
+            network: Base
+          response:
+            body: $Wallet.Example1
+
     get-by-id:
       path: "/get-by-id"
       method: "GET"
@@ -15,12 +33,14 @@ service:
       request:
         name: GetWalletByIdRequest
         query-parameters:
+          network: commons.Network
           id: string
       response: Wallet
       errors:
         - commons.BadRequestError
       examples:
         - query-parameters:
+            network: Base
             id: 5884bd1d-ecb3-41ea-bcc7-e9e3d229618f
           response:
             body: $Wallet.Example1
