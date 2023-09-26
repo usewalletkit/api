@@ -21,6 +21,7 @@ groups:
           namespaceExport: WalletKit
           extraDependencies:
             js-cookie: "^3.0.5"
+            "@types/js-cookie": "^3.0.4"
       - name: fernapi/fern-typescript-node-sdk
         version: 0.7.2
         output:
@@ -51,3 +52,4 @@ groups:
           namespaceExport: WalletKit
           extraDependencies:
             js-cookie: "^3.0.5"
+            "@types/js-cookie": "^3.0.4"
