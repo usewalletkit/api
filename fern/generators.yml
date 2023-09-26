@@ -1,4 +1,7 @@
 default-group: local
+config:
+  extraDependencies:
+    js-cookie: "^3.0.5"
 groups:
   docs:
     generators:
