@@ -19,6 +19,7 @@ groups:
           repository: usewalletkit/walletkit-js
         config:
           namespaceExport: WalletKit
+          neverThrowErrors: true
           extraDependencies:
             js-cookie: "^3.0.5"
             "@types/js-cookie": "^3.0.4"
@@ -32,6 +33,7 @@ groups:
           repository: usewalletkit/walletkit-node
         config:
           namespaceExport: WalletKit
+          neverThrowErrors: true
   local:
     generators:
       - name: fernapi/fern-typescript-node-sdk
@@ -42,6 +44,7 @@ groups:
           package-name: '@walletkit-fern/walletkit-node'
         config:
           namespaceExport: WalletKit
+          neverThrowErrors: true
       - name: fernapi/fern-typescript-browser-sdk
         version: 0.7.2
         output:
@@ -50,6 +53,7 @@ groups:
           package-name: '@walletkit-fern/walletkit-js'
         config:
           namespaceExport: WalletKit
+          neverThrowErrors: true
           extraDependencies:
             js-cookie: "^3.0.5"
             "@types/js-cookie": "^3.0.4"
