@@ -1,7 +1,4 @@
 default-group: local
-config:
-  extraDependencies:
-    js-cookie: "^3.0.5"
 groups:
   docs:
     generators:
@@ -22,6 +19,8 @@ groups:
           repository: usewalletkit/walletkit-js
         config:
           namespaceExport: WalletKit
+          extraDependencies:
+            js-cookie: "^3.0.5"
       - name: fernapi/fern-typescript-node-sdk
         version: 0.7.2
         output:
@@ -50,3 +49,5 @@ groups:
           package-name: '@walletkit-fern/walletkit-js'
         config:
           namespaceExport: WalletKit
+          extraDependencies:
+            js-cookie: "^3.0.5"
