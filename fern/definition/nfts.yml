@@ -6,16 +6,16 @@ imports:
 service:
   auth: true
   display-name: NFT
-  base-path: /nfts/collections
+  base-path: /nfts
   endpoints:
     create:
-      path: ""
+      path: "/collections"
       method: POST
       auth: true
       docs: |
         Creates an NFT Collection with provided metadata.
         An NFT collection refers to a group of non-fungible tokens (NFTs) that are created and released together, often following a specific theme or concept. NFTs are unique digital assets that are stored on a blockchain, represent ownership or proof of authenticity of a particular item, artwork, or digital content.
-        The created nft collection's address can be found by `/transactions/status-by-id` 
+        The created nft collection's address can be found by `/transactions/status-by-id`
         endpoint once the transaction is succeeded.
       display-name: Create NFT Collection
       request:
@@ -45,7 +45,7 @@ service:
         - commons.BadRequestError
 
     mint-nft:
-      path: /nfts/mint
+      path: /mint
       method: POST
       auth: true
       docs: Mints a NFT from a collection
@@ -77,7 +77,7 @@ service:
         - commons.BadRequestError
 
     transfer-nft:
-      path: /nfts/transfer
+      path: /transfer
       method: POST
       auth: true
       docs: Transfers NFT from `from` to `recipient`. The from address must be wallet created in the project.
@@ -105,7 +105,7 @@ service:
         - commons.BadRequestError
 
     list-nfts:
-      path: /nfts
+      path: ""
       method: GET
       auth: true
       docs: List NFTs by wallet or by collection address
@@ -133,7 +133,7 @@ service:
         - commons.BadRequestError
 
     get-nft-collection:
-      path: /nfts/collection-by-address
+      path: /collection-by-address
       method: GET
       auth: true
       docs: Get NFT collection by collection address
@@ -151,7 +151,7 @@ service:
         - commons.BadRequestError
 
     list-nft-collections:
-      path: /nfts/collections
+      path: /collections
       method: GET
       auth: true
       docs: List NFT collections owned by wallet
@@ -173,7 +173,7 @@ service:
         - commons.BadRequestError
 
     nft-image-upload:
-      path: /nfts/upload
+      path: /upload
       method: POST
       auth: true
       docs: Upload NFT image to IPFS
