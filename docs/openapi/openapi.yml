@@ -3,7 +3,7 @@ info:
   title: WalletKit
   version: ''
 paths:
-  /activity/activity:
+  /activity:
     get:
       description: Retrieves activity history on a specific wallet address.
       operationId: activity_list

@@ -8,7 +8,7 @@ service:
   base-path: /activity
   endpoints:
     list:
-      path: /activity
+      path: ""
       method: GET
       docs: Retrieves activity history on a specific wallet address.
       display-name: List Wallet Activity
