@@ -46,6 +46,7 @@
     {
       "group": "Quickstart",
       "pages": [
+        "quickstart/create-a-user-controlled-wallet",
         "quickstart/api-keys",
         "quickstart/nodejs",
         "quickstart/http",

@@ -1,0 +1,70 @@
+---
+title: "Create Your First Wallet"
+---
+
+In this guide, we'll go over the steps to create a user controlled wallet using WalletKit.
+
+### Prerequisites
+
+- Sign up for your [WalletKit](https://app.usewalletkit.com/) account
+
+
+### 1. Create a walletkit client
+
+Install the corresponding walletkit sdk for your development platform. We'll use the [WalletKit-JS SDK](https://www.npmjs.com/package/walletkit-js) for this guide.
+
+```bash Shell
+npm install walletkit-js
+```
+
+Obtain WalletKit ProjectID from the [WalletKit Dashboard](https://app.usewalletkit.com/api-keys)
+
+```javascript NextJS
+// Create an instance of WalletKitClient
+const wk = new WalletKitClient({
+    projectId: "YOUR_PROJECT_ID", 
+    environment: WalletKitEnvironment.Testnet, 
+    source: TokenSource.Walletkit, // since session token is obtained from walletkit
+});
+```
+
+### 2. Obtain a user session
+
+We'll use walletkit authentication for this guide, but you can use other authentication provider like [Supabase](https://supabase.io/) or [Firebase](https://firebase.google.com/).
+
+```javascript NextJS
+const resp = await wk.users.loginWithEmail({ "{USER_EMAIL}" });
+if (!resp.ok) {
+    throw resp.error.statusCode
+}
+
+const userId = resp.body.userId;
+```
+
+Now the user will receive an email with a verification code. We'll use the verification code to verify the user.
+
+```javascript NextJS
+const resp = await wk.users.verifyLogin({
+    userId: userId,
+    verificationCode: "{VERIFICATION_CODE_RECEIVED_IN_EMAIL}",
+})
+
+if (!resp.ok) {
+    throw resp.error.statusCode
+}
+```
+The walletkit client is now authenticated with the user session token. We can now create a wallet for the user.
+
+### 3. Create a wallet
+
+Creating a wallet is as simple as making an API call
+
+```javascript NextJS
+const wallet = await wk.wallets.create({
+    network: 'Base',
+    name: "{USER_EMAIL}",
+    ownerId: userId,
+    controlMode: WalletControlMode.User,
+    userPin: "{USER_PIN}",
+});
+```
