@@ -4,6 +4,14 @@ title: "Create Your First Wallet"
 
 In this guide, we'll go over the steps to create your first user controlled wallet.
 
+### User PIN
+
+The `user_pin` set by the user can be a 6-digit pincode or a password. It is required to authorize interactions with their wallet.
+The `user_pin` is used to encrypt the user's share of the private key, stored by WalletKit.
+<Warning>
+You must never store the `user_pin` on your servers.
+</Warning>
+
 ### Prerequisites
 
 - Sign up for your [WalletKit](https://app.usewalletkit.com/) developer account
@@ -70,7 +78,7 @@ When the access token is generated using WalletKit, the SDK automatically handle
 
 ### 3. Create a wallet
 
-Creating a wallet is as simple as making an API call
+Creating a wallet is as simple as making an API call. Since this is a user controlled wallet, you will use `user_pin` set by the user.
 
 ```javascript NextJS
 const wallet = await wk.wallets.create({

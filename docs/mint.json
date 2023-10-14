@@ -46,7 +46,7 @@
     {
       "group": "Quickstart",
       "pages": [
-        "quickstart/api-keys",
+        "quickstart/developer-account",
         {
           "group" : "User-Controlled Wallets",
           "pages" : [
@@ -56,11 +56,9 @@
         {
           "group" : "Developer-Controlled Wallets",
           "pages" : [
-            "quickstart/nodejs",
             "quickstart/secret"
           ]
-        },
-        "quickstart/http"
+        }
       ]
     },
     {
