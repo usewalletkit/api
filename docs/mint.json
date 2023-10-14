@@ -46,11 +46,21 @@
     {
       "group": "Quickstart",
       "pages": [
-        "quickstart/create-a-user-controlled-wallet",
         "quickstart/api-keys",
-        "quickstart/nodejs",
-        "quickstart/http",
-        "quickstart/secret"
+        {
+          "group" : "User-Controlled Wallets",
+          "pages" : [
+            "quickstart/create-a-user-controlled-wallet"
+          ]
+        },
+        {
+          "group" : "Developer-Controlled Wallets",
+          "pages" : [
+            "quickstart/nodejs",
+            "quickstart/secret"
+          ]
+        },
+        "quickstart/http"
       ]
     },
     {
@@ -58,12 +68,6 @@
       "pages": [
         "wallets/create-wallet",
         "wallets/activity-history"
-      ]
-    },
-    {
-      "group": "Gas",
-      "pages": [
-        "gas/get-gas"
       ]
     },
     {
