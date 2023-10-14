@@ -1,0 +1,38 @@
+---
+title: "Make A Gasless Transfer"
+---
+
+In this guide, we'll go over the steps to make a gasless transfer from a user controlled wallet.
+
+### Prerequisites
+
+- [Create Your First Wallet](/quickstart/create-a-user-controlled-wallet) 
+
+
+### 1. Fund the wallet with some test ERC20 to transfer
+
+Before you can make a transfer, your wallet needs to have some token balance. You can use [WalletKit Faucet](https://faucet.usewalletkit.com/) to get some test token for free.
+![](/images/reference/walletkit-faucet.png) 
+
+### 2. Create a walletkit client and obtain session token
+
+See step 1 and 2 in [Create Your First Wallet](/quickstart/create-a-user-controlled-wallet#1-create-a-walletkit-client).
+
+### 3. Make a gasless transfer
+
+Making a gasless transfer is as simple as making an API call. Since this is a user controlled wallet, you will use `user_pin` set by the user.
+
+```javascript NextJS
+const transaction = await wk.tokens.transfer({
+  network: WalletKit.Network.Base,
+  from: '0x..', // user wallet address
+  token: '0xec05f9eb5ebc36732256bc86eaf654c55a20752a', // WalletKit ERC20 test token
+  recipient: '0x..',
+  amount: '1',
+  userPin: "USER_PROVIDED_PIN",
+});
+```
+
+The call returns a transaction object with a transaction id. You can monitor the status of the transaction by calling the
+[Get Transaction Status](/api-reference/transactions/transaction-status-by-id) endpoint. WalletKit handles retries to
+ensure that the transaction is successful.

@@ -1,5 +1,5 @@
 ---
-title: "Create Your First Wallet"
+title: "Create Your First Gasless Wallet"
 ---
 
 In this guide, we'll go over the steps to create your first user controlled wallet.
@@ -15,7 +15,6 @@ You must never store the `user_pin` on your servers.
 ### Prerequisites
 
 - Sign up for your [WalletKit](https://app.usewalletkit.com/) developer account
-
 
 ### 1. Create a walletkit client
 
@@ -76,9 +75,9 @@ The walletkit client is now authenticated with the user session token. We can no
 When the access token is generated using WalletKit, the SDK automatically handles the session token refreshing.
 </Tip>
 
-### 3. Create a wallet
+### 3. Create a gasless wallet
 
-Creating a wallet is as simple as making an API call. Since this is a user controlled wallet, you will use `user_pin` set by the user.
+Creating a gasless wallet is as simple as making an API call. Since this is a user controlled wallet, you will use `user_pin` set by the user.
 
 ```javascript NextJS
 const wallet = await wk.wallets.create({

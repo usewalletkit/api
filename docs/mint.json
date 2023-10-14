@@ -50,7 +50,8 @@
         {
           "group" : "User-Controlled Wallets",
           "pages" : [
-            "quickstart/create-a-user-controlled-wallet"
+            "quickstart/create-a-user-controlled-wallet",
+            "quickstart/make-a-transfer"
           ]
         },
         {
