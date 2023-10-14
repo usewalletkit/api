@@ -225,6 +225,10 @@ paths:
                   description: address of the NFT collection smart contract to mint from.
                 recipient:
                   type: string
+                  nullable: true
+                  description: >-
+                    wallet address where the NFT should be delivered. defaults
+                    to the sender's address.
                 metadata:
                   $ref: '#/components/schemas/MintNftRequestMetadata'
                   nullable: true
@@ -246,7 +250,6 @@ paths:
               required:
                 - network
                 - contract_address
-                - recipient
   /nfts/transfer:
     post:
       description: >-

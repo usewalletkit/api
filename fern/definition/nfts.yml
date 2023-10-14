@@ -59,7 +59,8 @@ service:
               type: string
               docs: address of the NFT collection smart contract to mint from.
             recipient:
-              type: string
+              type: optional<string>
+              docs: wallet address where the NFT should be delivered. defaults to the sender's address.
             metadata:
               docs: Metadata JSON object.
               type: optional<MintNftRequestMetadata>
