@@ -81,7 +81,7 @@ Creating a gasless wallet is as simple as making an API call. Since this is a us
 
 ```javascript NextJS
 const wallet = await wk.wallets.create({
-    network: 'Base',
+    network: WalletKit.Network.Base,
     name: "USER_EMAIL",
     ownerId: userId,
     controlMode: WalletControlMode.User,
