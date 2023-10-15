@@ -27,6 +27,10 @@ npm install walletkit-js
 Obtain WalletKit ProjectID from the [WalletKit Dashboard](https://app.usewalletkit.com/api-keys)
 
 ```javascript NextJS
+import { WalletKitClient} from "walletkit-js/Client";
+import { WalletKitEnvironment} from "walletkit-js";
+import { TokenSource, Network } from "walletkit-js/api";
+
 // Create an instance of WalletKitClient
 const wk = new WalletKitClient({
     projectId: "YOUR_PROJECT_ID", 
@@ -81,7 +85,7 @@ Creating a gasless wallet is as simple as making an API call. Since this is a us
 
 ```javascript NextJS
 const wallet = await wk.wallets.create({
-    network: WalletKit.Network.Base,
+    network: Network.Base,
     name: "USER_EMAIL",
     ownerId: userId,
     controlMode: WalletControlMode.User,
