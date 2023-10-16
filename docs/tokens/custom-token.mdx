@@ -26,13 +26,17 @@ You can also programmatically deploy custom tokens using the
 [Create Token API](http://localhost:3000/api-reference/tokens/create-token).
 
 <CodeGroup>
-```javascript Node
-import {WalletKitClient} from 'walletkit';
-import {Network} from 'walletkit/api';
+```javascript NextJS
+import { WalletKitClient} from "walletkit-js/Client";
+import { WalletKitEnvironment} from "walletkit-js";
+import { TokenSource, Network } from "walletkit-js/api";
 
-const wk = WalletKitClient.usingAPIKey({
-  projectID: "<Project ID>",
-  apiKey: "<API Key>"
+// Create an instance of WalletKitClient
+const wk = new WalletKitClient({
+    projectId: "YOUR_PROJECT_ID", 
+    environment: WalletKitEnvironment.Testnet, 
+    token: "SESSION_TOKEN",
+    source: TokenSource.Walletkit,
 });
 
 const transaction = await wk.tokens.create({

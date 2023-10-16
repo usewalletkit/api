@@ -49,16 +49,21 @@ and [Mint NFT endpoint](/api-reference/nfts/mint-nft).
 Use the [Create NFT Collection endpoint](/api-reference/nfts/create-nft-collection) to create NFT collection.
 
 <CodeGroup>
-```javascript Node
-import { WalletKit, WalletKitClient } from 'walletkit';
+```javascript NextJS
+import { WalletKitClient} from "walletkit-js/Client";
+import { WalletKitEnvironment} from "walletkit-js";
+import { TokenSource, Network } from "walletkit-js/api";
 
+// Create an instance of WalletKitClient
 const wk = new WalletKitClient({
-  projectId: '<Project ID>',
-  token: '<API Key>'
+    projectId: "YOUR_PROJECT_ID", 
+    environment: WalletKitEnvironment.Testnet, 
+    token: "SESSION_TOKEN",
+    source: TokenSource.Walletkit,
 });
 
 const transaction = await wk.nfts.create({
-  network: WalletKit.Network.Base,
+  network: Network.Base,
   name: "Sky Airline Gold Member",
   symbol: "SAGM",
   imageUrl: "https://example.com/gold_membership",

@@ -4,16 +4,21 @@ description: "Easily transfer NFTs from one wallet to another"
 ---
 
 <CodeGroup>
-```javascript Node
-import { WalletKit, WalletKitClient } from 'walletkit';
+```javascript NextJS
+import { WalletKitClient} from "walletkit-js/Client";
+import { WalletKitEnvironment} from "walletkit-js";
+import { TokenSource, Network } from "walletkit-js/api";
 
+// Create an instance of WalletKitClient
 const wk = new WalletKitClient({
-  projectId: '<Project ID>',
-  token: '<API Key>'
+    projectId: "YOUR_PROJECT_ID", 
+    environment: WalletKitEnvironment.Testnet, 
+    token: "SESSION_TOKEN",
+    source: TokenSource.Walletkit,
 });
 
 const transaction = await wk.nfts.transfer({
-  network: WalletKit.Network.Base,
+  network: Network.Base,
   from: '0x..',
   contractAddress: '0x..',
   recipient: '0x..',
