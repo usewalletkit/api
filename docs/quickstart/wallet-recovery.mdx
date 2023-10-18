@@ -5,14 +5,14 @@ title: "Wallet Recovery"
 In this guide, we'll go over how wallet recovery works.
 
 As mentioned in [Wallet Control Modes](/introduction/wallet-control-modes#user-controlled-wallets), one of the three secret shares is recovery share.
-There are many ways to manage the recovery share, and each one has its own pros and cons, for example, 
-1. storing in offline by user like write it down on a paper requires less trust on 3rd party but put burden on user to secure the share.
-2. security questions, removes the secure store burden from user but requires more trust on the party who stores the recovery share.
+There are various methods to manage recovery shares, each with its own trade-offs:
+- User's Offline Storage: For instance, writing it on paper. This approach minimizes reliance on third parties but shifts the responsibility to the user for secure storage.
+- Trusted Service Storage: A trusted service stores the share, accessible after identity verification, often with security questions. This approach eases the burden on users for secure storage but requires greater trust in the service provider.
 
-WalletKit tries to find the balance between user experience and trust needed on other party.
+WalletKit strives to strike a balance between user experience and trust requirements within the system
 
-### How it works
-Recovery share is encrypted by developer's public key store by WalletKit. Used only for recovery purposes.
+### Our Approach
+The Recovery Share is encrypted using the developer's public key and securely stored with WalletKit. This share is reserved exclusively for recovery purposes.
 
 To recover, we use WalletKit share + Recovery share:
 1. User authenticates themselves (email/phone/passkey)
