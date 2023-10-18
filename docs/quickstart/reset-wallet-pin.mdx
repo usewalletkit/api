@@ -1,0 +1,33 @@
+---
+title: "Reset Wallet PIN"
+---
+
+In this guide, we'll go over the steps to enable user to reset their wallet PIN.
+
+### Prerequisites
+
+- [Create Your First Wallet](/quickstart/create-a-user-controlled-wallet) 
+- User must know their current PIN to reset it. Otherwise, user should go through the Account Recovery flow.
+
+### 1. Create a walletkit client and obtain session token
+
+See step 1 and 2 in [Create Your First Wallet](/quickstart/create-a-user-controlled-wallet#1-create-a-walletkit-client).
+
+### 2. Reset PIN
+
+Resetting PIN is as simple as an API call.
+
+```javascript NextJS
+const resp = await wk.wallets.changeUserPin({
+    network: Network.Base,
+    address: "0x..",
+    oldUserPin: "<old_user_pin>",
+    newUserPin: "<new_user_pin>"
+});
+
+if (resp.ok && resp.body.success) {
+    // User pin changed successfully
+} else {
+    // User pin change failed
+}
+```
