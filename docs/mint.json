@@ -52,7 +52,8 @@
           "pages" : [
             "quickstart/create-a-user-controlled-wallet",
             "quickstart/make-a-transfer",
-            "quickstart/reset-user-pin"
+            "quickstart/reset-user-pin",
+            "quickstart/wallet-recovery"
           ]
         },
         {
