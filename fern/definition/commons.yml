@@ -36,7 +36,12 @@ types:
       network: Network
       status:
         type: string
+  
+  BadRequestErrorBody:
+    properties:
+      error: string
 
 errors:
   BadRequestError:
     status-code: 400
+    type: BadRequestErrorBody
