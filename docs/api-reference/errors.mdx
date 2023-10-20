@@ -19,13 +19,13 @@ Some 4xx errors that could be handled programmatically (e.g., transfer amount ex
 ### Error Response Format
 Besides HTTP status code, error response include supplementary JSON fields that provide a more detailed, programmatic description of errors for enhanced error handling.
 - code: For some errors that could be handled programmatically, a short string indicating the error code reported.
-- message: A human-readable message providing more details about the error.
+- error: A human-readable message providing more details about the error.
 
 ```json Example
 HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
   "code": "balance_insufficient",
-  "message": "Transfer amount exceeds balance"
+  "error": "Transfer amount exceeds balance"
 }
 ```

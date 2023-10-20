@@ -1417,10 +1417,10 @@ components:
         code:
           type: string
           nullable: true
-        message:
+        error:
           type: string
       required:
-        - message
+        - error
     BuyGasResponse:
       title: BuyGasResponse
       type: object
