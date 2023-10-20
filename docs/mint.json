@@ -158,6 +158,12 @@
       "pages": [
         "api-reference/activity/list-wallet-activity"
       ]
+    },
+    {
+      "group": "API Errors",
+      "pages": [
+        "api-reference/errors"
+      ]
     }
   ],
   "footerSocials": {

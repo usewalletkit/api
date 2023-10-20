@@ -39,7 +39,8 @@ types:
   
   BadRequestErrorBody:
     properties:
-      error: string
+      code: optional<string>
+      message: string
 
 errors:
   BadRequestError:

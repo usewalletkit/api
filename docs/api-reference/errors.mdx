@@ -1,0 +1,31 @@
+---
+title: "Errors"
+---
+
+WalletKit uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g., a required parameter was omitted, invalid address, etc.). Codes in the 5xx range indicate an error with Stripe's servers (these are rare).
+
+Some 4xx errors that could be handled programmatically (e.g., transfer amount exceeds balance) include an error code that briefly explains the error reported.
+
+| HTTP Status Code     | Description                                            |
+|----------------------|--------------------------------------------------------|
+| 200 - OK             | Everything worked as expected.                        |
+| 400 - Bad Request    | The request was invalid, often due to missing a required parameter or invalid parameter. |
+| 401 - Unauthorized   | No valid API key provided or invalid session token                           |
+| 403 - Forbidden      | The API key/session token doesn't have permissions to perform the request. |
+| 404 - Not Found      | The requested resource doesn't exist.                |
+| 429 - Too Many Requests | Too many requests hit the API too quickly. We recommend an exponential backoff of your requests. |
+| 500 - Server Errors | Something went wrong on WalletKit's end. (These are rare.) |
+
+### Error Response Format
+Besides HTTP status code, error response include supplementary JSON fields that provide a more detailed, programmatic description of errors for enhanced error handling.
+- code: For some errors that could be handled programmatically, a short string indicating the error code reported.
+- message: A human-readable message providing more details about the error.
+
+```json Example
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+  "code": "balance_insufficient",
+  "message": "Transfer amount exceeds balance"
+}
+```

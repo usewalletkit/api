@@ -1414,10 +1414,13 @@ components:
       title: BadRequestErrorBody
       type: object
       properties:
-        error:
+        code:
+          type: string
+          nullable: true
+        message:
           type: string
       required:
-        - error
+        - message
     BuyGasResponse:
       title: BuyGasResponse
       type: object
