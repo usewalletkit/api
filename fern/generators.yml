@@ -23,37 +23,3 @@ groups:
           extraDependencies:
             js-cookie: "^3.0.5"
             "@types/js-cookie": "^3.0.4"
-      - name: fernapi/fern-typescript-node-sdk
-        version: 0.7.2
-        output:
-          location: npm
-          package-name: walletkit
-          token: ${NPM_TOKEN}
-        github:
-          repository: usewalletkit/walletkit-node
-        config:
-          namespaceExport: WalletKit
-          neverThrowErrors: true
-  local:
-    generators:
-      - name: fernapi/fern-typescript-node-sdk
-        version: 0.7.2
-        output:
-          location: npm
-          url: npm.buildwithfern.com
-          package-name: '@walletkit-fern/walletkit-node'
-        config:
-          namespaceExport: WalletKit
-          neverThrowErrors: true
-      - name: fernapi/fern-typescript-browser-sdk
-        version: 0.7.2
-        output:
-          location: npm
-          url: npm.buildwithfern.com
-          package-name: '@walletkit-fern/walletkit-js'
-        config:
-          namespaceExport: WalletKit
-          neverThrowErrors: true
-          extraDependencies:
-            js-cookie: "^3.0.5"
-            "@types/js-cookie": "^3.0.4"
