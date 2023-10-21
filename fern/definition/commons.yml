@@ -25,8 +25,8 @@ types:
   UserPin:
     type: optional<string>
     docs: >-
-      A 6-digit numeric pin that is only known to the user, set during 
-      wallet creation. This pin is required to sign transactions from 
+      A 6-digit numeric pin that is only known to the user, set during
+      wallet creation. This pin is required to sign transactions from
       this wallet.
 
   TransactionSubmissionResponse:
@@ -36,8 +36,8 @@ types:
       network: Network
       status:
         type: string
-  
-  BadRequestErrorBody:
+
+  ErrorResponse:
     properties:
       code: optional<string>
       error: string
@@ -45,4 +45,13 @@ types:
 errors:
   BadRequestError:
     status-code: 400
-    type: BadRequestErrorBody
+    type: ErrorResponse
+  UnauthorizedError:
+    status-code: 401
+    type: ErrorResponse
+  ForbiddenError:
+    status-code: 403
+    type: ErrorResponse
+  UnknownError:
+    status-code: 500
+    type: ErrorResponse
