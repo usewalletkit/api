@@ -40,7 +40,8 @@
       "pages": [
         "introduction/overview",
         "introduction/supported-networks",
-        "introduction/wallet-control-modes"
+        "introduction/wallet-control-modes",
+        "introduction/authentication"
       ]
     },
     {
