@@ -20,6 +20,3 @@ groups:
         config:
           namespaceExport: WalletKit
           neverThrowErrors: true
-          extraDependencies:
-            js-cookie: "^3.0.5"
-            "@types/js-cookie": "^3.0.4"
