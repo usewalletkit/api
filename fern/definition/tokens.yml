@@ -22,8 +22,6 @@ service:
               token contract address or symbol in case of the gas token
             type: string
       response: GetTokenResponse
-      errors:
-        - commons.BadRequestError
 
     create:
       path: ""
@@ -58,8 +56,6 @@ service:
             developer_secret: optional<commons.DeveloperSecret>
             user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
-      errors:
-        - commons.BadRequestError
 
     transfer:
       path: /transfer
@@ -88,8 +84,6 @@ service:
             developer_secret: optional<commons.DeveloperSecret>
             user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
-      errors:
-        - commons.BadRequestError
 
     mint:
       path: /mint
@@ -110,8 +104,6 @@ service:
             developer_secret: optional<commons.DeveloperSecret>
             user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
-      errors:
-        - commons.BadRequestError
 
     list-balances:
       path: /balances
@@ -126,18 +118,16 @@ service:
           wallet_address:
             type: string
       response: list<ListTokenBalancesResponseItem>
-      errors:
-        - commons.BadRequestError
 
     batch-transfer:
       path: /batch-transfer
       method: POST
       auth: true
       docs: |
-        Batch transfers from the `from` wallet to the list of 
-        `recipients` with the provided amount. The `from` address can only be the ones 
-        created in the project. Transfers within a batch are processed atomically 
-        in a single transaction, resulting in significantly lower average costs 
+        Batch transfers from the `from` wallet to the list of
+        `recipients` with the provided amount. The `from` address can only be the ones
+        created in the project. Transfers within a batch are processed atomically
+        in a single transaction, resulting in significantly lower average costs
         compared to individual transfers
       display-name: Batch Transfer Token
       request:
@@ -159,8 +149,6 @@ service:
             developer_secret: optional<commons.DeveloperSecret>
             user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
-      errors:
-        - commons.BadRequestError
 
 types:
   GetTokenResponse:

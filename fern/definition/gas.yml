@@ -22,8 +22,6 @@ service:
             destination_address:
               type: optional<string>
       response: BuyGasResponse
-      errors:
-        - commons.BadRequestError
 
 types:
   BuyGasResponse:

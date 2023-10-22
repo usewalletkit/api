@@ -17,8 +17,6 @@ service:
         query-parameters:
           network: commons.Network
       response: Wallet
-      errors:
-        - commons.BadRequestError
       examples:
         - query-parameters:
             network: Base
@@ -36,8 +34,6 @@ service:
           network: commons.Network
           id: string
       response: Wallet
-      errors:
-        - commons.BadRequestError
       examples:
         - query-parameters:
             network: Base
@@ -56,8 +52,6 @@ service:
           network: commons.Network
           address: string
       response: Wallet
-      errors:
-        - commons.BadRequestError
 
     get-by-owner-id:
       path: "/get-by-owner-id"
@@ -70,8 +64,6 @@ service:
           network: commons.Network
           ownerID: string
       response: Wallet
-      errors:
-        - commons.BadRequestError
 
     create:
       path: ""
@@ -80,8 +72,6 @@ service:
       display-name: Create Wallet
       request: CreateWalletRequest
       response: CreateWalletResponse
-      errors:
-        - commons.BadRequestError
       examples:
         - name: Example1
           request: $CreateWalletRequest.Example1
@@ -111,8 +101,6 @@ service:
       display-name: Change User Pin
       request: ChangeUserPinRequest
       response: ChangeUserPinResponse
-      errors:
-        - commons.BadRequestError
       examples:
         - name: Example1
           request: $ChangeUserPinRequest.Example1
@@ -126,8 +114,6 @@ service:
       display-name: Export Wallet
       request: ExportWalletRequest
       response: ExportWalletResponse
-      errors:
-        - commons.BadRequestError
       examples:
         - name: Example1
           request: $ExportWalletRequest.Example1

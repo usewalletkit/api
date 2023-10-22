@@ -18,8 +18,6 @@ service:
           network: commons.Network
           transaction_hash: string
       response: GetTransactionStatusByHashResponse
-      errors:
-        - commons.BadRequestError
 
     sign-and-send:
       path: /sign-and-send
@@ -41,8 +39,6 @@ service:
             developer_secret: optional<commons.DeveloperSecret>
             user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
-      errors:
-        - commons.BadRequestError
 
     status-by-id:
       path: /status-by-id
@@ -59,8 +55,6 @@ service:
               transaction. e.g. Transfer Token
             type: optional<string>
       response: GetTransactionStatusByIdResponse
-      errors:
-        - commons.BadRequestError
 
 types:
   GetTransactionStatusByHashResponse:

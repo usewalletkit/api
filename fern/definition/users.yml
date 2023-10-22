@@ -13,8 +13,7 @@ service:
       docs: Create an anonymous user session
       display-name: Login Anonymously
       response: Session
-      errors:
-        - commons.BadRequestError
+
     login-with-email:
       path: /login-with-email
       method: POST
@@ -27,8 +26,7 @@ service:
             email:
               type: string
       response: LoginWithEmailResponse
-      errors:
-        - commons.BadRequestError
+
     verify-login:
       path: /verify-login
       method: POST
@@ -43,8 +41,7 @@ service:
             verification_code:
               type: string
       response: Session
-      errors:
-        - commons.BadRequestError
+
     refresh-token:
       path: /refresh-token
       method: POST
@@ -59,8 +56,6 @@ service:
             refresh_token:
               type: string
       response: Session
-      errors:
-        - commons.BadRequestError
 
 types:
   Session:

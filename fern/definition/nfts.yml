@@ -41,8 +41,6 @@ service:
             developer_secret: optional<commons.DeveloperSecret>
             user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
-      errors:
-        - commons.BadRequestError
 
     mint-nft:
       path: /mint
@@ -74,8 +72,6 @@ service:
             developer_secret: optional<commons.DeveloperSecret>
             user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
-      errors:
-        - commons.BadRequestError
 
     transfer-nft:
       path: /transfer
@@ -102,8 +98,6 @@ service:
             developer_secret: optional<commons.DeveloperSecret>
             user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
-      errors:
-        - commons.BadRequestError
 
     list-nfts:
       path: ""
@@ -130,8 +124,6 @@ service:
             docs: size of each page
             type: optional<integer>
       response: list<ListNftsResponseItem>
-      errors:
-        - commons.BadRequestError
 
     get-nft-collection:
       path: /collection-by-address
@@ -148,8 +140,6 @@ service:
             docs: address of the NFT contract
             type: optional<string>
       response: GetNftCollectionResponse
-      errors:
-        - commons.BadRequestError
 
     list-nft-collections:
       path: /collections
@@ -170,8 +160,6 @@ service:
             docs: size of each page
             type: optional<integer>
       response: list<ListNftCollectionsResponseItem>
-      errors:
-        - commons.BadRequestError
 
     nft-image-upload:
       path: /upload
@@ -180,8 +168,6 @@ service:
       docs: Upload NFT image to IPFS
       display-name: Upload NFT image
       response: NftImageUploadResponse
-      errors:
-        - commons.BadRequestError
 
 types:
   MintNftRequestMetadata:

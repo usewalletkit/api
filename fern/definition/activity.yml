@@ -23,8 +23,6 @@ service:
           page_size:
             type: optional<integer>
       response: list<ListWalletActivityResponseItem>
-      errors:
-        - commons.BadRequestError
 
 types:
   ListWalletActivityResponseItem:
