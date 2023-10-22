@@ -17,3 +17,8 @@ default-environment: testnet
 environments:
   testnet: https://testnet.usewalletkit.com
   mainnet: https://mainnet.usewalletkit.com
+errors:
+  - commons.BadRequestError
+  - commons.UnauthorizedError
+  - commons.ForbiddenError
+  - commons.UnknownError
