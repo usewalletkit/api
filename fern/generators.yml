@@ -9,7 +9,7 @@ groups:
           path: ./../docs/openapi
   publish:
     generators:
-      - name: fernapi/fern-typescript-browser-sdk
+      - name: fernapi/fern-typescript-node-sdk
         version: 0.7.2
         output:
           location: npm
