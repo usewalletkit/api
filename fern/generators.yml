@@ -20,3 +20,14 @@ groups:
         config:
           namespaceExport: WalletKit
           neverThrowErrors: true
+  local:
+    generators:
+      - name: fernapi/fern-typescript-node-sdk
+        version: 0.7.2
+        output:
+          location: local-file-system
+          path: ../../walletkit-js/src/
+        config:
+          namespaceExport: WalletKit
+          neverThrowErrors: true
+          outputSourceFiles: true
