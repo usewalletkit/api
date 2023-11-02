@@ -57,6 +57,12 @@ service:
               type: string
       response: Session
 
+    logout:
+      path: /logout
+      method: POST
+      docs: Log a user out and clear session cookies (only available in SDKs)
+      display-name: Logout
+
 types:
   Session:
     properties:
