@@ -1229,6 +1229,56 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
       summary: Login Anonymously
+  /users/login-with-wallet:
+    post:
+      description: Log a user in with their wallet using Sign in with Ethereum.
+      operationId: users_login-with-wallet
+      tags:
+        - Users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginWithWalletResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Login with Wallet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sign_in_wallet:
+                  type: string
+              required:
+                - sign_in_wallet
   /users/login-with-email:
     post:
       description: Log a user in with their email.
@@ -2304,6 +2354,17 @@ components:
           type: string
       required:
         - user_id
+    LoginWithWalletResponse:
+      title: LoginWithWalletResponse
+      type: object
+      properties:
+        user_id:
+          type: string
+        nonce:
+          type: string
+      required:
+        - user_id
+        - nonce
     LoginWithEmailResponse:
       title: LoginWithEmailResponse
       type: object

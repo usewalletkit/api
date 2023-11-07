@@ -14,6 +14,18 @@ service:
       display-name: Login Anonymously
       response: Session
 
+    login-with-wallet:
+      path: /login-with-wallet
+      method: POST
+      docs: Log a user in with their wallet using Sign in with Ethereum.
+      display-name: Login with Wallet
+      request:
+        name: LoginWithWalletRequest
+        body:
+          properties:
+            sign_in_wallet: string
+      response: LoginWithWalletResponse
+
     login-with-email:
       path: /login-with-email
       method: POST
@@ -91,6 +103,12 @@ types:
   LoginAnonymouslyResponse:
     properties:
       user_id:
+        type: string
+  LoginWithWalletResponse:
+    properties:
+      user_id:
+        type: string
+      nonce:
         type: string
   LoginWithEmailResponse:
     properties:
