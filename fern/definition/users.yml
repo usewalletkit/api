@@ -30,16 +30,22 @@ service:
     verify-login:
       path: /verify-login
       method: POST
-      docs: Verify a user's login code.
+      docs: Verify a user's login challenge and create a session.
       display-name: Verify Login
       request:
         name: VerifyLoginRequest
         body:
           properties:
             user_id:
-              type: string
+              type: optional<string>
             verification_code:
-              type: string
+              type: optional<string>
+            siwe_message:
+              type: optional<string>
+            signature:
+              type: optional<string>
+            google_credential:
+              type: optional<string>
       response: Session
 
     refresh-token:
