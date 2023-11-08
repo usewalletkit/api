@@ -40,6 +40,48 @@ service:
             user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
 
+    batch-sign-and-send:
+      path: /batch-sign-and-send
+      method: POST
+      auth: true
+      docs: This endpoint makes arbitrary smart contract function calls in batch.
+      display-name: Batch Sign and Send
+      request:
+        name: BatchSignAndSendRequest
+        body:
+          properties:
+            network: commons.Network
+            signer_wallet_address:
+              type: string
+              docs: address can only be the ones created in the project.
+            unsigned_transactions:
+              type: list<SignAndSendRequestUnsignedTransaction>
+              docs: list of transaction input to be signed.
+            developer_secret: optional<commons.DeveloperSecret>
+            user_pin: optional<commons.UserPin>
+      response: commons.TransactionSubmissionResponse
+
+    sign-message:
+      path: /sign-message
+      method: POST
+      auth: true
+      docs: This endpoint calculates a network-specific signature (e.g. in EIP-191 format EVM networks) for the provided message.
+      display-name: Sign Message
+      request:
+        name: SignMessageRequest
+        body:
+          properties:
+            network: commons.Network
+            signer_wallet_address:
+              type: string
+              docs: address can only be the ones created in the project.
+            message:
+              type: string
+              docs: message to be signed.
+            developer_secret: optional<commons.DeveloperSecret>
+            user_pin: optional<commons.UserPin>
+      response: SignMessageResponse
+
     status-by-id:
       path: /status-by-id
       method: GET
@@ -103,3 +145,8 @@ types:
           If it's a smart contract interaction, the calldata of the smart
           contract function. (ABI-encoded function with arguments)
         type: optional<string>
+
+  SignMessageResponse:
+    properties:
+      signature:
+        type: string

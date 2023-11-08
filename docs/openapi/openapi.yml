@@ -1139,6 +1139,140 @@ paths:
                 - network
                 - signer_wallet_address
                 - unsigned_transaction
+  /transactions/batch-sign-and-send:
+    post:
+      description: This endpoint makes arbitrary smart contract function calls in batch.
+      operationId: transactions_batch-sign-and-send
+      tags:
+        - Transactions
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSubmissionResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Batch Sign and Send
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                signer_wallet_address:
+                  type: string
+                  description: address can only be the ones created in the project.
+                unsigned_transactions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SignAndSendRequestUnsignedTransaction'
+                  description: list of transaction input to be signed.
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
+              required:
+                - network
+                - signer_wallet_address
+                - unsigned_transactions
+  /transactions/sign-message:
+    post:
+      description: >-
+        This endpoint calculates a network-specific signature (e.g. in EIP-191
+        format EVM networks) for the provided message.
+      operationId: transactions_sign-message
+      tags:
+        - Transactions
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignMessageResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Sign Message
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                signer_wallet_address:
+                  type: string
+                  description: address can only be the ones created in the project.
+                message:
+                  type: string
+                  description: message to be signed.
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
+              required:
+                - network
+                - signer_wallet_address
+                - message
   /transactions/status-by-id:
     get:
       description: >-
@@ -2314,6 +2448,14 @@ components:
             contract function. (ABI-encoded function with arguments)
       required:
         - to
+    SignMessageResponse:
+      title: SignMessageResponse
+      type: object
+      properties:
+        signature:
+          type: string
+      required:
+        - signature
     Session:
       title: Session
       type: object
