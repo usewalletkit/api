@@ -7,13 +7,24 @@ service:
   auth: false
   base-path: /users
   endpoints:
-    session-challenge:
+    create-session-challenge:
       path: /create-session-challenge
       method: POST
       docs: Create a session challenge for a user
-      display-name: Session Challenge
+      display-name: Create Session Challenge
       request:
         name: SessionChallengeRequest
+      response: SessionChallenge
+
+    get-session-challenge:
+      path: /session-challenge
+      method: GET
+      docs: Get a session challenge by code
+      display-name: Get Session Challenge
+      request:
+        name: GetSessionChallengeRequest
+        query-parameters:
+          code: string
       response: SessionChallenge
 
     login-anonymously:
@@ -95,14 +106,12 @@ types:
     properties:
       id:
         type: string
-      created_at:
-        type: datetime
-      project_id:
-        type: string
       code:
         type: string
-      expires_at:
-        type: datetime
+      expired:
+        type: boolean
+      completed:
+        type: boolean
   Session:
     properties:
       id:
