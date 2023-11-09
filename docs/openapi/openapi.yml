@@ -1324,6 +1324,45 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
       summary: Transaction Status by ID
       security: *ref_0
+  /users/create-session-challenge:
+    post:
+      description: Create a session challenge for a user
+      operationId: users_session-challenge
+      tags:
+        - Users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionChallenge'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Session Challenge
   /users/login-anonymously:
     post:
       description: Create an anonymous user session
@@ -2456,6 +2495,28 @@ components:
           type: string
       required:
         - signature
+    SessionChallenge:
+      title: SessionChallenge
+      type: object
+      properties:
+        id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        project_id:
+          type: string
+        code:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - created_at
+        - project_id
+        - code
+        - expires_at
     Session:
       title: Session
       type: object

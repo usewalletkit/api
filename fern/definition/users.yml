@@ -7,6 +7,15 @@ service:
   auth: false
   base-path: /users
   endpoints:
+    session-challenge:
+      path: /create-session-challenge
+      method: POST
+      docs: Create a session challenge for a user
+      display-name: Session Challenge
+      request:
+        name: SessionChallengeRequest
+      response: SessionChallenge
+
     login-anonymously:
       path: /login-anonymously
       method: POST
@@ -82,6 +91,18 @@ service:
       display-name: Logout
 
 types:
+  SessionChallenge:
+    properties:
+      id:
+        type: string
+      created_at:
+        type: datetime
+      project_id:
+        type: string
+      code:
+        type: string
+      expires_at:
+        type: datetime
   Session:
     properties:
       id:
