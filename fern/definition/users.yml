@@ -67,6 +67,8 @@ service:
               type: optional<string>
             google_credential:
               type: optional<string>
+            session_code:
+              type: optional<string>
       response: Session
 
     refresh-token:

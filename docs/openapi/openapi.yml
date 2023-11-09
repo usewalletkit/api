@@ -1563,6 +1563,9 @@ paths:
                 google_credential:
                   type: string
                   nullable: true
+                session_code:
+                  type: string
+                  nullable: true
   /users/refresh-token:
     post:
       description: Refresh an access token
