@@ -65,8 +65,6 @@ service:
               type: optional<string>
             signature:
               type: optional<string>
-            google_credential:
-              type: optional<string>
             session_challenge_code:
               type: optional<string>
       response: Session

@@ -1560,9 +1560,6 @@ paths:
                 signature:
                   type: string
                   nullable: true
-                google_credential:
-                  type: string
-                  nullable: true
                 session_challenge_code:
                   type: string
                   nullable: true
