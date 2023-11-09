@@ -1563,7 +1563,7 @@ paths:
                 google_credential:
                   type: string
                   nullable: true
-                session_code:
+                session_challenge_code:
                   type: string
                   nullable: true
   /users/refresh-token:
