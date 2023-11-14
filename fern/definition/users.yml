@@ -46,6 +46,19 @@ service:
             sign_in_wallet: string
       response: LoginWithWalletResponse
 
+    login-with-magic-link:
+      path: /login-with-magic-link
+      method: POST
+      docs: Log a user in with their email and magic link
+      display-name: Login with Magic Link
+      request:
+        name: LoginWithMagicLinkRequest
+        body:
+          properties:
+            email:
+              type: string
+      response: SessionChallenge
+
     login-with-email:
       path: /login-with-email
       method: POST
