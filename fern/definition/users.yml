@@ -131,6 +131,8 @@ service:
               type: optional<string>
             session_challenge_code:
               type: optional<string>
+            passkey_credential_assertion_response:
+              type: optional<unknown>
       response: Session
 
     refresh-token:

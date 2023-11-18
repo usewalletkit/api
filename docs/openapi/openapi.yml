@@ -1826,6 +1826,8 @@ paths:
                 session_challenge_code:
                   type: string
                   nullable: true
+                passkey_credential_assertion_response:
+                  nullable: true
   /users/refresh-token:
     post:
       description: Refresh an access token
