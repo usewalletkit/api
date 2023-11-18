@@ -7,6 +7,44 @@ service:
   auth: false
   base-path: /users
   endpoints:
+    begin-passkey-registration:
+      path: /passkey/begin-registration
+      method: POST
+      docs: Begin the passkey registration process
+      display-name: Begin Passkey Registration
+      request:
+        name: BeginPasskeyRegistrationRequest
+      response: unknown
+
+    finish-passkey-registration:
+      path: /passkey/finish-registration
+      method: POST
+      docs: Finish the passkey registration process
+      display-name: Finish Passkey Registration
+      request:
+        name: FinishPasskeyRegistrationRequest
+        body: unknown
+
+    login-with-discoverable-passkey:
+      path: /login-with-discoverable-passkey
+      method: POST
+      docs: Log a user in with a discoverable passkey
+      display-name: Login with Discoverable Passkey
+      response: unknown
+
+    login-with-passkey:
+      path: /login-with-passkey
+      method: POST
+      docs: Log a user in with a passkey
+      display-name: Login with Passkey
+      request:
+        name: LoginWithPasskeyRequest
+        body:
+          properties:
+            email: optional<string>
+            sign_in_wallet: optional<string>
+      response: unknown
+
     create-session-challenge:
       path: /create-session-challenge
       method: POST
