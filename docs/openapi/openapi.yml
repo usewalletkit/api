@@ -1362,6 +1362,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
       summary: Begin Passkey Registration
+      security: *ref_0
   /users/passkey/finish-registration:
     post:
       description: Finish the passkey registration process
@@ -1397,6 +1398,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
       summary: Finish Passkey Registration
+      security: *ref_0
       requestBody:
         required: true
         content:

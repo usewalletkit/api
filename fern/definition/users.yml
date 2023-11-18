@@ -10,6 +10,7 @@ service:
     begin-passkey-registration:
       path: /passkey/begin-registration
       method: POST
+      auth: true
       docs: Begin the passkey registration process
       display-name: Begin Passkey Registration
       request:
@@ -19,6 +20,7 @@ service:
     finish-passkey-registration:
       path: /passkey/finish-registration
       method: POST
+      auth: true
       docs: Finish the passkey registration process
       display-name: Finish Passkey Registration
       request:
