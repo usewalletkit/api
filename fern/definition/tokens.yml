@@ -21,7 +21,7 @@ service:
             docs: >-
               token contract address or symbol in case of the gas token
             type: string
-      response: GetTokenResponse
+      response: Token
 
     create:
       path: ""
@@ -151,7 +151,7 @@ service:
       response: commons.TransactionSubmissionResponse
 
 types:
-  GetTokenResponse:
+  Token:
     properties:
       uuid:
         type: string

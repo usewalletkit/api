@@ -71,12 +71,12 @@ service:
       docs: Creates a wallet with provided metadata.
       display-name: Create Wallet
       request: CreateWalletRequest
-      response: CreateWalletResponse
+      response: Wallet
       examples:
         - name: Example1
           request: $CreateWalletRequest.Example1
           response:
-            body: $CreateWalletResponse.Example1
+            body: $Wallet.Example1
 
     list:
       path: ""
@@ -92,7 +92,7 @@ service:
             type: optional<integer>
           page_size:
             type: optional<string>
-      response: list<ListWalletsResponseItem>
+      response: list<Wallet>
 
     change-user-pin:
       path: "/change-user-pin"
@@ -209,30 +209,3 @@ types:
           name: Joe's wallet
           owner_id: 58c9095e-24db-43eb-b49d-b78f72573a29
           address: "0x976Cf57B7EE1D84E73BE9115457889d49a8A1335"
-
-  CreateWalletResponse:
-    properties:
-      id: string
-      created_at: string
-      network: commons.Network
-      name: optional<string>
-      owner_id: optional<string>
-      address: string
-    examples:
-      - name: Example1
-        value:
-          id: 5884bd1d-ecb3-41ea-bcc7-e9e3d229618f
-          created_at: "2023-07-21T22:03:16Z"
-          network: Polygon
-          name: Joe's wallet
-          owner_id: 58c9095e-24db-43eb-b49d-b78f72573a29
-          address: "0x976Cf57B7EE1D84E73BE9115457889d49a8A1335"
-
-  ListWalletsResponseItem:
-    properties:
-      id: string
-      created_at: string
-      network: commons.Network
-      name: optional<string>
-      owner_id: optional<string>
-      address: string

@@ -123,7 +123,7 @@ service:
           page_size:
             docs: size of each page
             type: optional<integer>
-      response: list<ListNftsResponseItem>
+      response: list<Nft>
 
     get-nft-collection:
       path: /collection-by-address
@@ -139,7 +139,7 @@ service:
           collection_address:
             docs: address of the NFT contract
             type: optional<string>
-      response: GetNftCollectionResponse
+      response: NftCollection
 
     list-nft-collections:
       path: /collections
@@ -159,7 +159,7 @@ service:
           page_size:
             docs: size of each page
             type: optional<integer>
-      response: list<ListNftCollectionsResponseItem>
+      response: list<NftCollection>
 
     nft-image-upload:
       path: /upload
@@ -186,11 +186,10 @@ types:
           asset to which this NFT represents. Consider making any images at a
           width between 320 and 1080 pixels and aspect ratio between 1.91:1 and
           4:5 inclusive.
-
-  ListNftsResponseItem:
+  Nft:
     properties:
       metadata:
-        type: optional<ListNftsResponseItemMetadata>
+        type: optional<NftMetadata>
       owner_wallet_address:
         type: string
       contract_address:
@@ -198,7 +197,7 @@ types:
       token_id:
         type: string
 
-  ListNftsResponseItemMetadata:
+  NftMetadata:
     properties:
       name:
         type: string
@@ -207,7 +206,7 @@ types:
       image:
         type: string
 
-  GetNftCollectionResponse:
+  NftCollection:
     properties:
       network: commons.Network
       contract_address:
@@ -215,18 +214,10 @@ types:
       name:
         type: string
       symbol:
-        type: string
-
-  ListNftCollectionsResponseItem:
-    properties:
-      network: commons.Network
-      contract_address:
-        type: string
-      name:
-        type: string
+        type: optional<string>
       image_url:
         type: string
-
+     
   NftImageUploadResponse:
     properties:
       ipfs_url:

@@ -2,6 +2,8 @@
 
 imports:
   commons: commons.yml
+  tokens: tokens.yml
+  nfts: nfts.yml
 
 service:
   auth: true
@@ -34,7 +36,7 @@ service:
               type: string
               docs: address can only be the ones created in the project.
             unsigned_transaction:
-              type: SignAndSendRequestUnsignedTransaction
+              type: UnsignedTransaction
               docs: input of a transaction to be signed.
             developer_secret: optional<commons.DeveloperSecret>
             user_pin: optional<commons.UserPin>
@@ -55,7 +57,7 @@ service:
               type: string
               docs: address can only be the ones created in the project.
             unsigned_transactions:
-              type: list<SignAndSendRequestUnsignedTransaction>
+              type: list<UnsignedTransaction>
               docs: list of transaction input to be signed.
             developer_secret: optional<commons.DeveloperSecret>
             user_pin: optional<commons.UserPin>
@@ -98,6 +100,25 @@ service:
             type: optional<string>
       response: GetTransactionStatusByIdResponse
 
+    preview:
+      path: /preview
+      method: POST
+      auth: true
+      docs: This endpoint allows you to preview a transaction’s execution without sending it to the blockchain.
+      display-name: Preview
+      request:
+        name: PreviewRequest
+        body:
+          properties:
+            network: commons.Network
+            from:
+              type: string
+              docs: sender of the transaction.
+            unsigned_transaction:
+              type: UnsignedTransaction
+              docs: transaction to preview.
+      response: PreviewResponse
+
 types:
   GetTransactionStatusByHashResponse:
     properties:
@@ -127,8 +148,8 @@ types:
           If the transaction is a contract creation, this field will be populated with the contract address.
         type: optional<string>
 
-  SignAndSendRequestUnsignedTransaction:
-    docs: input of a transaction to be signed.
+  UnsignedTransaction:
+    docs: input of a transaction.
     properties:
       to:
         docs: >-
@@ -150,3 +171,57 @@ types:
     properties:
       signature:
         type: string
+  
+  AssetChange:
+    properties:
+      token:
+        type: optional<tokens.Token>
+      nft:
+        type: optional<nfts.Nft>
+      amount:
+        type: string
+      raw_amount:
+        type: string
+      from:
+        type: string
+      to:
+        type: string
+
+  ContractType:
+    enum:
+      - token
+      - nft
+      - other
+
+  ContractMetadata:
+    properties:
+      network: commons.Network 
+      address:
+        type: string
+      type: ContractType
+      name:
+        type: optional<string>
+      logo_url:
+        type: optional<string>
+      token:
+        type: optional<tokens.Token>
+      nft:
+        type: optional<nfts.NftCollection>
+
+  
+  PreviewResponse:
+    properties:
+      network:
+        type: commons.Network
+      from:
+        type: string
+      to:
+        type: string
+      contract:
+        type: optional<ContractMetadata>
+      function_name:
+        type: optional<string>
+      arguments:
+        type: map<string, string>
+      asset_changes:
+        type: list<AssetChange>
