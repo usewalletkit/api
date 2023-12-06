@@ -118,6 +118,25 @@ service:
               type: UnsignedTransaction
               docs: transaction to preview.
       response: PreviewResponse
+    
+    preview-bundle:
+      path: /preview-bundle
+      method: POST
+      auth: true
+      docs: This endpoint allows you to preview a bundle of transactions as it would execute on chain and returns results for each transaction.
+      display-name: Preview Bundle
+      request:
+        name: PreviewBundleRequest
+        body:
+          properties:
+            network: commons.Network
+            from:
+              type: string
+              docs: sender of the transaction.
+            unsigned_transactions:
+              type: list<UnsignedTransaction>
+              docs: a bundle of transactions to preview.
+      response: list<PreviewResponse>
 
 types:
   GetTransactionStatusByHashResponse:
@@ -208,6 +227,14 @@ types:
       nft:
         type: optional<nfts.NftCollection>
 
+  Simulation:
+    properties:
+      success:
+        type: boolean
+      asset_changes:
+        type: optional<list<AssetChange>>
+      error:
+        type: optional<string>
   
   PreviewResponse:
     properties:
@@ -223,5 +250,5 @@ types:
         type: optional<string>
       arguments:
         type: map<string, string>
-      asset_changes:
-        type: list<AssetChange>
+      simulation:
+        type: optional<Simulation>

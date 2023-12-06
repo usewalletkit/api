@@ -1385,6 +1385,71 @@ paths:
                 - network
                 - from
                 - unsigned_transaction
+  /transactions/preview-bundle:
+    post:
+      description: >-
+        This endpoint allows you to preview a bundle of transactions as it would
+        execute on chain and returns results for each transaction.
+      operationId: transactions_preview-bundle
+      tags:
+        - Transactions
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PreviewResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Preview Bundle
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                from:
+                  type: string
+                  description: sender of the transaction.
+                unsigned_transactions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UnsignedTransaction'
+                  description: a bundle of transactions to preview.
+              required:
+                - network
+                - from
+                - unsigned_transactions
   /users/passkey/begin-registration:
     post:
       description: Begin the passkey registration process
@@ -2863,6 +2928,22 @@ components:
         - network
         - address
         - type
+    Simulation:
+      title: Simulation
+      type: object
+      properties:
+        success:
+          type: boolean
+        asset_changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetChange'
+          nullable: true
+        error:
+          type: string
+          nullable: true
+      required:
+        - success
     PreviewResponse:
       title: PreviewResponse
       type: object
@@ -2883,16 +2964,14 @@ components:
           type: object
           additionalProperties:
             type: string
-        asset_changes:
-          type: array
-          items:
-            $ref: '#/components/schemas/AssetChange'
+        simulation:
+          $ref: '#/components/schemas/Simulation'
+          nullable: true
       required:
         - network
         - from
         - to
         - arguments
-        - asset_changes
     SessionChallenge:
       title: SessionChallenge
       type: object
