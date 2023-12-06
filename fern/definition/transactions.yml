@@ -118,7 +118,7 @@ service:
               type: UnsignedTransaction
               docs: transaction to preview.
       response: PreviewResponse
-    
+
     preview-bundle:
       path: /preview-bundle
       method: POST
@@ -190,7 +190,7 @@ types:
     properties:
       signature:
         type: string
-  
+
   AssetChange:
     properties:
       token:
@@ -214,7 +214,7 @@ types:
 
   ContractMetadata:
     properties:
-      network: commons.Network 
+      network: commons.Network
       address:
         type: string
       type: ContractType
@@ -235,7 +235,7 @@ types:
         type: optional<list<AssetChange>>
       error:
         type: optional<string>
-  
+
   PreviewResponse:
     properties:
       network:
@@ -249,6 +249,6 @@ types:
       function_name:
         type: optional<string>
       arguments:
-        type: map<string, string>
+        type: optional<map<string, string>>
       simulation:
         type: optional<Simulation>
