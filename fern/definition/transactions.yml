@@ -249,6 +249,6 @@ types:
       function_name:
         type: optional<string>
       arguments:
-        type: optional<map<string, string>>
+        type: optional<map<string, unknown>>
       simulation:
         type: optional<Simulation>
