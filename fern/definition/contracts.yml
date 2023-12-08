@@ -9,7 +9,7 @@ service:
   auth: true
   base-path: /contracts
   endpoints:
-    list:
+    get-metadata:
       path: "/metadata"
       method: GET
       docs: Get contract metadata by contract address.

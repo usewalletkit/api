@@ -71,7 +71,7 @@ paths:
   /contracts/metadata:
     get:
       description: Get contract metadata by contract address.
-      operationId: contracts_list
+      operationId: contracts_get-metadata
       tags:
         - Contracts
       parameters:
