@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+imports:
+  commons: commons.yml
+  tokens: tokens.yml
+  nfts: nfts.yml
+
+service:
+  auth: true
+  base-path: /contracts
+  endpoints:
+    list:
+      path: "/metadata"
+      method: GET
+      docs: Get contract metadata by contract address.
+      display-name: Get Contract Metadata
+      request:
+        name: GetContractMetadataRequest
+        query-parameters:
+          network: commons.Network
+          contract_address:
+            type: string
+      response: ContractMetadata
+
+types:
+  ContractType:
+    enum:
+      - token
+      - nft
+      - other
+
+  ContractMetadata:
+    properties:
+      network: commons.Network
+      address:
+        type: string
+      type: ContractType
+      name:
+        type: optional<string>
+      logo_url:
+        type: optional<string>
+      token:
+        type: optional<tokens.Token>
+      nft:
+        type: optional<nfts.NftCollection>

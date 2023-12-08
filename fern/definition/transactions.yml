@@ -2,6 +2,7 @@
 
 imports:
   commons: commons.yml
+  contracts: contracts.yml
   tokens: tokens.yml
   nfts: nfts.yml
 
@@ -206,27 +207,6 @@ types:
       to:
         type: string
 
-  ContractType:
-    enum:
-      - token
-      - nft
-      - other
-
-  ContractMetadata:
-    properties:
-      network: commons.Network
-      address:
-        type: string
-      type: ContractType
-      name:
-        type: optional<string>
-      logo_url:
-        type: optional<string>
-      token:
-        type: optional<tokens.Token>
-      nft:
-        type: optional<nfts.NftCollection>
-
   Simulation:
     properties:
       success:
@@ -245,7 +225,7 @@ types:
       to:
         type: string
       contract:
-        type: optional<ContractMetadata>
+        type: optional<contracts.ContractMetadata>
       function_name:
         type: optional<string>
       arguments:
