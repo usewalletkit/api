@@ -20,7 +20,7 @@ service:
           network: commons.Network
           addresses:
             type: string
-      response: list<AddressMetadata>
+      response: map<string, optional<AddressMetadata>>
 
 types:
   AddressType:
