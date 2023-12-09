@@ -2,7 +2,7 @@
 
 imports:
   commons: commons.yml
-  contracts: contracts.yml
+  addresses: addresses.yml
   tokens: tokens.yml
   nfts: nfts.yml
 
@@ -225,7 +225,7 @@ types:
       to:
         type: string
       contract:
-        type: optional<contracts.ContractMetadata>
+        type: optional<addresses.AddressMetadata>
       function_name:
         type: optional<string>
       arguments:

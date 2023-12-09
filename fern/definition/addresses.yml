@@ -7,34 +7,34 @@ imports:
 
 service:
   auth: true
-  base-path: /contracts
+  base-path: /addresses
   endpoints:
-    get-metadata:
+    list-metadata:
       path: "/metadata"
       method: GET
-      docs: Get contract metadata by contract address.
-      display-name: Get Contract Metadata
+      docs: List address metadata for provided addresses.
+      display-name: List Address Metadata
       request:
-        name: GetContractMetadataRequest
+        name: ListAddressMetadataRequest
         query-parameters:
           network: commons.Network
-          contract_address:
+          addresses:
             type: string
-      response: ContractMetadata
+      response: list<AddressMetadata>
 
 types:
-  ContractType:
+  AddressType:
     enum:
       - token
       - nft
       - other
 
-  ContractMetadata:
+  AddressMetadata:
     properties:
       network: commons.Network
       address:
         type: string
-      type: ContractType
+      type: AddressType
       name:
         type: optional<string>
       logo_url:

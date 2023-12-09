@@ -68,19 +68,19 @@ paths:
       summary: List Wallet Activity
       security: &ref_0
         - BearerAuth: []
-  /contracts/metadata:
+  /addresses/metadata:
     get:
-      description: Get contract metadata by contract address.
-      operationId: contracts_get-metadata
+      description: List address metadata for provided addresses.
+      operationId: addresses_list-metadata
       tags:
-        - Contracts
+        - Addresses
       parameters:
         - name: network
           in: query
           required: true
           schema:
             $ref: '#/components/schemas/Network'
-        - name: contract_address
+        - name: addresses
           in: query
           required: true
           schema:
@@ -91,7 +91,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContractMetadata'
+                type: array
+                items:
+                  $ref: '#/components/schemas/AddressMetadata'
         '400':
           description: ''
           content:
@@ -116,7 +118,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-      summary: Get Contract Metadata
+      summary: List Address Metadata
       security: *ref_0
   /gas/buy:
     post:
@@ -2619,6 +2621,39 @@ components:
         - symbol
         - decimals
         - display_decimals
+    AddressType:
+      title: AddressType
+      type: string
+      enum:
+        - token
+        - nft
+        - other
+    AddressMetadata:
+      title: AddressMetadata
+      type: object
+      properties:
+        network:
+          $ref: '#/components/schemas/Network'
+        address:
+          type: string
+        type:
+          $ref: '#/components/schemas/AddressType'
+        name:
+          type: string
+          nullable: true
+        logo_url:
+          type: string
+          nullable: true
+        token:
+          $ref: '#/components/schemas/Token'
+          nullable: true
+        nft:
+          $ref: '#/components/schemas/NftCollection'
+          nullable: true
+      required:
+        - network
+        - address
+        - type
     TokenSource:
       title: TokenSource
       type: string
@@ -2674,39 +2709,6 @@ components:
           type: string
       required:
         - error
-    ContractType:
-      title: ContractType
-      type: string
-      enum:
-        - token
-        - nft
-        - other
-    ContractMetadata:
-      title: ContractMetadata
-      type: object
-      properties:
-        network:
-          $ref: '#/components/schemas/Network'
-        address:
-          type: string
-        type:
-          $ref: '#/components/schemas/ContractType'
-        name:
-          type: string
-          nullable: true
-        logo_url:
-          type: string
-          nullable: true
-        token:
-          $ref: '#/components/schemas/Token'
-          nullable: true
-        nft:
-          $ref: '#/components/schemas/NftCollection'
-          nullable: true
-      required:
-        - network
-        - address
-        - type
     BuyGasResponse:
       title: BuyGasResponse
       type: object
@@ -3005,7 +3007,7 @@ components:
         to:
           type: string
         contract:
-          $ref: '#/components/schemas/ContractMetadata'
+          $ref: '#/components/schemas/AddressMetadata'
           nullable: true
         function_name:
           type: string

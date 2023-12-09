@@ -3,7 +3,7 @@ navigation:
   - transactions.yml
   - tokens.yml
   - nfts.yml
-  - contracts.yml
+  - addresses.yml
   - activity.yml
   - gas.yml
   - users.yml
