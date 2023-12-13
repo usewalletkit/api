@@ -5,6 +5,6 @@
   },
   "devDependencies": {
     "fern": "^0.0.19",
-    "mintlify": "^4.0.12"
+    "mintlify": "^4.0.75"
   }
 }
