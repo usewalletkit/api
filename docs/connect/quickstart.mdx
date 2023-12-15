@@ -1,0 +1,94 @@
+---
+title: Quickstart
+description: Let's get you set up with Connect using React and wagmi connector
+icon: "star"
+---
+
+Use our React SDK with the wagmi connector to quickly add smart wallets to your app with pre-built UI components.
+
+<Tabs>
+    <Tab title="Email Login">
+    <Frame>
+        <img width="300" noZoom src="/images/connect_email_login.gif" />
+    </Frame>
+    </Tab>
+    <Tab title="Passkey Login">
+    <Frame>
+        <img width="325" noZoom src="/images/connect_passkey_login.gif" />
+    </Frame>
+    </Tab>
+</Tabs>
+
+---
+
+<Info>This guide assumes you have already set up your project with [wagmi](https://wagmi.sh/) and are familiar with it.</Info>
+
+<Steps>
+    <Step title="Install the SDK">
+    ```bash
+    npm install react-walletkit walletkit-js
+    ```
+    </Step>
+
+    <Step title="Setup WalletKitConnector">
+    Initialize `WalletKitConnector` and add it to the list of connectors in the wagmi config.
+
+    ```typescript
+    import {configureChains, createConfig} from "wagmi";
+    import {WalletKitConnector} from "react-walletkit";
+
+    const {chains, publicClient} = configureChains(..);
+
+    const wagmiConfig = createConfig({
+      connectors: [
+        ..,
+        new WalletKitConnector({
+          chains,
+          options: {
+            projectId: "<your project id>",
+            promptForWalletKitWithEOA: true,
+          },
+        }),
+      ],
+      publicClient
+    });
+    ```
+    </Step>
+
+    <Step title="Setup WalletKitProvider">
+    Wrap your app with `<WalletKitProvider>`, after `<WagmiConfig>`.
+
+    ```typescript
+    import {WalletKitProvider} from "react-walletkit";
+
+    function App {
+      return (
+        <WagmiConfig config={wagmiConfig}>
+            <WalletKitProvider appLogo={<AppLogo/>}>
+            ...
+            </WalletKitProvider>
+        </WagmiConfig>
+      );
+    }
+    ```
+    </Step>
+
+    <Step title="Update Connect button">
+    Use the `useConnectWithWalletKit` hook to open the WalletKit modal when the user clicks the "Connect" button.
+
+    ```typescript
+    import {useConnectWithWalletKit} from "react-walletkit";
+
+    const ConnectButton = () => {
+        const {connect} = useConnectWithWalletKit();
+
+        return (
+            <button onClick={connect}>Connect</button>
+        );
+    }
+    ```
+    </Step>
+
+</Steps>
+
+<Check>Clicking the Connect button should open the WalletKit modal! Got stuck? Email founders@usewalletkit.com and we will help you debug</Check>

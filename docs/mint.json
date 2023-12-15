@@ -38,52 +38,48 @@
     {
       "group": "Introduction",
       "pages": [
-        "introduction/overview",
+        "introduction/welcome",
         "introduction/supported-networks",
-        "introduction/wallet-control-modes",
-        "introduction/authentication"
+        "introduction/security-model"
       ]
     },
     {
-      "group": "Quickstart",
+      "group": "Connect",
       "pages": [
-        "quickstart/developer-account",
-        {
-          "group" : "User-Controlled Wallets",
-          "pages" : [
-            "quickstart/create-a-user-controlled-wallet",
-            "quickstart/make-a-transfer",
-            "quickstart/reset-user-pin",
-            "quickstart/wallet-recovery"
-          ]
-        },
-        {
-          "group" : "Developer-Controlled Wallets",
-          "pages" : [
-            "quickstart/secret"
-          ]
-        }
+        "connect/overview",
+        "connect/quickstart",
+        "connect/send-transaction",
+        "connect/sign-message",
+        "connect/batch-transactions",
+        "connect/cors-origin"
       ]
     },
     {
-      "group": "Wallets",
+      "group": "Smart Wallets",
       "pages": [
-        "wallets/create-wallet",
-        "wallets/activity-history"
+        "smart-wallets/overview",
+        "smart-wallets/create-wallet",
+        "smart-wallets/send-transactions",
+        "smart-wallets/activity-history"
       ]
     },
     {
-      "group": "Tokens",
+      "group": "Tokens & NFTs",
       "pages": [
-        "tokens/custom-token",
-        "tokens/make-transfer"
+        "tokens-and-nfts/overview",
+        "tokens-and-nfts/custom-token",
+        "tokens-and-nfts/mint-nft",
+        "tokens-and-nfts/transfer"
       ]
     },
     {
-      "group": "NFTs",
+      "group": "Libraries",
       "pages": [
-        "nfts/mint",
-        "nfts/make-transfer"
+        "libraries/react-wagmi",
+        "libraries/typescript",
+        "libraries/ios",
+        "libraries/android",
+        "libraries/rest-api"
       ]
     },
     {
@@ -119,9 +115,7 @@
     },
     {
       "group": "Gas",
-      "pages": [
-        "api-reference/gas/buy-gas"
-      ]
+      "pages": ["api-reference/gas/buy-gas"]
     },
     {
       "group": "Tokens",
@@ -156,15 +150,11 @@
     },
     {
       "group": "Activity",
-      "pages": [
-        "api-reference/activity/list-wallet-activity"
-      ]
+      "pages": ["api-reference/activity/list-wallet-activity"]
     },
     {
       "group": "API Errors",
-      "pages": [
-        "api-reference/errors"
-      ]
+      "pages": ["api-reference/errors"]
     }
   ],
   "footerSocials": {

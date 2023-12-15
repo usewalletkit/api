@@ -1,0 +1,32 @@
+---
+description: "Prompt the user to review, sign, and send a gasless transaction with their wallet"
+icon: "paper-plane-top"
+---
+
+Use wagmi's `useSendTransaction` hook to prompt the user to review, sign, and send a transaction. No gas required!
+
+<Frame caption="WalletKit prompts the user with a modal that shows the transaction details along
+with any expected changes in assets. The user can then review and sign the transaction using their 6-digit pin.">
+<img width="300" noZoom src="/images/connect_send_transaction.png" />
+</Frame>
+
+
+
+```typescript
+import { useSendTransaction, usePrepareSendTransaction } from 'wagmi'
+
+function App() {
+  const { data, isLoading, isSuccess, sendTransaction } = useSendTransaction({
+    to: 'tusharsoni.eth',
+    value: parseEther('0.01'),
+  })
+
+  return (
+    <div>
+      <button onClick={() => sendTransaction()}>Send Transaction</button>
+      {isLoading && <div>Check Wallet</div>}
+      {isSuccess && <div>Transaction: {JSON.stringify(data)}</div>}
+    </div>
+  )
+}
+```

@@ -1,0 +1,31 @@
+---
+description: "Prompt the user to sign a message with their wallet"
+icon: "signature-lock"
+---
+
+Use wagmi's `useSignMessage` hook to prompt the user to sign a message.
+
+<Frame caption="WalletKit prompts the user with a modal that shows the message. The user can then review and sign the message using their 6-digit pin.">
+    <img width="325" noZoom src="/images/connect_sign_message.png" />
+</Frame>
+
+
+```typescript
+import { useSignMessage } from 'wagmi'
+
+function App() {
+  const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
+    message: 'hello world',
+  })
+
+  return (
+    <div>
+      <button disabled={isLoading} onClick={() => signMessage()}>
+        Sign message
+      </button>
+      {isSuccess && <div>Signature: {data}</div>}
+      {isError && <div>Error signing message</div>}
+    </div>
+  )
+}
+```
