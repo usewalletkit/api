@@ -1,0 +1,49 @@
+---
+title: Create wallet
+openapi: post /wallets
+description: Create a secure, smart, and gasless wallet
+---
+
+### Control modes
+
+When creating a new wallet, you can choose between two control modes:
+
+- **User**: The user controls the wallet and can sign transactions. You must ask the user for a 6-digit pin and provide it in the request.
+
+- **Developer**: You control the wallet and can sign transactions. You must provide the developer secret in the request.
+
+### Owner ID
+The owner id is automatically set to the user id when using user access token. You can safely ignore it in this case.
+
+If you are making server-side requests using your API Key, you can optionally set the owner id to a user id corresponding to your authentication system.
+
+<Snippet file="header-project-id.mdx" />
+
+<RequestExample>
+
+```typescript Typescript
+const wk = new WalletKitClient({..})
+
+await wk.wallets.create({
+    network: Network.Polygon,
+    controlMode: WalletControlMode.User,
+    ownerId: user.id
+    name: user.name,
+    userPin: userPin,
+});
+```
+
+```bash curl
+curl --request POST \
+  --url https://testnet.usewalletkit.com/wallets \
+  --header 'X-WalletKit-Project-ID: <project-id>' \
+  --header 'Authorization: Bearer <token>' \
+  --data '{
+  "network": "Polygon",
+  "name": "My Wallet",
+  "owner_id": "58c9095e-24db-43eb-b49d-b78f72573a29",
+  "control_mode": "developer",
+  "developer_secret": "testnet-secret"
+}'
+```
+</RequestExample>

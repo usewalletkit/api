@@ -1,0 +1,65 @@
+---
+title: iOS
+description: Use the WalletKit swift package to integrate with the Smart Wallets API in your iOS app
+---
+
+### Requirements
+
+- iOS 14.0+
+
+### Installation
+
+You can install the WalletKit swift package using either Swift Package Manager or CocoaPods.
+
+**Swift Package Manager**
+1. In Xcode, select “File” → “Swift Packages” → “Add Package Dependency”
+2. Enter https://github.com/usewalletkit/walletkit-ios.git
+
+**CocoaPods**
+1. Add `pod 'WalletKit'` to your Podfile
+2. Run `pod install`
+
+### Setup
+
+Setup the client with your Project ID in your `AppDelegate`. You can find your Project ID in the [WalletKit Dashboard](https://app.usewalletkit.com/api-keys).
+
+```swift
+import UIKit
+import WalletKit
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        let projectID = "WALLET_KIT_PROJECT_ID"
+        WalletKit.configure(
+            projectID: projectID,
+            environment: .testnet,
+            tokenSource: .walletkit
+        )
+
+        return true
+    }
+}
+```
+
+If you are using SwiftUI, register the app delegate in your `App`:
+
+```swift
+import SwiftUI
+
+@main
+struct WalletKitDemoApp: App {
+
+    // Register app delegate for WalletKit setup.
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+
+    var body: some Scene {
+        WindowGroup {
+            HomeView()
+        }
+    }
+}
+```
+
+<Info>
+At this point, the client is unauthenticated. To authenticate your client, check out the [Authentication](../authentication) section.
+</Info>

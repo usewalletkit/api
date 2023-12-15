@@ -1,0 +1,46 @@
+---
+description: Use the WalletKit library to integrate with the Smart Wallets API in your Android app
+---
+
+### Installation
+
+Find the latest version of the library on [Github Releases](https://github.com/usewalletkit/walletkit-android/releases). Then, use your preferred dependency management tool to add the library to your project.
+
+**Gradle**
+```groovy
+implementation group: 'com.usewalletkit.sdk', name: 'sdk', version: '<latest_version>'
+```
+
+**Gradle DLS**
+```kotlin
+implementation("com.usewalletkit.sdk:sdk:<latest_version>")
+```
+
+**Maven**
+```xml
+<dependency>
+    <groupId>com.usewalletkit.sdk</groupId>
+    <artifactId>sdk</artifactId>
+    <version>latest_version</version>
+</dependency>
+```
+
+### Initialize Client
+
+Setup the client with your Project ID. You can find your Project ID in the [WalletKit Dashboard](https://app.usewalletkit.com/api-keys).
+
+```kotlin
+val loginClient = WalletKitLoginClient(
+    projectId = "my_project_id",
+    baseUrl = "https://testnet.usewalletkit.com", // or mainnet
+    context = context,
+)
+
+val walletKitClient = WalletKitClient(
+    loginClient = loginClient,
+)
+```
+
+<Info>
+At this point, the client is unauthenticated. To authenticate your client, check out the [Authentication](../authentication) section.
+</Info>

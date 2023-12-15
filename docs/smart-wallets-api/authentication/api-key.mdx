@@ -1,0 +1,34 @@
+---
+title: "API Key"
+description: Integrate with WalletKit API from server-side applications using your API key
+---
+
+Using API Keys is ideal when you have an existing authentication system in place for your users.
+
+<Warning>
+    API Keys are intended for server-side use only. You should never expose your API key in any public website or app's client-side code.
+</Warning>
+
+### Setup
+
+You can find and manage your API keys in the [WalletKit Dashboard](https://app.usewalletkit.com/api-keys).
+
+
+Once you have the API key from the WalletKit dashboard, authenticate your requests like so:
+
+<CodeGroup>
+```typescript Typescript
+const wk = new WalletKitClient({
+  projectId: "<Your Project ID>",
+  token: "<Your API Key>":,
+});
+```
+
+```bash Curl
+curl --request GET \
+  --url https://testnet.usewalletkit.com/wallets \
+  --header 'X-WalletKit-Project-ID: <Project ID>' \
+  --header 'Authorization: Bearer <Your API Key>'
+```
+
+</CodeGroup>

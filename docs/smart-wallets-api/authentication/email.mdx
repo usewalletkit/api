@@ -1,0 +1,50 @@
+---
+title: Email
+description: Generate an access token for your users using their email address
+---
+
+<Steps>
+    <Step title="Send an email with OTP">
+    Using the WalletKit client, send an email to the user's email address. This will contain a one-time password (OTP) that the user will use to verify their email address.
+
+    ```typescript Typescript
+    const wk = new WalletKitClient({..});
+
+    const loginWithEmailResp = await wk.users.loginWithEmail({
+        email: "<user email>",
+    })
+    if (!loginWithEmailResp.ok) {
+        // handle error
+    }
+
+    // store this for later use
+    const userId = loginWithEmailResp.body.userId;
+    ```
+    </Step>
+    <Step title="Verify email">
+    In your app, ask the user to enter the verification code they received in their email. Once they enter the code, send it to WalletKit to verify the email address.
+
+    ```typescript Typescript
+    const verifyLoginResp = await wk.users.verifyLogin({
+        userId: loginWithEmailResp.body.userId,
+        verificationCode: "<code from email>",
+    });
+    if (!verifyLoginResp.ok) {
+        // handle error
+    }
+    ```
+    </Step>
+
+    <Step title="Handle access token">
+    If you are using one of the WalletKit SDKs, you can skip this step - the SDK will handle this for you.
+
+    If you are using the WalletKit API directly, you will need to store the access token returned by the `verify-login` call. This token is used to authenticate the user in subsequent API calls.
+
+    ```bash curl
+    curl --request GET \
+      --url https://testnet.usewalletkit.com/wallets \
+      --header 'X-WalletKit-Project-ID: <Project ID>' \
+      --header 'Authorization: Bearer <Access Token>'
+    ```
+    </Step>
+</Steps>

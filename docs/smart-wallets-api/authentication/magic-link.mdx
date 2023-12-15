@@ -1,0 +1,66 @@
+---
+description: Generate an access token for your users by sending them a magic link to their email
+---
+
+<Steps>
+    <Step title="Send an email with magic link">
+    Using the WalletKit client, send an email to the user's email address. This will contain a magic link that the user can click to verify their email address.
+
+    ```typescript Typescript
+    const wk = new WalletKitClient({..});
+
+    const loginWithMagicLinkResp = await wk.users.loginWithMagicLink({
+        email: "<user email>",
+    })
+    if (!loginWithMagicLinkResp.ok) {
+        // handle error
+    }
+    ```
+    </Step>
+    <Step title="Wait for user to click the link">
+    In your app, ask the user to click the link sent to their email. You can wait for the user to click the link by polling the WalletKit API.
+
+    ```typescript Typescript
+    const sessionChallengeResp = await wk.users.getSessionChallenge({
+        code: loginWithMagicLinkResp.body.code,
+    });
+    if (!sessionChallengeResp.ok) {
+        // handle error
+    }
+
+    if (sessionChallengeResp.body.expired) {
+        // handle expired
+    }
+
+    if (sessionChallengeResp.body.completed) {
+        // handle completed, see next step on how
+    }
+    ```
+    </Step>
+
+    <Step title="Get access token">
+    Once the session challenge has been completed, you can get the access token for the user.
+
+    ```typescript Typescript
+    const verifyLoginResp = await wk.users.verifyLogin({
+        sessionChallengeCode: sessionChallengeResp.body.code,
+    });
+    if (!verifyLoginResp.ok) {
+        // handle error
+    }
+    ```
+    </Step>
+
+    <Step title="Handle access token">
+    If you are using one of the WalletKit SDKs, you can skip this step - the SDK will handle this for you.
+
+    If you are using the WalletKit API directly, you will need to store the access token returned by the `verify-login` call. This token is used to authenticate the user in subsequent API calls.
+
+    ```bash curl
+    curl --request GET \
+      --url https://testnet.usewalletkit.com/wallets \
+      --header 'X-WalletKit-Project-ID: <Project ID>' \
+      --header 'Authorization: Bearer <Access Token>'
+    ```
+    </Step>
+</Steps>

@@ -1,5 +1,6 @@
 ---
 title: "Mint NFT"
+icon: monkey
 description: "Learn how to mint NFTs with WalletKit."
 ---
 
@@ -56,8 +57,8 @@ import { TokenSource, Network } from "walletkit-js/api";
 
 // Create an instance of WalletKitClient
 const wk = new WalletKitClient({
-    projectId: "YOUR_PROJECT_ID", 
-    environment: WalletKitEnvironment.Testnet, 
+    projectId: "YOUR_PROJECT_ID",
+    environment: WalletKitEnvironment.Testnet,
     token: "SESSION_TOKEN",
     source: TokenSource.Walletkit,
 });

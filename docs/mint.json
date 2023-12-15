@@ -26,145 +26,139 @@
   "topbarLinks": [],
   "tabs": [
     {
-      "name": "Guides",
-      "url": "guides"
-    },
-    {
       "name": "API Reference",
       "url": "api-reference"
     }
   ],
   "navigation": [
     {
-      "group": "Introduction",
+      "group": "Welcome",
+      "pages": ["welcome/introduction", "welcome/supported-networks"]
+    },
+    {
+      "group": "Connect",
       "pages": [
-        "introduction/overview",
-        "introduction/supported-networks",
-        "introduction/wallet-control-modes",
-        "introduction/authentication"
+        "connect/overview",
+        "connect/quickstart",
+        "connect/send-transaction",
+        "connect/sign-message",
+        "connect/batch-transactions",
+        "connect/cors-origin"
       ]
     },
     {
-      "group": "Quickstart",
+      "group": "Smart Wallets",
       "pages": [
-        "quickstart/developer-account",
+        "smart-wallets-api/overview",
         {
-          "group" : "User-Controlled Wallets",
-          "pages" : [
-            "quickstart/create-a-user-controlled-wallet",
-            "quickstart/make-a-transfer",
-            "quickstart/reset-user-pin",
-            "quickstart/wallet-recovery"
+          "icon": "code",
+          "group": "Libraries",
+          "pages": [
+            "smart-wallets-api/libraries/typescript",
+            "smart-wallets-api/libraries/ios",
+            "smart-wallets-api/libraries/android"
           ]
         },
         {
-          "group" : "Developer-Controlled Wallets",
-          "pages" : [
-            "quickstart/secret"
+          "icon": "key",
+          "group": "Authentication",
+          "pages": [
+            "smart-wallets-api/authentication/overview",
+            "smart-wallets-api/authentication/email",
+            "smart-wallets-api/authentication/magic-link",
+            "smart-wallets-api/authentication/api-key"
           ]
-        }
+        },
+        "smart-wallets-api/create-wallet",
+        "smart-wallets-api/send-transaction",
+        "smart-wallets-api/export-wallet"
       ]
     },
     {
-      "group": "Wallets",
-      "pages": [
-        "wallets/create-wallet",
-        "wallets/activity-history"
-      ]
-    },
-    {
-      "group": "Tokens",
+      "group": "Tokens & NFTs",
       "pages": [
         "tokens/custom-token",
-        "tokens/make-transfer"
-      ]
-    },
-    {
-      "group": "NFTs",
-      "pages": [
+        "tokens/make-transfer",
         "nfts/mint",
         "nfts/make-transfer"
       ]
     },
     {
-      "group": "Guides",
-      "pages": [
-        "guides/rewards-loyalty-program",
-        "guides/pwa-with-simple-onboarding-on-base",
-        "guides/webhooks",
-        "guides/automations",
-        "guides/relay"
-      ]
+      "group": "Activity",
+      "pages": ["api-reference/activity/list-wallet-activity"]
     },
     {
-      "group": "Wallets",
-      "pages": [
-        "api-reference/wallets/create-wallet",
-        "api-reference/wallets/get-wallet-by-id",
-        "api-reference/wallets/get-wallet-by-address",
-        "api-reference/wallets/get-wallet-by-owner-id",
-        "api-reference/wallets/list-wallets",
-        "api-reference/wallets/change-user-pin",
-        "api-reference/wallets/export-wallet"
-      ]
+      "group": "Addresses",
+      "pages": ["api-reference/addresses/list-address-metadata"]
     },
     {
-      "group": "Users",
+      "group": "NFTs",
       "pages": [
-        "api-reference/users/login-with-email",
-        "api-reference/users/login-anonymously",
-        "api-reference/users/verify-login",
-        "api-reference/users/refresh-token"
-      ]
-    },
-    {
-      "group": "Gas",
-      "pages": [
-        "api-reference/gas/buy-gas"
+        "api-reference/nfts/list-nft-collections",
+        "api-reference/nfts/create-nft-collection",
+        "api-reference/nfts/mint-nft",
+        "api-reference/nfts/transfer-nft",
+        "api-reference/nfts/list-nfts",
+        "api-reference/nfts/get-nft-collection",
+        "api-reference/nfts/upload-nft-image"
       ]
     },
     {
       "group": "Tokens",
       "pages": [
-        "api-reference/tokens/create-token",
         "api-reference/tokens/get-token",
-        "api-reference/tokens/mint-token",
+        "api-reference/tokens/create-token",
         "api-reference/tokens/transfer-token",
-        "api-reference/tokens/batch-transfer-token",
-        "api-reference/tokens/list-token-balances"
-      ]
-    },
-    {
-      "group": "NFTs",
-      "pages": [
-        "api-reference/nfts/create-nft-collection",
-        "api-reference/nfts/upload-nft-image",
-        "api-reference/nfts/mint-nft",
-        "api-reference/nfts/transfer-nft",
-        "api-reference/nfts/list-nfts",
-        "api-reference/nfts/get-nft-collection",
-        "api-reference/nfts/list-nft-collections"
+        "api-reference/tokens/mint-token",
+        "api-reference/tokens/list-token-balances",
+        "api-reference/tokens/batch-transfer-token"
       ]
     },
     {
       "group": "Transactions",
       "pages": [
         "api-reference/transactions/transaction-status-by-hash",
+        "api-reference/transactions/sign-and-send",
+        "api-reference/transactions/batch-sign-and-send",
+        "api-reference/transactions/sign-message",
         "api-reference/transactions/transaction-status-by-id",
-        "api-reference/transactions/sign-and-send"
+        "api-reference/transactions/preview",
+        "api-reference/transactions/preview-bundle"
       ]
     },
     {
-      "group": "Activity",
+      "group": "Users",
       "pages": [
-        "api-reference/activity/list-wallet-activity"
+        "api-reference/users/begin-passkey-registration",
+        "api-reference/users/finish-passkey-registration",
+        "api-reference/users/login-with-discoverable-passkey",
+        "api-reference/users/login-with-passkey",
+        "api-reference/users/create-session-challenge",
+        "api-reference/users/get-session-challenge",
+        "api-reference/users/login-with-wallet",
+        "api-reference/users/login-with-email",
+        "api-reference/users/login-with-magic-link",
+        "api-reference/users/verify-login",
+        "api-reference/users/refresh-token",
+        "api-reference/users/logout"
+      ]
+    },
+    {
+      "group": "Wallets",
+      "pages": [
+        "api-reference/wallets/get-user-wallet-by-network",
+        "api-reference/wallets/get-wallet-by-id",
+        "api-reference/wallets/get-wallet-by-address",
+        "api-reference/wallets/get-wallet-by-owner-id",
+        "api-reference/wallets/list-wallets",
+        "api-reference/wallets/create-wallet",
+        "api-reference/wallets/change-user-pin",
+        "api-reference/wallets/export-wallet"
       ]
     },
     {
       "group": "API Errors",
-      "pages": [
-        "api-reference/errors"
-      ]
+      "pages": ["api-reference/errors"]
     }
   ],
   "footerSocials": {

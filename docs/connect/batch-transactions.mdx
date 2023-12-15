@@ -1,0 +1,47 @@
+---
+description: Batch multiple transactions into a single on-chain transaction
+icon: "rectangle-history"
+---
+
+Using WalletKit's smart wallets, you can batch multiple transactions into one. For example, common flows like approving a token and then spending it can be done in a single transaction. Similar to the Send Transaction flow, this is completely gasless.
+
+<Frame caption="WalletKit prompts the user to review all transactions in the batch before signing. It displays details of each transaction and any expected changes in assets. The user can then sign the transaction using their 6-digit pin.">
+    <img width="325" noZoom src="/images/connect_batch_send_transaction_1.png" />
+</Frame>
+
+```typescript
+import { useContractBatchWrite } from 'react-walletkit'
+
+function App() {
+  const { data, error, isLoading, write } = useContractBatchWrite({
+    calls: [
+      {
+        address: USDC_ADDRESS,
+        abi: erc20ABI,
+        functionName: "approve",
+        args: [
+          "0x000000000000000000000000000000000000dead",
+          parseUnits("5", 6),
+        ],
+      }
+      {
+        address: USDC_ADDRESS,
+        abi: erc20ABI,
+        functionName: "transfer",
+        args: [
+          "0x000000000000000000000000000000000000dead",
+          parseUnits("5", 6),
+        ],
+      },
+    ],
+  })
+
+  return (
+    <div>
+      <button onClick={() => write()}>Send Transaction</button>
+      {isLoading && <div>Check Wallet</div>}
+      {data ? <div>Transaction: {JSON.stringify(data)}</div> : null}
+    </div>
+  )
+}
+```

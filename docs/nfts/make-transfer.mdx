@@ -1,5 +1,6 @@
 ---
-title: "Make Transfer"
+title: "Transfer NFTs"
+icon: money-bill-transfer
 description: "Easily transfer NFTs from one wallet to another"
 ---
 
@@ -9,13 +10,7 @@ import { WalletKitClient} from "walletkit-js/Client";
 import { WalletKitEnvironment} from "walletkit-js";
 import { TokenSource, Network } from "walletkit-js/api";
 
-// Create an instance of WalletKitClient
-const wk = new WalletKitClient({
-    projectId: "YOUR_PROJECT_ID", 
-    environment: WalletKitEnvironment.Testnet, 
-    token: "SESSION_TOKEN",
-    source: TokenSource.Walletkit,
-});
+const wk = new WalletKitClient({..});
 
 const transaction = await wk.nfts.transfer({
   network: Network.Base,

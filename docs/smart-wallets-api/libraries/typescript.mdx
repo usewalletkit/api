@@ -1,0 +1,102 @@
+---
+description: "Use the walletkit-js library to integrate with the Smart Wallets API in your web apps"
+---
+
+### Install SDK
+
+```bash
+npm install walletkit-js
+```
+
+### Initialize Client
+
+Setup the client with your Project ID. You can find your Project ID in the [WalletKit Dashboard](https://app.usewalletkit.com/api-keys).
+```typescript
+const wk = new WalletKitClient({
+    projectId: "YOUR_PROJECT_ID",
+    store: {
+      get: (key: string) => {..},
+      set: (key: string, value: string, expires: Date) => {..},
+      delete: (key: string) => {..},
+    }
+})
+```
+
+<Info>
+At this point, the client is unauthenticated. To authenticate your client, check out the [Authentication](../authentication) section.
+</Info>
+
+### The Store
+
+<Info>
+You only need to set the `store` object if you are making client-side calls. If you are only making server-side calls, you can skip this section and use the [API key](../authentication/api-key) to authenticate your client.
+</Info>
+
+In order to make sure that the client is able to persist data, such as the authentication token, you need to provide a store object. The store object is a simple key-value store that implements the following interface:
+
+```typescript
+interface KVStore {
+    get(name: string): string | undefined;
+    set?(name: string, value: string, expires: Date): void;
+    delete?(name: string): void;
+}
+```
+
+You can use the KVStore interface to store the authentication token in the browser's local storage, or in a cookie.
+
+#### Local Storage
+
+The following example shows how to use the browser's local storage to store the authentication token:
+
+```typescript
+const localStorageStore: KVStore = {
+    get: (name) => {
+        const item = localStorage.getItem(name);
+        if (!item) {
+            return undefined;
+        }
+
+        const { value, expires } = JSON.parse(item);
+        if (new Date() > new Date(expires)) {
+            localStorage.removeItem(name);
+            return undefined;
+        }
+
+        return value;
+    },
+    set: (name, value, expires) => {
+        localStorage.setItem(name, JSON.stringify({ value, expires }));
+    },
+    delete: (name) => localStorage.removeItem(name),
+};
+```
+
+#### Cookies
+
+The following example shows how to use cookies to store the authentication token.
+
+It uses the `js-cookie` library to set, get and delete cookies.
+
+```bash
+npm install js-cookie
+```
+
+```typescript
+import BrowserCookies from "js-cookie";
+
+const browserCookieStore: KVStore = {
+    get: (name) => BrowserCookies.get(name),
+    set: (name, value, expires) => {
+        BrowserCookies.set(name, value, {
+            expires,
+            path: "/",
+            sameSite: "lax",
+            secure: true,
+            httpOnly: false,
+        });
+    },
+    delete: (name) => BrowserCookies.remove(name),
+};
+```
+
+<Note>Note that the `set` and `delete` methods in the `KVStore` interface are optional. This is useful if you need to read an existing authentication token to make calls, but you don't have the ability to modify cookies.</Note>
