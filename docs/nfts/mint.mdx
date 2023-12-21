@@ -23,7 +23,7 @@ WalletKit provides no-code tools in the Dashboard to create NFT collection and m
 ### Create Collection
 To create a NFT collection, follow these steps:
 
-1. Head over to the [Dashboard](https://app.usewalletkit.com)
+1. Head over to the [Dashboard](https://app.walletkit.com)
 2. Click “Create Collection
 3. Configure the collection, by picking a name, symbol, and cover.
 4. Finally, confirm the network you want to deploy on and click “Create”
@@ -74,7 +74,7 @@ const transaction = await wk.nfts.create({
 
 ```bash cURL
 curl --request POST \
-     --url 'https://testnet.usewalletkit.com/nfts/collections' \
+     --url 'https://testnet.walletkit.com/nfts/collections' \
      --header 'X-WalletKit-Project-ID: <Project ID>' \
      --header 'Authorization: Bearer <API Key>' \
      --data '
@@ -127,7 +127,7 @@ Storing NFT images on IPFS is recommended, as it is decentralized and immutable.
 
 ```bash cURL
 curl -X 'POST' \
-  'https://testnet.usewalletkit.com/nfts/upload' \
+  'https://testnet.walletkit.com/nfts/upload' \
   --header 'X-WalletKit-Project-ID: <Project ID>' \
   --header 'Authorization: Bearer <API Key>' \
   -H 'accept: application/json' \
@@ -170,7 +170,7 @@ const transaction = await wk.nfts.mint({
 
 ```bash curl
   curl --request POST \
-  --url https://testnet.usewalletkit.com/nfts/mint \
+  --url https://testnet.walletkit.com/nfts/mint \
   --user '<Project ID>:<API Key>' \
   --data '{
     "network": "Base",

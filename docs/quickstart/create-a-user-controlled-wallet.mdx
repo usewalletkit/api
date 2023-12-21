@@ -14,7 +14,7 @@ You must never store the `user_pin` on your servers.
 
 ### Prerequisites
 
-- Sign up for your [WalletKit](https://app.usewalletkit.com/) developer account
+- Sign up for your [WalletKit](https://app.walletkit.com/) developer account
 
 ### 1. Create a walletkit client
 
@@ -24,7 +24,7 @@ Install the corresponding walletkit sdk for your development platform. We'll use
 npm install walletkit-js
 ```
 
-Obtain WalletKit ProjectID from the [WalletKit Dashboard](https://app.usewalletkit.com/api-keys)
+Obtain WalletKit ProjectID from the [WalletKit Dashboard](https://app.walletkit.com/api-keys)
 
 ```javascript NextJS
 import { WalletKitClient} from "walletkit-js/Client";
@@ -33,8 +33,8 @@ import { TokenSource, Network } from "walletkit-js/api";
 
 // Create an instance of WalletKitClient
 const wk = new WalletKitClient({
-    projectId: "YOUR_PROJECT_ID", 
-    environment: WalletKitEnvironment.Testnet, 
+    projectId: "YOUR_PROJECT_ID",
+    environment: WalletKitEnvironment.Testnet,
     // since we will be using walletkit authentication for this guide
     source: TokenSource.Walletkit,
 });
@@ -42,7 +42,7 @@ const wk = new WalletKitClient({
 
 ### 2. Obtain a user session
 
-When an instance of the client is initialized, it is unauthenticated by default. The developer must authenticate the user in order to call all authenticated endpoints. 
+When an instance of the client is initialized, it is unauthenticated by default. The developer must authenticate the user in order to call all authenticated endpoints.
 The developer can do so by:
 1. Generate a new access token using WalletKit using one of the following methods:
     - Use the [Login with Email](/api-reference/users/login-with-email) + [Verify Login](/api-reference/users/verify-login) endpoints to get an access token

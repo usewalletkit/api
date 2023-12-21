@@ -39,7 +39,7 @@ At a high-level, you will be performing the following steps:
 
 Begin by making a new Zap. Next, choose the "Webhooks by Zapier" trigger with the "Catch Raw Hook" event.
 
-![](/images/reference/63c0189-image.png) 
+![](/images/reference/63c0189-image.png)
 
 Click “Continue” and Zapier will generate a URL for you. Note this URL for the next step.
 
@@ -53,7 +53,7 @@ Setup webhook in WalletKit for transfer events:
 4. Use the URL from the previous step as the Target URL.
 5. Check the box for Transfer events.
 6. Click “Create Webhook”.
-![](/images/reference/57ce63b-image.png) 
+![](/images/reference/57ce63b-image.png)
 
 #### Test Transfer
 
@@ -61,7 +61,7 @@ To test the Zapier trigger, send a test transaction with some `MATIC` to your Wa
 
 After sending the `MATIC`, you can test your Zapier trigger. It should find a record like so:
 
-![](/images/reference/634f162-image.png) 
+![](/images/reference/634f162-image.png)
 
 Click “Continue with selected record”.
 
@@ -73,11 +73,11 @@ Next, we'll make an action in Zapier. This action will take the `raw_body` data 
 
 Choose “Code by Zapier” as the Action and pick “Run Javascript” as the event:
 
-![](/images/reference/348c0d8-image.png) 
+![](/images/reference/348c0d8-image.png)
 
 Click “Continue”. Configure the “Input Data” and the “Code” like so:
 
-![](/images/reference/294fc46-image.png) 
+![](/images/reference/294fc46-image.png)
 
 Remember to update the recipient value to your intended destination address. Click “Continue” and test the action.
 
@@ -87,11 +87,11 @@ To make the forward transfer, we'll make an API call to WalletKit from our Zap.
 
 In Zapier, add a new action by clicking the "plus" button at the bottom. Select "Webhooks by Zapier" and choose "POST" as the event.
 
-![](/images/reference/bf4f5f6-image.png) 
+![](/images/reference/bf4f5f6-image.png)
 
-Click on "Continue". In the next step, copy and paste this URL: `https://testnet.usewalletkit.com/tokens/transfer`. Select JSON as the Payload Type. Zapier will take the request body from the previous step automatically.
+Click on "Continue". In the next step, copy and paste this URL: `https://testnet.walletkit.com/tokens/transfer`. Select JSON as the Payload Type. Zapier will take the request body from the previous step automatically.
 
-![](/images/reference/1da5ac5-image.png) 
+![](/images/reference/1da5ac5-image.png)
 
 To finish, we need to authenticate the request. Go to the WalletKit dashboard, click on the API Keys page, and get the Project ID and the API Secret.
 

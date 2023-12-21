@@ -14,14 +14,14 @@
     "thumbsRating": false
   },
   "api": {
-    "baseUrl": "https://testnet.usewalletkit.com",
+    "baseUrl": "https://testnet.walletkit.com",
     "playground": {
       "mode": "hide"
     }
   },
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://app.usewalletkit.com"
+    "url": "https://app.walletkit.com"
   },
   "topbarLinks": [],
   "tabs": [
@@ -162,6 +162,6 @@
     }
   ],
   "footerSocials": {
-    "website": "https://usewalletkit.com"
+    "website": "https://walletkit.com"
   }
 }

@@ -8,8 +8,8 @@ WalletKit provides a set of HTTP APIs so you can integrate with your own backend
 #### API Hosts
 WalletKit exposes two endpoints, one for each environment:
 
-- Mainnet: https://mainnet.usewalletkit.com
-- Testnet: https://testnet.usewalletkit.com
+- Mainnet: https://mainnet.walletkit.com
+- Testnet: https://testnet.walletkit.com
 
 #### Authentication
 WalletKit uses Basic Authentication to authenticate your requests. Broadly, this works by passing the
@@ -17,7 +17,7 @@ WalletKit uses Basic Authentication to authenticate your requests. Broadly, this
 
 <Tip>
   Grab your ProjectID and API Key from the API Keys page in the WalletKit Dashboard:
-  https://app.usewalletkit.com/api-keys
+  https://app.walletkit.com/api-keys
 </Tip>
 
 #### Example Request
@@ -25,7 +25,7 @@ Here is an example request to create a wallet on the Base testnet network:
 
 ```bash
 curl --request POST \
---url https://testnet.usewalletkit.com/wallets \
+--url https://testnet.walletkit.com/wallets \
 --header 'X-WalletKit-Project-ID: <Project ID>' \
 --header 'Authorization: Bearer <API Key>' \
 --data '{
@@ -36,4 +36,4 @@ curl --request POST \
 }'
 ```
 
-Checkout the API Reference to see all the available endpoints: https://docs.usewalletkit.com/api-reference
+Checkout the API Reference to see all the available endpoints: https://docs.walletkit.com/api-reference

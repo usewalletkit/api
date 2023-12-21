@@ -27,12 +27,12 @@ implementation("com.usewalletkit.sdk:sdk:<latest_version>")
 
 ### Initialize Client
 
-Setup the client with your Project ID. You can find your Project ID in the [WalletKit Dashboard](https://app.usewalletkit.com/api-keys).
+Setup the client with your Project ID. You can find your Project ID in the [WalletKit Dashboard](https://app.walletkit.com/api-keys).
 
 ```kotlin
 val loginClient = WalletKitLoginClient(
     projectId = "my_project_id",
-    baseUrl = "https://testnet.usewalletkit.com", // or mainnet
+    baseUrl = "https://testnet.walletkit.com", // or mainnet
     context = context,
 )
 

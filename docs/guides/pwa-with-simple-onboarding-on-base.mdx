@@ -17,7 +17,7 @@ Let's begin.
 
 ### Setup
 
-1. Setup your [WalletKit](https://usewalletkit.com/) account
+1. Setup your [WalletKit](https://walletkit.com/) account
 2. Get your Project ID and API Secret from the API Keys page
 3. Create a [Supabase](https://supabase.com/) account, we'll use them for Auth
 
@@ -61,7 +61,7 @@ Open the `app/page.tsx` file for editing. Replace the entire component with a si
 export default async function Index() {
     const supabase = createServerComponentClient({cookies})
     const {data: {session}} = await supabase.auth.getSession();
-  
+
   return (
     <div className="w-full flex-1 gap-8 flex flex-col items-center">
     <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
@@ -99,7 +99,7 @@ const {data: {session}} = await supabase.auth.getSession();
 let wallet = null;
 
 if (session) {
-  wallet = await fetch('https://testnet.usewalletkit.com/wallets', {
+  wallet = await fetch('https://testnet.walletkit.com/wallets', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ Finally, let's update the welcome message to display the wallet address:
 
 You should see a simple page with the wallet address:
 
-![](/images/reference/3605f01-image.png) 
+![](/images/reference/3605f01-image.png)
 
 That's it! If the user logs out and logs back in, the same wallet will persist.
 
@@ -142,7 +142,7 @@ Once you download the assets, rename the manifest file to `manifest.json`.
 
 Create a `public/` directory at the root of your project and move all files there
 
-![](/images/reference/bec1a22-image.png) 
+![](/images/reference/bec1a22-image.png)
 
 Finally, edit `app/layout.tsx` file update the `metadata` variable:
 
@@ -156,6 +156,6 @@ export const metadata = {
 
 Refresh your page and you should see the Install icon next to the share icon:
 
-![](/images/reference/255aede-image.png) 
+![](/images/reference/255aede-image.png)
 
 All done! Users can now install your app to their home screen and have a wallet associated to their account

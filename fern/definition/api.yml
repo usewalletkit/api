@@ -15,8 +15,8 @@ headers:
     name: source
 default-environment: testnet
 environments:
-  testnet: https://testnet.usewalletkit.com
-  mainnet: https://mainnet.usewalletkit.com
+  testnet: https://testnet.walletkit.com
+  mainnet: https://mainnet.walletkit.com
 errors:
   - commons.BadRequestError
   - commons.UnauthorizedError

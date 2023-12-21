@@ -11,7 +11,7 @@ Using API Keys is ideal when you have an existing authentication system in place
 
 ### Setup
 
-You can find and manage your API keys in the [WalletKit Dashboard](https://app.usewalletkit.com/api-keys).
+You can find and manage your API keys in the [WalletKit Dashboard](https://app.walletkit.com/api-keys).
 
 
 Once you have the API key from the WalletKit dashboard, authenticate your requests like so:
@@ -26,7 +26,7 @@ const wk = new WalletKitClient({
 
 ```bash Curl
 curl --request GET \
-  --url https://testnet.usewalletkit.com/wallets \
+  --url https://testnet.walletkit.com/wallets \
   --header 'X-WalletKit-Project-ID: <Project ID>' \
   --header 'Authorization: Bearer <Your API Key>'
 ```

@@ -60,7 +60,7 @@ To create a managed wallet on WalletKit for a customer who signs up on your plat
 
 ```bash Shell
 curl --request POST \
-     --url https://testnet.usewalletkit.com/wallets \
+     --url https://testnet.walletkit.com/wallets \
      --header 'X-WalletKit-Project-ID: <Project ID>' \
      --header 'Authorization: Bearer <API Key>' \
      --data '
@@ -89,7 +89,7 @@ To make a transfer, you can use the transfer tokens endpoint:
 
 ```bash Shell
 curl --request POST \
-     --url https://testnet.usewalletkit.com/tokens/transfer \
+     --url https://testnet.walletkit.com/tokens/transfer \
      --user <project id>:<api secret> \
      --data '
 {
