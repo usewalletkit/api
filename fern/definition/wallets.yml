@@ -125,6 +125,10 @@ types:
     enum:
       - developer
       - user
+  WalletType:
+    enum:
+      - eoa
+      - contract
   ChangeUserPinRequest:
     properties:
       network: commons.Network
@@ -181,6 +185,14 @@ types:
           When control_mode is developer, the developer_secret must be
           provided. When control_mode is user, the user_pin must be
           provided.
+      type:
+        type: optional<WalletType>
+        docs: >-
+          Defines whether the wallet is an externally owned address (EOA) 
+          or contract address. Externally owned account uses the public 
+          address derived from the owner's key pair hold assets and make 
+          transactions. Contract wallet uses address of the smart contract 
+          controlled by owner's key pair to hold assets and make transactions.
       developer_secret: optional<commons.DeveloperSecret>
       user_pin: optional<commons.UserPin>
     examples:

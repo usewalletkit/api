@@ -3034,6 +3034,12 @@ components:
       enum:
         - developer
         - user
+    WalletType:
+      title: WalletType
+      type: string
+      enum:
+        - eoa
+        - contract
     ChangeUserPinRequest:
       title: ChangeUserPinRequest
       type: object
@@ -3110,6 +3116,15 @@ components:
             Defines whether the developer or the user controls the wallet. When
             control_mode is developer, the developer_secret must be provided.
             When control_mode is user, the user_pin must be provided.
+        type:
+          $ref: '#/components/schemas/WalletType'
+          nullable: true
+          description: >-
+            Defines whether the wallet is an externally owned address (EOA)  or
+            contract address. Externally owned account uses the public  address
+            derived from the owner's key pair hold assets and make 
+            transactions. Contract wallet uses address of the smart contract 
+            controlled by owner's key pair to hold assets and make transactions.
         developer_secret:
           $ref: '#/components/schemas/DeveloperSecret'
           nullable: true
