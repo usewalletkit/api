@@ -1,0 +1,50 @@
+---
+title: Create wallet
+description: Onboard users to your app with email, social login, or passkeys
+icon: "wallet"
+---
+
+<Frame>
+  <img width="300" noZoom src="/images/connect_create_wallet.png" />
+</Frame>
+
+WalletKit lets users create a secure gasless wallet using their email or social login. WalletKit will guide the user through creating a wallet, setting a 6-digit pin, and optionally enabling passkeys to further secure their wallet.
+
+<CodeGroup>
+
+```typescript React
+import { useWalletKit } from "@walletkit/react-connect";
+
+export function Connect() {
+  const { connect } = useWalletKit();
+  const [isConnected, setIsConnected] = useState(false);
+
+  const handleConnect = async () => {
+    await connect();
+    setIsConnected(true);
+  };
+
+  if (!isConnected) {
+    return <button onClick={handleConnect}>Connect</button>;
+  }
+
+  return <div>Connected!</div>;
+}
+```
+
+```typescript wagmi
+import { useConnect } from "@walletkit/wagmi-connect";
+
+export function Connect() {
+  const { connect } = useConnect(); // imported from @walletkit/wagmi-connect
+  const { isConnected } = useAccount();
+
+  if (!isConnected) {
+    return <button onClick={connect}>Connect</button>;
+  }
+
+  return <div>Connected!</div>;
+}
+```
+
+</CodeGroup>

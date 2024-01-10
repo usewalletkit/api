@@ -3,20 +3,42 @@ description: "Prompt the user to sign a message with their wallet"
 icon: "signature-lock"
 ---
 
-Use wagmi's `useSignMessage` hook to prompt the user to sign a message.
-
-<Frame caption="WalletKit prompts the user with a modal that shows the message. The user can then review and sign the message using their 6-digit pin.">
-    <img width="325" noZoom src="/images/connect_sign_message.png" />
+<Frame>
+  <img width="300" noZoom src="/images/connect_sign_message.png" />
 </Frame>
 
+WalletKit prompts the user with a modal that shows the message. The user can then review and sign the message using their 6-digit pin.
 
-```typescript
-import { useSignMessage } from 'wagmi'
+<CodeGroup>
+
+```typescript React
+import { useWalletKit } from "@walletkit/react-connect";
+
+function App() {
+  const walletKit = useWalletKit();
+  const [signature, setSignature] = useState("");
+
+  const signMessage = async () => {
+    const signature = await walletKit.signMessage("hello world");
+    setSignature(signature);
+  };
+
+  return (
+    <div>
+      <button onClick={() => signMessage()}>Sign Message</button>
+      {signature ? <div>Signature: {signature}</div> : null}
+    </div>
+  );
+}
+```
+
+```typescript wagmi
+import { useSignMessage } from "wagmi";
 
 function App() {
   const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
-    message: 'hello world',
-  })
+    message: "hello world",
+  });
 
   return (
     <div>
@@ -26,6 +48,8 @@ function App() {
       {isSuccess && <div>Signature: {data}</div>}
       {isError && <div>Error signing message</div>}
     </div>
-  )
+  );
 }
 ```
+
+</CodeGroup>

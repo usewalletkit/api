@@ -3,45 +3,89 @@ description: Batch multiple transactions into a single on-chain transaction
 icon: "rectangle-history"
 ---
 
-Using WalletKit's smart wallets, you can batch multiple transactions into one. For example, common flows like approving a token and then spending it can be done in a single transaction. Similar to the Send Transaction flow, this is completely gasless.
-
-<Frame caption="WalletKit prompts the user to review all transactions in the batch before signing. It displays details of each transaction and any expected changes in assets. The user can then sign the transaction using their 6-digit pin.">
-    <img width="325" noZoom src="/images/connect_batch_send_transaction_1.png" />
+<Frame>
+  <img width="305" noZoom src="/images/connect_batch_send_transaction_1.png" />
 </Frame>
 
-```typescript
-import { useContractBatchWrite } from 'react-walletkit'
+WalletKit prompts the user to review all transactions in the batch before signing. It displays details of each transaction and any expected changes in assets. The user can then sign the transaction using their 6-digit pin.
 
-function App() {
-  const { data, error, isLoading, write } = useContractBatchWrite({
-    calls: [
+Batching is available for Smart Wallets and each batched transaction is broadcasted on-chain as a single transaction.
+
+<CodeGroup>
+
+```typescript React
+import { useWalletKit } from "@walletkit/react-connect";
+import { parseUnits } from "viem";
+
+export function App() {
+  const walletKit = useWalletKit();
+  const [hash, setHash] = useState("");
+
+  const sendTransaction = async () => {
+    const hash = await walletKit.signAndSendTransactions([
       {
-        address: USDC_ADDRESS,
         abi: erc20ABI,
+        address: USDC_ADDRESS,
         functionName: "approve",
         args: [
           "0x000000000000000000000000000000000000dead",
           parseUnits("5", 6),
         ],
-      }
+      },
       {
-        address: USDC_ADDRESS,
         abi: erc20ABI,
+        address: USDC_ADDRESS,
         functionName: "transfer",
         args: [
           "0x000000000000000000000000000000000000dead",
           parseUnits("5", 6),
         ],
       },
-    ],
-  })
+    ]);
+    setHash(hash);
+  };
 
   return (
     <div>
-      <button onClick={() => write()}>Send Transaction</button>
-      {isLoading && <div>Check Wallet</div>}
-      {data ? <div>Transaction: {JSON.stringify(data)}</div> : null}
+      <button onClick={() => sendTransaction()}>Send Transaction</button>
+      {hash ? <div>Transaction: {hash}</div> : null}
     </div>
-  )
+  );
 }
 ```
+
+```typescript wagmi
+import { useBatchWriteContract } from "@walletkit/react-connect";
+
+function App() {
+  const [hash, setHash] = useState("");
+  const { batchWriteContractAsync } = useBatchWriteContract([
+    {
+      abi: erc20ABI,
+      address: USDC_ADDRESS,
+      functionName: "approve",
+      args: ["0x000000000000000000000000000000000000dead", parseUnits("5", 6)],
+    },
+    {
+      abi: erc20ABI,
+      address: USDC_ADDRESS,
+      functionName: "transfer",
+      args: ["0x000000000000000000000000000000000000dead", parseUnits("5", 6)],
+    },
+  ]);
+
+  const handleSendTransaction = async () => {
+    const hash = await batchWriteContractAsync();
+    setHash(hash);
+  };
+
+  return (
+    <div>
+      <button onClick={handleSendTransaction}>Send Transaction</button>
+      {hash ? <div>Transaction: {hash}</div> : null}
+    </div>
+  );
+}
+```
+
+</CodeGroup>

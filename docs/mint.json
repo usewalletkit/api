@@ -39,7 +39,8 @@
       "group": "Connect",
       "pages": [
         "connect/overview",
-        "connect/quickstart",
+        "connect/installation",
+        "connect/create-wallet",
         "connect/send-transaction",
         "connect/sign-message",
         "connect/batch-transactions",

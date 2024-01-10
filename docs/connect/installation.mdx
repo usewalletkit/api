@@ -1,0 +1,116 @@
+---
+title: Installation
+description: Let's get you set up with Connect using our React SDK
+icon: "code"
+---
+
+<Tabs>
+  <Tab title="React">
+    <Steps>
+      <Step title="Create a React project">
+        If you haven't already, create a React project using your preferred stack. Some popular options are [Vite](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) and [Next.JS](https://nextjs.org/docs/getting-started/installation#automatic-installation).
+
+        <CodeGroup>
+        ```bash Vite
+        npm create vite@latest
+        ```
+
+        ```bash Next.js
+        npx create-next-app@latest
+        ```
+        </CodeGroup>
+      </Step>
+
+      <Step title="Install the WalletKit SDK">
+        ```bash
+        npm install @walletkit/react-connect walletkit-js
+        ```
+      </Step>
+
+      <Step title="Setup WalletKitConnect & WalletKitProvider">
+        Initialize `WalletKitConnect` with your Project ID and wrap your app with `WalletKitProvider`, adding it as close to the root as possible.
+
+        <Tip>You can get your Project ID from the [API Keys](https://app.walletkit.com/api-keys) page in the WalletKit dashboard.</Tip>
+
+
+        ```typescript
+        import {WalletKitConnect} from "@walletkit/react-connect"
+
+        const wkConnect = new WalletKitConnect({
+          projectId: '<WalletKit-Project-ID>',
+        });
+
+        export function App() {
+          return (
+            <WalletKitProvider connect={wkConnect}>
+              ...
+            </WalletKitProvider>
+          )
+        }
+        ```
+      </Step>
+
+  </Steps>
+</Tab>
+
+<Tab title="wagmi">
+  <Info>This guide is for wagmi v2</Info>
+
+  <Steps>
+    <Step title="Create a wagmi project">
+      If you haven't already, follow the steps over at [wagmi.sh](https://wagmi.sh/react/getting-started#getting-started) to create a wagmi project.
+
+      ```bash
+        npm init wagmi
+      ```
+    </Step>
+
+    <Step title="Install the WalletKit SDK">
+      ```bash
+        npm i @walletkit/wagmi-connect @walletkit/react-connect walletkit-js
+      ```
+    </Step>
+
+    <Step title="Add WalletKit connector to wagmi config">
+      In your wagmi config, add the WalletKit connector with your WalletKit Project ID.
+
+      <Tip>You can get your Project ID from the [API Keys](https://app.walletkit.com/api-keys) page in the WalletKit dashboard.</Tip>
+
+      ```typescript
+      import {walletKit} from "@walletkit/wagmi-connect";
+
+      export const wagmiConfig = createConfig({
+        chains: [..],
+        transports: {..},
+        connectors: [
+          walletKit({
+            projectId: '<WalletKit-Project-ID>',
+          }),
+        ]
+      })
+      ```
+    </Step>
+
+    <Step title="Add WalletKitWagmiProvider">
+      Wrap your app in `WalletKitWagmiProvider`, adding it right after `WagmiProvider` and `QueryClientProvider`.
+
+      ```typescript
+        import {WalletKitWagmiProvider} from "@walletkit/wagmi-connect"
+
+        export function App() {
+          return (
+            <WagmiProvider config={wagmiConfig}>
+              <QueryClientProvider client={queryClient}>
+                <WalletKitWagmiProvider>
+                  ...
+                </WalletKitWagmiProvider>
+              </QueryClientProvider>
+            </WagmiProvider>
+          )
+        }
+      ```
+    </Step>
+
+  </Steps>
+</Tab>
+</Tabs>
