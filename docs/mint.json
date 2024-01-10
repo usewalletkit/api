@@ -44,6 +44,8 @@
         "connect/send-transaction",
         "connect/sign-message",
         "connect/batch-transactions",
+        "connect/external-connectors",
+        "connect/siwe",
         "connect/cors-origin"
       ]
     },

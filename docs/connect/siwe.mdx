@@ -1,0 +1,27 @@
+---
+title: Sign-In With Ethereum
+description: "Enable gasless wallets for users with EOA wallets"
+icon: "ethereum"
+---
+
+<Info>This feature is only available if you're using wagmi</Info>
+
+Let users make gasless and batched transactions even if they have signed in to your app using an EOA wallet via MetaMask, Coinbase, WalletConnect, or similar external connectors.
+
+Use the `useSIWE` hook to let users create a smart wallet by WalletKit by signing a message with their EOA wallet.
+
+```typescript
+export function EnableGaslessButton() {
+  const { siweAsync, address, status } = useSIWE();
+
+  console.log("EOA Address": address);
+
+  return (
+    <button disabled={status !== "idle"}>
+      {status === "pending" ? "Check Wallet.." : "Enable Gasless"}
+    </button>
+  );
+}
+```
+
+Once a user has completed this process, you can now use other hooks like [sendTransaction](send-transaction) or [useBatchWriteContract](batch-transactions) to make gasless transactions.

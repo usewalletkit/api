@@ -1,0 +1,104 @@
+---
+title: External connectors
+description: Onboard users using their existing wallets via MetaMask, Coinbase, or WalletConnect
+icon: "link-simple"
+---
+
+<Frame>
+  <img width="300" noZoom src="/images/connect_external_connectors.png" />
+</Frame>
+
+Add customizable options to allow users to connect via other providers in the WalletKit Connect modal. This is great for users who have existing wallets and don't wish to use email or social logins.
+
+<Tabs>
+
+<Tab title="React">
+
+`WalletKitProvider` accepts an `externalConnectors` prop that can be used to inject buttons with customizable behavior.
+
+```typescript
+const externalConnectors = [
+  {
+    id: 'metaMask',
+    name: 'MetaMask',
+    logo: ({className}: { className: string }) => <MetaMaskLogo className={className}/>,
+    onClick: async () => {
+      await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+    },
+  }
+]
+
+export function App() {
+  return (
+    <WalletKitProvider connect={..} externalConnectors={externalConnectors}>
+    ...
+    </WalletKitProvider>;
+  )
+}
+```
+
+</Tab>
+
+<Tab title="wagmi">
+wagmi comes with an existing set of [connectors](https://wagmi.sh/react/api/connectors) that can be easily added to the WalletKit Connect modal.
+
+<Steps>
+
+<Step title="Add connectors to wagmi">
+Add all the connectors you wish to support to your wagmi config.
+
+```typescript
+export const wagmiConfig = createConfig({
+  chains: [..],
+  transports: {..},
+  connectors: [
+    coinbaseWallet({
+      appName: 'My Wagmi App',
+    }),
+    walletConnect({
+      projectId: '<My Wallet Connect ID>',
+    }),
+    walletKit({
+      projectId: '<My WalletKit Project ID>',
+    }),
+  ]
+});
+```
+
+</Step>
+
+<Step title="Configure WalletKitWagmiProvider">
+`WalletKitWagmiProvider` accepts an `externalConnectorIds` prop that can be used to filter and order which connectors should be displayed in the WalletKit Connect modal.
+
+For example, to support MetaMask, Coinbase, and Wallet Connect (in that order), use the following:
+
+```typescript
+export function App() {
+  return (
+    <WagmiProvider config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>
+        <WalletKitWagmiProvider
+          externalConnectorIds={[
+            "io.metamask",
+            "coinbaseWalletSDK",
+            "walletConnect",
+          ]}
+        >
+          ...
+        </WalletKitWagmiProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
+  );
+}
+```
+
+</Step>
+
+</Steps>
+
+</Tab>
+
+</Tabs>
+
