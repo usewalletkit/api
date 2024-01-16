@@ -75,6 +75,9 @@ service:
         body:
           properties:
             network: commons.Network
+            message_type:
+              type: optional<SignMessageMessageType>
+              docs: type of message to be signed. defaults to string.
             signer_wallet_address:
               type: string
               docs: address can only be the ones created in the project.
@@ -83,6 +86,7 @@ service:
               docs: message to be signed.
             developer_secret: optional<commons.DeveloperSecret>
             user_pin: optional<commons.UserPin>
+
       response: SignMessageResponse
 
     status-by-id:
@@ -140,6 +144,11 @@ service:
       response: list<PreviewResponse>
 
 types:
+  SignMessageMessageType:
+    enum:
+      - string
+      - bytes
+
   GetTransactionStatusByHashResponse:
     properties:
       transaction_hash:

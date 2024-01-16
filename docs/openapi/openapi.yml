@@ -1251,6 +1251,10 @@ paths:
               properties:
                 network:
                   $ref: '#/components/schemas/Network'
+                message_type:
+                  $ref: '#/components/schemas/SignMessageMessageType'
+                  nullable: true
+                  description: type of message to be signed. defaults to string.
                 signer_wallet_address:
                   type: string
                   description: address can only be the ones created in the project.
@@ -2807,6 +2811,12 @@ components:
       required:
         - recipient
         - amount
+    SignMessageMessageType:
+      title: SignMessageMessageType
+      type: string
+      enum:
+        - string
+        - bytes
     GetTransactionStatusByHashResponse:
       title: GetTransactionStatusByHashResponse
       type: object
