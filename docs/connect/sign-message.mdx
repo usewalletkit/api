@@ -13,13 +13,14 @@ WalletKit prompts the user with a modal that shows the message. The user can the
 
 ```typescript React
 import { useWalletKit } from "@walletkit/react-connect";
+import { toHex } from "viem";
 
 function App() {
   const walletKit = useWalletKit();
   const [signature, setSignature] = useState("");
 
   const signMessage = async () => {
-    const signature = await walletKit.signMessage("hello world");
+    const signature = await walletKit.signMessage(toHex("hello world"));
     setSignature(signature);
   };
 
