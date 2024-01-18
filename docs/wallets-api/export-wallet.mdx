@@ -1,6 +1,34 @@
 ---
 title: Export wallet
-openapi: post /wallets/export
+description: Export your wallet's mnemonic phrase.
+icon: file-export
 ---
 
-<Snippet file="header-project-id.mdx" />
+<Note> Prerequisite: [Create Wallet](/wallets-api/create-wallet)</Note>
+    <CodeGroup>
+    ```typescript Typescript
+    const exportWalletResp = await wk.wallets.export({
+        network: Network.Base,
+        address: "<walelt address>",
+        userPin: "<user pin>",
+    });
+
+    if (!exportWalletResp.ok) {
+    // handle error
+    }
+
+    const smartContractWalletAddress = createWalletResp.body.address;
+    ```
+
+    ```bash Curl
+    curl --request POST \
+      --url https://testnet.walletkit.com/wallets/export \
+      --header 'X-WalletKit-Project-ID: <Project ID>' \
+      --header 'Authorization: Bearer <User Access Token or Your API Key>' \
+      --data '{
+            "network": "Base",
+            "address": "<wallet address>",
+            "user_pin": "<user pin>"
+        }'
+    ```
+    </CodeGroup>
