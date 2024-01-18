@@ -1,7 +1,7 @@
 ---
 title: Export wallet
-description: Export your wallet's mnemonic phrase.
-icon: file-export
+description: Export wallet's mnemonic phrase.
+icon: "file-export"
 ---
 
 <Note> Prerequisite: [Create Wallet](/wallets-api/create-wallet)</Note>
@@ -17,7 +17,7 @@ icon: file-export
     // handle error
     }
 
-    const smartContractWalletAddress = createWalletResp.body.address;
+    const mnemonicPhrase = exportWalletResp.body.mnemonicPhrase;
     ```
 
     ```bash Curl
