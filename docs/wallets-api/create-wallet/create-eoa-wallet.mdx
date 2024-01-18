@@ -14,7 +14,7 @@ icon: "key-skeleton-left-right"
     <Step title="Obtain user pincode">
     In your app, ask the user for a 6-digit pincode. This pincode will be used to encrypt the user's share of the signing key.
     <Warning>
-    You must never store the user pin on your servers.
+    You must never store the `user in` on your servers.
     </Warning>
     </Step>
     <Step title="Create a EOA wallet">
@@ -45,12 +45,12 @@ icon: "key-skeleton-left-right"
       --header 'Authorization: Bearer <User Access Token or Your API Key>' \
       --data 
       '{
-        "network": "base",
+        "network": "Base",
         "name": "<wallet name>",
-        "ownerId": "<user id>",
-        "controlMode": "user",
+        "owner_id": "<user id>",
+        "control_mode": "user",
         "type": "eoa",
-        "userPin": "<user pin>"
+        "user_pin": "<user pin>"
       }'
     ```
     </CodeGroup>
