@@ -1,7 +1,7 @@
 ---
 title: Create wallet
 openapi: post /wallets
-description: Create a secure, smart, and gasless wallet
+description: Create a secure, smart, and gasless wallet or EOA wallet
 ---
 
 ### Control modes
@@ -17,6 +17,9 @@ The owner id is automatically set to the user id when using user access token. Y
 
 If you are making server-side requests using your API Key, you can optionally set the owner id to a user id corresponding to your authentication system.
 
+### Type
+
+
 <Snippet file="header-project-id.mdx" />
 
 <RequestExample>
@@ -25,7 +28,7 @@ If you are making server-side requests using your API Key, you can optionally se
 const wk = new WalletKitClient({..})
 
 await wk.wallets.create({
-    network: Network.Polygon,
+    network: Network.Base,
     controlMode: WalletControlMode.User,
     ownerId: user.id
     name: user.name,

@@ -3130,11 +3130,9 @@ components:
           $ref: '#/components/schemas/WalletType'
           nullable: true
           description: >-
-            Defines whether the wallet is an externally owned address (EOA)  or
-            contract address. Externally owned account uses the public  address
-            derived from the owner's key pair hold assets and make 
-            transactions. Contract wallet uses address of the smart contract 
-            controlled by owner's key pair to hold assets and make transactions.
+            Defines whether the wallet address is an externally owned address
+            (EOA)  derived from the owner's key pair or address of the smart
+            contract controlled by the owner's key pair.
         developer_secret:
           $ref: '#/components/schemas/DeveloperSecret'
           nullable: true

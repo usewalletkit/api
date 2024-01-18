@@ -1,0 +1,60 @@
+---
+title: EOA Wallet
+description: Create a secure EOA wallet controlled by the user
+icon: "key-skeleton-left-right"
+---
+
+<Steps>
+    <Step title="Add WalletKit to your app">
+    Get your SDK setup as usual using [Get Started](/wallets-api/overview#get-started).
+    </Step>
+    <Step title="Authenticate to WalletKit">
+    Get your SDK authenticated or get the API key if server-side app follwoing [Authentication guide](/wallets-api/authentication/overview). 
+    </Step>
+    <Step title="Obtain user pincode">
+    In your app, ask the user for a 6-digit pincode. This pincode will be used to encrypt the user's share of the signing key.
+    <Warning>
+    You must never store the user pin on your servers.
+    </Warning>
+    </Step>
+    <Step title="Create a EOA wallet">
+    Create a wallet with the `userPin` and `controlMode` set to `user`.
+
+    <CodeGroup>
+    ```typescript Typescript
+    const createWalletResp = await wk.wallets.create({
+        network: Network.Base,
+        name: "<walelt name>",
+        ownerId: userId, // optional
+        controlMode: WalletControlMode.User,
+        type: WalletType.Eoa,
+        userPin: "<user pin>",
+    });
+
+    if (!createWalletResp.ok) {
+    // handle error
+    }
+
+    const smartContractWalletAddress = createWalletResp.body.address;
+    ```
+
+    ```bash Curl
+    curl --request POST \
+      --url https://testnet.walletkit.com/wallets \
+      --header 'X-WalletKit-Project-ID: <Project ID>' \
+      --header 'Authorization: Bearer <User Access Token or Your API Key>' \
+      --data 
+      '{
+        "network": "base",
+        "name": "<wallet name>",
+        "ownerId": "<user id>",
+        "controlMode": "user",
+        "type": "eoa",
+        "userPin": "<user pin>"
+      }'
+    ```
+    </CodeGroup>
+    `ownerId` is automatically set to the user id when using WalletKit SDKs, you can safely ignore it in this case.
+    If you are making server-side requests using your API Key, you can optionally set the owner id to a user id corresponding to your authentication system.
+    </Step>
+</Steps>

@@ -50,31 +50,38 @@
       ]
     },
     {
-      "group": "Smart Wallets",
+      "group": "Wallets API",
       "pages": [
-        "smart-wallets-api/overview",
+        "wallets-api/overview",
         {
           "icon": "code",
           "group": "Libraries",
           "pages": [
-            "smart-wallets-api/libraries/typescript",
-            "smart-wallets-api/libraries/ios",
-            "smart-wallets-api/libraries/android"
+            "wallets-api/libraries/typescript",
+            "wallets-api/libraries/ios",
+            "wallets-api/libraries/android"
           ]
         },
         {
           "icon": "key",
           "group": "Authentication",
           "pages": [
-            "smart-wallets-api/authentication/overview",
-            "smart-wallets-api/authentication/email",
-            "smart-wallets-api/authentication/magic-link",
-            "smart-wallets-api/authentication/api-key"
+            "wallets-api/authentication/overview",
+            "wallets-api/authentication/email",
+            "wallets-api/authentication/magic-link",
+            "wallets-api/authentication/api-key"
           ]
         },
-        "smart-wallets-api/create-wallet",
-        "smart-wallets-api/send-transaction",
-        "smart-wallets-api/export-wallet"
+        {
+          "icon": "wallet",
+          "group": "Create Wallet",
+          "pages": [
+            "wallets-api/create-wallet/create-scw",
+            "wallets-api/create-wallet/create-eoa-wallet"
+          ]
+        },
+        "wallets-api/send-transaction",
+        "wallets-api/export-wallet"
       ]
     },
     {
