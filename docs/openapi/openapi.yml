@@ -600,6 +600,83 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
       summary: Upload NFT image
       security: *ref_0
+  /policies:
+    post:
+      description: >-
+        Creates a policy that grants developers temporary permission to perform
+        specific actions on users' behalf for a limited time.
+      operationId: policies_create
+      tags:
+        - Policies
+      parameters: []
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Create Policy
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                name:
+                  type: string
+                wallet_address:
+                  type: string
+                argument_rules:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ArgumentRule'
+                  description: >-
+                    A list of rules that govern the arguments of the function
+                    calls that the developer is allowed to make.
+                expires_at:
+                  type: string
+                  format: date-time
+                  nullable: true
+                  description: >-
+                    The time at which the policy expires. The developer will no
+                    longer be able to make function calls on the user's behalf
+                    after this time. When omitted, the policy will never expire.
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+              required:
+                - network
+                - name
+                - wallet_address
+                - argument_rules
+                - developer_secret
+                - user_pin
   /tokens/tokens:
     get:
       description: Gets the metadata for a token.
@@ -2737,6 +2814,34 @@ components:
           type: string
       required:
         - ipfs_url
+    Operator:
+      title: Operator
+      type: string
+      enum:
+        - eq
+        - ne
+        - gt
+        - ge
+        - lt
+        - le
+    ArgumentRule:
+      title: ArgumentRule
+      type: object
+      properties:
+        argument:
+          type: string
+          description: >-
+            The name of the argument that the rule applies to. e.g.
+            decodedInput.function, decodedInput.to
+        operator:
+          $ref: '#/components/schemas/Operator'
+        value:
+          type: string
+          description: the value to compare the argument to. e.g. "transfer", "0x1234..."
+      required:
+        - argument
+        - operator
+        - value
     Token:
       title: Token
       type: object

@@ -145,6 +145,12 @@
       ]
     },
     {
+      "group": "Policies",
+      "pages": [
+        "api-reference/policies/create-policy"
+      ]
+    },
+    {
       "group": "Users",
       "pages": [
         "api-reference/users/begin-passkey-registration",

@@ -6,4 +6,5 @@ navigation:
   - addresses.yml
   - activity.yml
   - users.yml
+  - policies.yml
   - commons.yml

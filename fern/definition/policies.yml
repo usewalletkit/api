@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+imports:
+  commons: commons.yml
+
+service:
+  auth: true
+  base-path: /policies
+  endpoints:
+    create:
+      path: ""
+      method: POST
+      docs: Creates a policy that grants developers temporary permission to perform specific actions on users' behalf for a limited time.
+      display-name: Create Policy
+      request:
+        name: CreatePolicyRequest
+        body:
+          properties:
+            network:
+              type: commons.Network
+            name:
+              type: string
+            wallet_address:
+              type: string
+            argument_rules:
+              type: list<ArgumentRule>
+              docs: >-
+                A list of rules that govern the arguments of the function calls that the developer is allowed to make.
+            expires_at:
+              docs: >-
+                The time at which the policy expires. The developer will no longer be able to make function calls on the user's behalf after this time. When omitted, the policy will never expire.
+              type: optional<datetime>
+            developer_secret: commons.DeveloperSecret
+            user_pin: commons.UserPin
+
+types:
+  Operator:
+    enum:
+      - eq
+      - ne
+      - gt
+      - ge
+      - lt
+      - le
+  ArgumentRule:
+    properties:
+      argument:
+        type: string
+        docs: >-
+          The name of the argument that the rule applies to. e.g. decodedInput.function, decodedInput.to
+      operator: Operator
+      value:
+        type: string
+        docs: >-
+          the value to compare the argument to. e.g. "transfer", "0x1234..."
