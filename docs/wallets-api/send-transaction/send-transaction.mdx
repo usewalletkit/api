@@ -14,19 +14,10 @@ icon: "paper-plane-top"
     </Step>
     <Step title="Send transaction">
     Fill in the transaction details and send it to WalletKit.
+    We use `encodeFunctionData` util method from `viem` to encode the transaction data in the example, but you can use any other method to encode the data.
     <CodeGroup>
     ```typescript Typescript
     import { encodeFunctionData } from "viem";
-
-    const contractABI = [
-        {
-            inputs: [{ internalType: "address", name: "to", type: "address" }, { internalType: "uint256", name: "value", type: "uint256" }],
-            name: "transfer",
-            outputs: [{ internalType: "bool", name: "", type: "bool" }],
-            stateMutability: "nonpayable",
-            type: "function",
-        },
-    ];
 
     const transaction = await wk.transactions.signAndSend({
         network: Network.Base,
@@ -34,8 +25,8 @@ icon: "paper-plane-top"
         unsignedTransaction: {
             to: '0xf175520c52418dfe19c8098071a252da48cd1c19',
             input: encodeFunctionData({
-                abi: contractABI,
-                args: ["0xFC0fb8C274b41Ca20DCa59eC979775C281A5c7E4", 0],
+                abi: erc20ABI,
+                args: ["0x4795cd8f434847eccdf5b62370157a70a7da6a46", 0],
                 functionName: "transfer",
             }),
         },

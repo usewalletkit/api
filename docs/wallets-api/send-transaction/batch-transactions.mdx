@@ -1,0 +1,66 @@
+---
+title: Batch transactions
+description: Batch multiple transactions into a single on-chain transaction
+icon: "rectangle-history"
+---
+Batching is available for Smart Wallets and each batched transaction is broadcasted on-chain as a single transaction.
+<Note> Prerequisite: [Create Wallet](/wallets-api/create-wallet/create-scw)</Note>
+<Steps>
+    <Step title="Obtain user pincode">
+    In your app, ask the user for their wallet's 6-digit pincode.
+    <Warning>
+    You must never store the user pin on your servers.
+    </Warning>
+    </Step>
+    <Step title="Batch transactions into a single transaction">
+    Fill in the transaction details and send it to WalletKit.
+    <CodeGroup>
+    ```typescript Typescript
+    import { encodeFunctionData } from "viem";
+
+    const transaction = await wk.transactions.batchSignAndSend({
+        network: Network.Base,
+        signerWalletAddress: "<walelt address>",
+        unsignedTransactions: [{
+            to: '0xf175520c52418dfe19c8098071a252da48cd1c19',
+            input: encodeFunctionData({
+                abi: erc20ABI,
+                args: ["0x4795cd8f434847eccdf5b62370157a70a7da6a46", 0],
+                functionName: "approve",
+            }),
+        },
+        {
+            to: '0xf175520c52418dfe19c8098071a252da48cd1c19',
+            input: encodeFunctionData({
+                abi: erc20ABI,
+                args: ["0x4795cd8f434847eccdf5b62370157a70a7da6a46", 0],
+                functionName: "transfer",
+            }),
+        }],
+        userPin: "<user pin>",
+    });
+    ```
+
+    ```bash Curl
+    curl --request POST \
+      --url https://testnet.walletkit.com/transactions/batch-sign-and-send \
+      --header 'X-WalletKit-Project-ID: <Project ID>' \
+      --header 'Authorization: Bearer <User Access Token or Your API Key>' \
+      --data 
+      '{
+            "network": "Base",
+            "signer_wallet_address": "<wallet address>",
+            "unsigned_transactions": [{
+                "to": "0xf175520c52418dfe19c8098071a252da48cd1c19",
+                "input": "0x095ea7b30000000000000000000000004795cd8f434847eccdf5b62370157a70a7da6a460000000000000000000000000000000000000000000000000000000000000000"
+            },
+            {
+                "to": "0xf175520c52418dfe19c8098071a252da48cd1c19",
+                "input": "0xa9059cbb0000000000000000000000004795cd8f434847eccdf5b62370157a70a7da6a460000000000000000000000000000000000000000000000000000000000000000"
+            }],
+            "user_pin": "<user pin>"
+      }'
+    ```
+    </CodeGroup>
+    </Step>
+</Steps>

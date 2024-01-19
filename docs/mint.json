@@ -80,7 +80,15 @@
             "wallets-api/create-wallet/create-eoa-wallet"
           ]
         },
-        "wallets-api/send-transaction",
+        {
+          "icon": "paper-plane-top",
+          "group": "Send Transaction",
+          "pages": [
+            "wallets-api/send-transaction/send-transaction",
+            "wallets-api/send-transaction/batch-transactions"
+          ]
+        },
+        "wallets-api/sign-message",
         "wallets-api/export-wallet"
       ]
     },

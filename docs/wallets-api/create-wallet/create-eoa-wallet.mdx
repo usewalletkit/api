@@ -18,7 +18,7 @@ icon: "key-skeleton-left-right"
     </Warning>
     </Step>
     <Step title="Create a EOA wallet">
-    Create a wallet with the `userPin` and `controlMode` set to `user`.
+    Create a wallet with the `userPin`, `controlMode` set to `user` and `type` set to `eoa`.
 
     <CodeGroup>
     ```typescript Typescript
@@ -54,7 +54,7 @@ icon: "key-skeleton-left-right"
       }'
     ```
     </CodeGroup>
-    `ownerId` is automatically set to the user id when using WalletKit SDKs, you can safely ignore it in this case.
+    `ownerId` is automatically set to the user id when authenticated with [email login](/wallets-api/authentication/email), you can safely ignore it in this case.
     If you are making server-side requests using your API Key, you can optionally set the owner id to a user id corresponding to your authentication system.
     </Step>
 </Steps>

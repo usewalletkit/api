@@ -1,0 +1,76 @@
+---
+description: "Sign a message with the wallet"
+icon: "signature-lock"
+---
+
+<Note> Prerequisite: [Create Wallet](/wallets-api/create-wallet/create-scw)</Note>
+<Steps>
+    <Step title="Obtain user pincode">
+    In your app, ask the user for their wallet's 6-digit pincode.
+    <Warning>
+    You must never store the user pin on your servers.
+    </Warning>
+    </Step>
+    <Step title="Sign Message">
+    Fill in the message and sign. Message can be either string or byte array represented in hex string, a common case is to sign a hash.
+
+    <Tabs>
+      <Tab title="Signing a string message">
+        <CodeGroup>
+        ```typescript Typescript
+
+        const transaction = await wk.transactions.signMessage({
+            network: Network.Base,
+            signerWalletAddress: "<walelt address>",
+            message: "hello world",
+            userPin: "<user pin>",
+        });
+        ```
+
+        ```bash Curl
+        curl --request POST \
+          --url https://testnet.walletkit.com/transactions/sign-message \
+          --header 'X-WalletKit-Project-ID: <Project ID>' \
+          --header 'Authorization: Bearer <User Access Token or Your API Key>' \
+          --data 
+          '{
+                "network": "Base",
+                "signer_wallet_address": "<wallet address>",
+                "message": "hello world"",
+                "user_pin": "<user pin>"
+          }'
+        ```
+        </CodeGroup>
+      </Tab>
+      <Tab title="Signing a bytes array">
+        <CodeGroup>
+        ```typescript Typescript
+
+        const transaction = await wk.transactions.signMessage({
+            network: Network.Base,
+            signerWalletAddress: "<walelt address>",
+            message: "0xa525d9687bb5b71dbe8ce59d98c77a32a5d4ce00dc271b4e3ad0ac72d44e6013",
+            message_type: "bytes",
+            userPin: "<user pin>",
+        });
+        ```
+
+        ```bash Curl
+        curl --request POST \
+          --url https://testnet.walletkit.com/transactions/sign-message \
+          --header 'X-WalletKit-Project-ID: <Project ID>' \
+          --header 'Authorization: Bearer <User Access Token or Your API Key>' \
+          --data 
+          '{
+                "network": "Base",
+                "signer_wallet_address": "<wallet address>",
+                "message": "0xa525d9687bb5b71dbe8ce59d98c77a32a5d4ce00dc271b4e3ad0ac72d44e6013",
+                "message_type": "bytes",
+                "user_pin": "<user pin>"
+          }'
+        ```
+        </CodeGroup>
+      </Tab>
+    </Tabs>
+  </Step>
+</Steps>
