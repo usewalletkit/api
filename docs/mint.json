@@ -82,13 +82,14 @@
         },
         {
           "icon": "paper-plane-top",
-          "group": "Send Transaction",
+          "group": "Send transaction",
           "pages": [
             "wallets-api/send-transaction/send-transaction",
             "wallets-api/send-transaction/batch-transactions"
           ]
         },
         "wallets-api/sign-message",
+        "wallets-api/create-delegation-policy",
         "wallets-api/export-wallet"
       ]
     },

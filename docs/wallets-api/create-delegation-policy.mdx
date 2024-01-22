@@ -1,0 +1,90 @@
+---
+title: Create delegation policy
+icon: "handshake"
+---
+User controlled wallet can delegate developer to send certain transactions on behalf of the user 
+for a limited time. This is very useful for automation of certain tasks where user don't want to 
+be involved when the task needs to be performed.
+
+<Note> Prerequisite: [Create Wallet](/wallets-api/create-wallet)</Note>
+<CodeGroup>
+```typescript Typescript
+const createPolicyResp = await wk.policies.create({
+    network: Network.Base,
+    walletAddress: "<walelt address>",
+    argumentRules: [
+        {
+            value: "<USDC_ADDRESS>",
+            argument: "to",
+            operator: Operator.Eq,
+        },
+        {
+            value: "transfer",
+            argument: "decodedInput.function",
+            operator: Operator.Eq,
+        },
+        {
+            value: "10000000",
+            argument: "decodedInput.value",
+            operator: Operator.Lt,
+        },
+        {
+            value: "0x4795cd8f434847eccdf5b62370157a70a7da6a46",
+            argument: "decodedInput.to",
+            operator: Operator.Eq,
+        }
+    ],
+    expiresAt: new Date("2024-01-23T18:25:43.511Z"),
+    developerSecret: "<developer secret>",
+    userPin: "<user pin>",
+});
+
+if (!createPolicyResp.ok) {
+// handle error
+}
+```
+
+```bash Curl
+curl --request POST \
+    --url https://testnet.walletkit.com/policies \
+    --header 'X-WalletKit-Project-ID: <Project ID>' \
+    --header 'Authorization: Bearer <User Access Token or Your API Key>' \
+    --data '{
+        "network": "Base",
+        "walletAddress": "<wallet address>",
+        "argument_rules": [
+            {
+                "value": "<USDC_ADDRESS>",
+                "argument": "to",
+                "operator": "eq"
+            },
+            {
+                "value": "transfer",
+                "argument": "decodedInput.function",
+                "operator": "eq"
+            },
+            {
+                "value": "10000000",
+                "argument": "decodedInput.value",
+                "operator": "lt"
+            },
+            {
+                "value": "0x4795cd8f434847eccdf5b62370157a70a7da6a46",
+                "argument": "decodedInput.to",
+                "operator": "eq"
+            }
+        ],
+        "expiresAt": "2024-01-23T18:25:43.511Z",
+        "developer_secret": "<developer_secret>"
+        "user_pin": "<user pin>"
+    }'
+```
+</CodeGroup>
+The above example creates a policy that allows developer to initiate USDC transfer that is 
+less than 10 USDC to the specified address without requiring user to be involved. 
+
+Delegation policy is a set of rules that define what transactions can be sent on behalf of 
+the user for a given period. And rules are defined as a list of `ArgumentRule` objects. 
+The `argument` field defines which part of the transaction should be checked (e.g. `to`, `value`). 
+WalletKit decodes the transaction input data to `decodedInput` object, to access the decoded input,
+use `decodedInput.<field>` (e.g. `decodedInput.function`, `decodedInput.to`).
