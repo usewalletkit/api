@@ -94,15 +94,6 @@
       ]
     },
     {
-      "group": "Tokens & NFTs",
-      "pages": [
-        "tokens/custom-token",
-        "tokens/make-transfer",
-        "nfts/mint",
-        "nfts/make-transfer"
-      ]
-    },
-    {
       "group": "Activity",
       "pages": ["api-reference/activity/list-wallet-activity"]
     },
