@@ -23,7 +23,9 @@
     "name": "Dashboard",
     "url": "https://app.walletkit.com"
   },
-  "topbarLinks": [],
+  "topbarLinks": [
+    {"name":  "Join Discord", "url":  "https://discord.gg/bm2Sqm9TWY"}
+  ],
   "tabs": [
     {
       "name": "API Reference",
