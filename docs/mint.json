@@ -36,17 +36,17 @@
       "pages": ["welcome/introduction", "welcome/supported-networks"]
     },
     {
-      "group": "Connect",
+      "group": "Link",
       "pages": [
-        "connect/overview",
-        "connect/installation",
-        "connect/create-wallet",
-        "connect/send-transaction",
-        "connect/sign-message",
-        "connect/batch-transactions",
-        "connect/external-connectors",
-        "connect/siwe",
-        "connect/cors-origin"
+        "link/overview",
+        "link/installation",
+        "link/create-wallet",
+        "link/send-transaction",
+        "link/sign-message",
+        "link/batch-transactions",
+        "link/external-connectors",
+        "link/siwe",
+        "link/cors-origin"
       ]
     },
     {

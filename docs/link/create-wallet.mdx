@@ -13,10 +13,10 @@ WalletKit lets users create a secure gasless wallet using their email or social 
 <CodeGroup>
 
 ```typescript React
-import { useWalletKit } from "@walletkit/react-connect";
+import { useWalletKitLink } from "@walletkit/react-link";
 
 export function Connect() {
-  const { connect } = useWalletKit();
+  const { connect } = useWalletKitLink();
   const [isConnected, setIsConnected] = useState(false);
 
   const handleConnect = async () => {
@@ -33,10 +33,10 @@ export function Connect() {
 ```
 
 ```typescript wagmi
-import { useConnect } from "@walletkit/wagmi-connect";
+import { useConnect } from "@walletkit/wagmi-link";
 
 export function Connect() {
-  const { connect } = useConnect(); // imported from @walletkit/wagmi-connect
+  const { connect } = useConnect(); // imported from @walletkit/wagmi-link
   const { isConnected } = useAccount();
 
   if (!isConnected) {

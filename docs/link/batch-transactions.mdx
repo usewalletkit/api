@@ -14,11 +14,11 @@ Batching is available for Smart Wallets and each batched transaction is broadcas
 <CodeGroup>
 
 ```typescript React
-import { useWalletKit } from "@walletkit/react-connect";
+import { useWalletKitLink } from "@walletkit/react-link";
 import { parseUnits } from "viem";
 
 export function App() {
-  const walletKit = useWalletKit();
+  const walletKit = useWalletKitLink();
   const [hash, setHash] = useState("");
 
   const sendTransaction = async () => {
@@ -55,7 +55,7 @@ export function App() {
 ```
 
 ```typescript wagmi
-import { useBatchWriteContract } from "@walletkit/react-connect";
+import { useBatchWriteContract } from "@walletkit/react-link";
 
 function App() {
   const [hash, setHash] = useState("");

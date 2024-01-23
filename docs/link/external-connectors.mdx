@@ -8,13 +8,13 @@ icon: "link-simple"
   <img width="300" noZoom src="/images/connect_external_connectors.png" />
 </Frame>
 
-Add customizable options to allow users to connect via other providers in the WalletKit Connect modal. This is great for users who have existing wallets and don't wish to use email or social logins.
+Add customizable options to allow users to connect via other providers in the WalletKit Link modal. This is great for users who have existing wallets and don't wish to use email or social logins.
 
 <Tabs>
 
 <Tab title="React">
 
-`WalletKitProvider` accepts an `externalConnectors` prop that can be used to inject buttons with customizable behavior.
+`WalletKitLinkProvider` accepts an `externalConnectors` prop that can be used to inject buttons with customizable behavior.
 
 ```typescript
 const externalConnectors = [
@@ -32,9 +32,9 @@ const externalConnectors = [
 
 export function App() {
   return (
-    <WalletKitProvider connect={..} externalConnectors={externalConnectors}>
+    <WalletKitLinkProvider link={..} externalConnectors={externalConnectors}>
     ...
-    </WalletKitProvider>;
+    </WalletKitLinkProvider>;
   )
 }
 ```
@@ -42,7 +42,7 @@ export function App() {
 </Tab>
 
 <Tab title="wagmi">
-wagmi comes with an existing set of [connectors](https://wagmi.sh/react/api/connectors) that can be easily added to the WalletKit Connect modal.
+wagmi comes with an existing set of [connectors](https://wagmi.sh/react/api/connectors) that can be easily added to the WalletKit Link modal.
 
 <Steps>
 
@@ -60,7 +60,7 @@ export const wagmiConfig = createConfig({
     walletConnect({
       projectId: '<My Wallet Connect ID>',
     }),
-    walletKit({
+    walletKitLink({
       projectId: '<My WalletKit Project ID>',
     }),
   ]
@@ -69,8 +69,8 @@ export const wagmiConfig = createConfig({
 
 </Step>
 
-<Step title="Configure WalletKitWagmiProvider">
-`WalletKitWagmiProvider` accepts an `externalConnectorIds` prop that can be used to filter and order which connectors should be displayed in the WalletKit Connect modal.
+<Step title="Configure WalletKitLinkWagmiProvider">
+`WalletKitWagmiProvider` accepts an `externalConnectorIds` prop that can be used to filter and order which connectors should be displayed in the WalletKit Link modal.
 
 For example, to support MetaMask, Coinbase, and Wallet Connect (in that order), use the following:
 
@@ -79,7 +79,7 @@ export function App() {
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
-        <WalletKitWagmiProvider
+        <WalletKitLinkWagmiProvider
           externalConnectorIds={[
             "io.metamask",
             "coinbaseWalletSDK",
@@ -87,7 +87,7 @@ export function App() {
           ]}
         >
           ...
-        </WalletKitWagmiProvider>
+        </WalletKitLinkWagmiProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );

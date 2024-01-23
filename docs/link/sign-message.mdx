@@ -12,11 +12,11 @@ WalletKit prompts the user with a modal that shows the message. The user can the
 <CodeGroup>
 
 ```typescript React
-import { useWalletKit } from "@walletkit/react-connect";
+import { useWalletKitLink } from "@walletkit/react-link";
 import { toHex } from "viem";
 
 function App() {
-  const walletKit = useWalletKit();
+  const walletKit = useWalletKitLink();
   const [signature, setSignature] = useState("");
 
   const signMessage = async () => {
