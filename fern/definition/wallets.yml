@@ -120,6 +120,19 @@ service:
           response:
             body: $ExportWalletResponse.Example1
 
+    import:
+      path: "/import"
+      method: POST
+      docs: Import a wallet with provided private key or mnemonic phrase.
+      display-name: Import Wallet
+      request: ImportWalletRequest
+      response: Wallet
+      examples:
+        - name: Example1
+          request: $ImportWalletRequest.Example1
+          response:
+            body: $Wallet.Example2
+
 types:
   WalletControlMode:
     enum:
@@ -201,7 +214,44 @@ types:
           owner_id: 58c9095e-24db-43eb-b49d-b78f72573a29
           control_mode: developer
           developer_secret: testnet-secret
-
+  ImportWalletRequest:
+    properties:
+      network: commons.Network
+      name: string
+      owner_id:
+        type: optional<string>
+        docs: >-
+          An ID that you can use to associate the wallet with a user in
+          your application. e.g. user uuid. When creating wallets for
+          the same owner_id across different networks, the same seed
+          phrase will be used.
+      control_mode:
+        type: WalletControlMode
+        docs: >-
+          Defines whether the developer or the user controls the wallet.
+          When control_mode is developer, the developer_secret must be
+          provided. When control_mode is user, the user_pin must be
+          provided.
+      type:
+        type: optional<WalletType>
+        docs: >-
+          Defines whether the wallet address is an externally owned address (EOA) 
+          derived from the owner's key pair or address of the smart contract controlled
+          by the owner's key pair.
+      private_key: optional<string>
+      mnemonic_phrase: optional<string>
+      developer_secret: optional<commons.DeveloperSecret>
+      user_pin: optional<commons.UserPin>
+    examples:
+      - name: Example1
+        value:
+          network: Avalanche
+          name: User Wallet
+          owner_id: 58c9095e-24db-43eb-b49d-ddc305c2b6f7
+          type: eoa
+          control_mode: user
+          private_key: "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+          user_pin: "111111"
   Wallet:
     properties:
       id: string
@@ -219,3 +269,11 @@ types:
           name: Joe's wallet
           owner_id: 58c9095e-24db-43eb-b49d-b78f72573a29
           address: "0x976Cf57B7EE1D84E73BE9115457889d49a8A1335"
+      - name: Example2
+        value:
+          id: 1427fe1c-226e-4dde-a0a1-d46c4521084b
+          created_at: "2024-01-31T11:36:06.395674-08:00"
+          network: Avalanche
+          name: User Wallet
+          owner_id: 58c9095e-24db-43eb-b49d-ddc305c2b6f7
+          address: "0x1Be31A94361a391bBaFB2a4CCd704F57dc04d4bb"

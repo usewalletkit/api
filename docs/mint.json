@@ -92,6 +92,7 @@
         },
         "wallets-api/sign-message",
         "wallets-api/create-delegation-policy",
+        "wallets-api/import-wallet",
         "wallets-api/export-wallet"
       ]
     },
@@ -171,6 +172,7 @@
         "api-reference/wallets/list-wallets",
         "api-reference/wallets/create-wallet",
         "api-reference/wallets/change-user-pin",
+        "api-reference/wallets/import-wallet",
         "api-reference/wallets/export-wallet"
       ]
     },

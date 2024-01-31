@@ -1,9 +1,8 @@
 ---
-title: EOA Wallet
-description: Create a secure EOA wallet controlled by the user
-icon: "key-skeleton-left-right"
+title: Import wallet
+description: Import wallet by private key, mnemonic phrase.
+icon: "file-import"
 ---
-
 <Steps>
     <Step title="Add WalletKit to your app">
     Get your SDK setup as usual using [Get Started](/wallets-api/overview#get-started).
@@ -17,30 +16,31 @@ icon: "key-skeleton-left-right"
     You must never store the `user in` on your servers.
     </Warning>
     </Step>
-    <Step title="Create a EOA wallet">
-    Create a wallet with the `userPin`, `controlMode` set to `user` and `type` set to `eoa`.
+    <Step title="Import an EOA wallet">
+    Import a wallet with the `privateKey`, set `userPin`, and `controlMode` set to `user`, `type` set to `eoa`.
 
     <CodeGroup>
     ```typescript Typescript
-    const createWalletResp = await wk.wallets.create({
+    const importWalletResp = await wk.wallets.import({
         network: Network.Base,
-        name: "<walelt name>",
-        ownerId: userId, // optional
+        name: "User Wallet",
+        ownerId: userId,
         controlMode: WalletControlMode.User,
         type: WalletType.Eoa,
+        privateKey: "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
         userPin: "<user pin>",
     });
 
-    if (!createWalletResp.ok) {
+    if (!importWalletResp.ok) {
     // handle error
     }
 
-    const walletAddress = createWalletResp.body.address;
+    const importedWalletAddress = importWalletResp.body.address;
     ```
 
     ```bash Curl
     curl --request POST \
-      --url https://testnet.walletkit.com/wallets \
+      --url https://testnet.walletkit.com/wallets/import \
       --header 'X-WalletKit-Project-ID: <Project ID>' \
       --header 'Authorization: Bearer <User Access Token or Your API Key>' \
       --data 
@@ -50,6 +50,7 @@ icon: "key-skeleton-left-right"
         "owner_id": "<user id>",
         "control_mode": "user",
         "type": "eoa",
+        "private_key": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
         "user_pin": "<user pin>"
       }'
     ```
