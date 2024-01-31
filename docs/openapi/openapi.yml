@@ -2520,7 +2520,7 @@ paths:
                   new_user_pin: '654321'
   /wallets/export:
     post:
-      description: Export wallet mnemonic phrase
+      description: Export wallet mnemonic phrase or private key.
       operationId: wallets_export
       tags:
         - Wallets
@@ -3272,11 +3272,10 @@ components:
       properties:
         mnemonic_phrase:
           type: string
-          example: >-
-            candy maple cake sugar pudding cream honey rich smooth crumble sweet
-            treat
-      required:
-        - mnemonic_phrase
+          nullable: true
+        private_key:
+          type: string
+          nullable: true
     CreateWalletRequest:
       title: CreateWalletRequest
       type: object

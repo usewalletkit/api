@@ -110,7 +110,7 @@ service:
     export:
       path: "/export"
       method: POST
-      docs: Export wallet mnemonic phrase
+      docs: Export wallet mnemonic phrase or private key.
       display-name: Export Wallet
       request: ExportWalletRequest
       response: ExportWalletResponse
@@ -175,11 +175,15 @@ types:
           user_pin: "123456"
   ExportWalletResponse:
     properties:
-      mnemonic_phrase: string
+      mnemonic_phrase: optional<string>
+      private_key: optional<string>
     examples:
       - name: Example1
         value:
           mnemonic_phrase: "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat"
+      - name: Example2
+        value:
+          private_key: "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
   CreateWalletRequest:
     properties:
       network: commons.Network
