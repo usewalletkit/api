@@ -2891,7 +2891,9 @@ components:
           type: integer
         logo_url:
           type: string
-        Balance:
+        raw_balance:
+          type: string
+        display_balance:
           type: string
       required:
         - uuid
@@ -2902,7 +2904,8 @@ components:
         - decimals
         - display_decimals
         - logo_url
-        - Balance
+        - raw_balance
+        - display_balance
     BatchTransferTokenRequestTransfersItem:
       title: BatchTransferTokenRequestTransfersItem
       type: object

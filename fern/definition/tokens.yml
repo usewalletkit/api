@@ -186,7 +186,9 @@ types:
         type: integer
       logo_url:
         type: string
-      Balance:
+      raw_balance:
+        type: string
+      display_balance:
         type: string
 
   BatchTransferTokenRequestTransfersItem:
