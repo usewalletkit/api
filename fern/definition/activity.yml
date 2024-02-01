@@ -40,7 +40,7 @@ types:
         type: string
       metadata:
         type: ListWalletActivityResponseItemMetadata
-      Token:
+      token:
         type: ListWalletActivityResponseItemToken
 
   ListWalletActivityResponseItemMetadata:
@@ -64,4 +64,4 @@ types:
       display_decimals:
         type: integer
       logo_url:
-        type: optional<string>
+        type: string
