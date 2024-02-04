@@ -153,6 +153,7 @@ service:
     logout:
       path: /logout
       method: POST
+      auth: true
       docs: Log a user out and clear session cookies (only available in SDKs)
       display-name: Logout
 
