@@ -43,6 +43,30 @@ service:
             user_pin: optional<commons.UserPin>
       response: commons.TransactionSubmissionResponse
 
+    sign:
+      path: /sign
+      method: POST
+      auth: true
+      docs: Signs a transaction without sending it to the blockchain.
+      display-name: Sign
+      request:
+        name: SignRequest
+        body:
+          properties:
+            network: commons.Network
+            signer_wallet_address:
+              type: string
+              docs: address can only be the ones created in the project.
+            unsigned_transaction:
+              type: UnsignedTransaction
+              docs: input of a transaction to be signed.
+            developer_secret: optional<commons.DeveloperSecret>
+            user_pin: optional<commons.UserPin>
+      response: 
+        type: string
+        docs: signed transaction. This is the raw transaction that can be sent to 
+          the rpc node. e.g. input to eth_sendrawtransaction
+
     batch-sign-and-send:
       path: /batch-sign-and-send
       method: POST

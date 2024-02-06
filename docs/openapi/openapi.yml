@@ -1210,6 +1210,73 @@ paths:
                 - network
                 - signer_wallet_address
                 - unsigned_transaction
+  /transactions/sign:
+    post:
+      description: Signs a transaction without sending it to the blockchain.
+      operationId: transactions_sign
+      tags:
+        - Transactions
+      parameters: []
+      responses:
+        '200':
+          description: >-
+            signed transaction. This is the raw transaction that can be sent to
+            the rpc node. e.g. input to eth_sendrawtransaction
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Sign
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                signer_wallet_address:
+                  type: string
+                  description: address can only be the ones created in the project.
+                unsigned_transaction:
+                  $ref: '#/components/schemas/UnsignedTransaction'
+                  description: input of a transaction to be signed.
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
+              required:
+                - network
+                - signer_wallet_address
+                - unsigned_transaction
   /transactions/batch-sign-and-send:
     post:
       description: This endpoint makes arbitrary smart contract function calls in batch.

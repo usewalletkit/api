@@ -132,6 +132,7 @@
       "pages": [
         "api-reference/transactions/transaction-status-by-hash",
         "api-reference/transactions/sign-and-send",
+        "api-reference/transactions/sign",
         "api-reference/transactions/batch-sign-and-send",
         "api-reference/transactions/sign-message",
         "api-reference/transactions/transaction-status-by-id",
