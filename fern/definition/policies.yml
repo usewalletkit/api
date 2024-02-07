@@ -32,6 +32,32 @@ service:
               type: optional<datetime>
             developer_secret: commons.DeveloperSecret
             user_pin: commons.UserPin
+    
+    list:
+      path: ""
+      method: GET
+      docs: Lists all policies for a wallet.
+      display-name: List Policies
+      request:
+        name: ListPoliciesRequest
+        query-parameters:
+          network: commons.Network
+          wallet_address: optional<string>
+      response: list<Policy>
+
+    revoke:
+      path: "/revoke"
+      method: POST
+      docs: Revokes a policy.
+      display-name: Revoke Policy
+      request:
+        name: RevokePolicyRequest
+        body:
+          properties:
+            uuid: string
+            developer_secret: optional<commons.DeveloperSecret>
+            user_pin: optional<commons.UserPin>
+      response: RevokePolicyResponse
 
 types:
   Operator:
@@ -53,3 +79,26 @@ types:
         type: string
         docs: >-
           the value to compare the argument to. e.g. "transfer", "0x1234..."
+  Policy:
+    properties:
+      uuid:
+        type: string
+      project_id:
+        type: string
+      network:
+        type: commons.Network
+      name:
+        type: optional<string>
+      wallet_address:
+        type: string
+      argument_rules:
+        type: list<ArgumentRule>
+      expires_at:
+        type: optional<datetime>
+      created_at:
+        type: datetime
+      updated_at:
+        type: datetime
+  RevokePolicyResponse:
+    properties:
+      success: boolean

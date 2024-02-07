@@ -143,7 +143,9 @@
     {
       "group": "Policies",
       "pages": [
-        "api-reference/policies/create-policy"
+        "api-reference/policies/create-policy",
+        "api-reference/policies/list-policies",
+        "api-reference/policies/revoke-policy"
       ]
     },
     {
