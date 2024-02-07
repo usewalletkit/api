@@ -32,6 +32,7 @@ service:
               type: optional<datetime>
             developer_secret: commons.DeveloperSecret
             user_pin: commons.UserPin
+      response: Policy
     
     list:
       path: ""
