@@ -3286,6 +3286,26 @@ components:
           description: >-
             If it's a smart contract interaction, the calldata of the smart
             contract function. (ABI-encoded function with arguments)
+        gasLimit:
+          type: string
+          nullable: true
+          description: >-
+            optional. maximum amount unit of gas to be used in this transaction.
+            If provided,  it will override the gas limit estimated by
+            eth_estimateGas.
+        maxPriorityFeePerGas:
+          type: string
+          nullable: true
+          description: >-
+            optional. If provided, it will override the gas tip estimated by
+            eth_maxPriorityFeePerGas.
+        maxFeePerGas:
+          type: string
+          nullable: true
+          description: >-
+            optional. maximum amount of native token to be paid per unit of gas
+            in this transaction.  If provided, it will override the gas fee cap
+            estimated by WalletKit.
       required:
         - to
     SignMessageResponse:
