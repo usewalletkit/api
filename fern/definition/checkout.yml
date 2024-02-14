@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+imports:
+  commons: commons.yml
+  addresses: addresses.yml
+  transactions: transactions.yml
+
+service:
+  auth: true
+  base-path: /checkout
+  endpoints:
+    preview:
+      path: /preview
+      method: POST
+      auth: true
+      docs: preview a checkout transaction.
+      display-name: Checkout Preview
+      request:
+        name: CheckoutPreviewRequest
+        body:
+          properties:
+            network: commons.Network
+            unsigned_transaction:
+              type: transactions.UnsignedTransaction
+              docs: transaction to preview.
+      response: CheckoutPreviewResponse
+
+types:
+  CheckoutPreviewResponse:
+    properties:
+      network:
+        type: commons.Network
+      from:
+        type: string
+      to:
+        type: string
+      contract:
+        type: addresses.AddressMetadata
+      function_name:
+        type: string
+      simulation:
+        type: transactions.Simulation
+      destination_wallet:
+        type: string
+      transaction_cost_usd:
+        type: string
+      fee_usd:
+        type: string
+      total_cost_usd:
+        type: string
+      
+

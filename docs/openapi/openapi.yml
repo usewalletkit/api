@@ -121,6 +121,61 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
       summary: List Address Metadata
       security: *ref_0
+  /checkout/preview:
+    post:
+      description: preview a checkout transaction.
+      operationId: checkout_preview
+      tags:
+        - Checkout
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutPreviewResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Checkout Preview
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                unsigned_transaction:
+                  $ref: '#/components/schemas/UnsignedTransaction'
+                  description: transaction to preview.
+              required:
+                - network
+                - unsigned_transaction
   /nfts/collections:
     post:
       description: >
@@ -2924,6 +2979,41 @@ components:
         - network
         - address
         - type
+    CheckoutPreviewResponse:
+      title: CheckoutPreviewResponse
+      type: object
+      properties:
+        network:
+          $ref: '#/components/schemas/Network'
+        from:
+          type: string
+        to:
+          type: string
+        contract:
+          $ref: '#/components/schemas/AddressMetadata'
+        function_name:
+          type: string
+        simulation:
+          $ref: '#/components/schemas/Simulation'
+        destination_wallet:
+          type: string
+        transaction_cost_usd:
+          type: string
+        fee_usd:
+          type: string
+        total_cost_usd:
+          type: string
+      required:
+        - network
+        - from
+        - to
+        - contract
+        - function_name
+        - simulation
+        - destination_wallet
+        - transaction_cost_usd
+        - fee_usd
+        - total_cost_usd
     TokenSource:
       title: TokenSource
       type: string

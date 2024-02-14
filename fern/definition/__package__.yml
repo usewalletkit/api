@@ -8,3 +8,4 @@ navigation:
   - users.yml
   - policies.yml
   - commons.yml
+  - checkout.yml
