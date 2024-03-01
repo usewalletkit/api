@@ -16,11 +16,11 @@ WalletKit lets users create a secure gasless wallet using their email or social 
 import { useWalletKitLink } from "@walletkit/react-link";
 
 export function Connect() {
-  const { connect } = useWalletKitLink();
+  const link = useWalletKitLink();
   const [isConnected, setIsConnected] = useState(false);
 
   const handleConnect = async () => {
-    await connect();
+    await link.connect();
     setIsConnected(true);
   };
 
