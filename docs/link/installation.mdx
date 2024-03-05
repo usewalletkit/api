@@ -77,13 +77,13 @@ icon: "code"
       <Tip>You can get your Project ID from the [API Keys](https://app.walletkit.com/api-keys) page in the WalletKit dashboard.</Tip>
 
       ```typescript
-      import {walletKit} from "@walletkit/wagmi-link";
+      import {walletKitLink} from "@walletkit/wagmi-link";
 
       export const wagmiConfig = createConfig({
         chains: [..],
         transports: {..},
         connectors: [
-          walletKit({
+          walletKitLink({
             projectId: '<WalletKit-Project-ID>',
           }),
         ]
