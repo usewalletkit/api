@@ -136,9 +136,9 @@ service:
         query-parameters:
           network:
             type: optional<commons.Network>
-          collection_address:
+          contract_address:
             docs: address of the NFT contract
-            type: optional<string>
+            type: string
       response: NftCollection
 
     list-nft-collections:
@@ -217,7 +217,7 @@ types:
         type: optional<string>
       image_url:
         type: string
-     
+
   NftImageUploadResponse:
     properties:
       ipfs_url:
