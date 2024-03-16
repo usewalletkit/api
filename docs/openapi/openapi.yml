@@ -575,13 +575,12 @@ paths:
           schema:
             $ref: '#/components/schemas/Network'
             nullable: true
-        - name: collection_address
+        - name: contract_address
           in: query
           description: address of the NFT contract
-          required: false
+          required: true
           schema:
             type: string
-            nullable: true
       responses:
         '200':
           description: ''
