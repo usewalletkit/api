@@ -212,26 +212,30 @@ types:
       value:
         docs: >-
           optional. amount of native token to be transferred to the to address
-          in this transaction.
+          in this transactio in hex-encoded with 0x prefix.
         type: optional<string>
       input:
         docs: >-
-          If it's a smart contract interaction, the calldata of the smart
+          If it's a smart contract interaction, the hex-encoded calldata of the smart
           contract function. (ABI-encoded function with arguments)
         type: optional<string>
       gasLimit:
         docs: >-
-          optional. maximum amount unit of gas to be used in this transaction. If provided, 
+          optional. hex-encoded with 0x prefix. maximum amount unit of gas to be used in this transaction. If provided, 
           it will override the gas limit estimated by eth_estimateGas.
         type: optional<string>
       maxPriorityFeePerGas:
         docs: >-
-          optional. If provided, it will override the gas tip estimated by eth_maxPriorityFeePerGas.
+          optional. hex-encoded with 0x prefix. If provided, it will override the gas tip estimated by eth_maxPriorityFeePerGas.
         type: optional<string>
       maxFeePerGas:
         docs: >-
-          optional. maximum amount of native token to be paid per unit of gas in this transaction. 
+          optional. hex-encoded with 0x prefix. maximum amount of native token to be paid per unit of gas in this transaction. 
           If provided, it will override the gas fee cap estimated by WalletKit.
+        type: optional<string>
+      nonce:
+        docs: >-
+          optional. hex-encoded with 0x prefix. the number of transactions made by the sender prior to this one.
         type: optional<string>
 
   SignMessageResponse:
